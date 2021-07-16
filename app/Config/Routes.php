@@ -38,6 +38,11 @@ $routes->group("Mahasiswa", function ($routes) {
 	$routes->group("TugasAkhir", function ($routes) {
 		$routes->get('judul', 'Mahasiswa::judul', ['as' => 'mahasiswa.judul']);
 		$routes->get('bimbinganProposal', 'Mahasiswa::bimbinganProposal', ['as' => 'mahasiswa.bimbinganProposal']);
+		$routes->get('bimbinganTugasAkhir', 'Mahasiswa::bimbinganTugasAkhir', ['as' => 'mahasiswa.bimbinganTugasAkhir']);
+	});
+	$routes->group("Jadwal", function ($routes) {
+		$routes->get('SeminarProposal', 'Mahasiswa::jadwalSeminarProposal', ['as' => 'mahasiswa.jadwal.jadwalSeminarProposal']);
+		$routes->get('SeminarTugasAkhir', 'Mahasiswa::jadwalSeminarTugasAkhir', ['as' => 'mahasiswa.jadwal.jadwalSeminarTugasAkhir']);
 	});
 });
 

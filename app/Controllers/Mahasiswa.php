@@ -18,4 +18,19 @@ class Mahasiswa extends BaseController
     {
         return view('mahasiswa/bimbinganProposalTugasAkhir');
     }
+
+    public function bimbinganTugasAkhir()
+    {
+        return view('mahasiswa/bimbinganTugasAkhir');
+    }
+
+    public function jadwalSeminarProposal()
+    {
+        return view('mahasiswa/jadwal/seminarProposal');
+    }
+
+    public function jadwalSeminarTugasAkhir()
+    {
+        return view('mahasiswa/jadwal/seminarTugasAkhir');
+    }
 }

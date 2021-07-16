@@ -27,9 +27,9 @@
                 <!-- Mahasiswa -->
                 <li class="nav-header">Mahasiswa</li>
                 <div class="user-panel mt-1 pb-1 mb-1 d-flex">
-                    <li class="nav-item">
+                    <li class="nav-item <?= (strstr(current_url(), base_url("/Mahasiswa/TugasAkhir"))) ? "menu-is-opening menu-open" : ""; ?>">
                         <!-- tambahkan active dibawah -->
-                        <a href="#" class="nav-link ">
+                        <a href="#" class="nav-link <?= (strstr(current_url(), base_url("/Mahasiswa/TugasAkhir"))) ? "active" : ""; ?>">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Tugas Akhir
@@ -38,7 +38,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= route_to("mahasiswa.judul"); ?>" class="nav-link  <?= (current_url() == base_url("/Mahasiswa/TugasAkhir/judul")) ? "active" : ""; ?>">
+                                <a href="<?= route_to("mahasiswa.judul"); ?>" class="nav-link <?= (current_url() == base_url("/Mahasiswa/TugasAkhir/judul")) ? "active" : ""; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Pengajuan Judul Tugas Akhir</p>
                                 </a>
@@ -50,7 +50,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../index3.html" class="nav-link">
+                                <a href="<?= route_to("mahasiswa.bimbinganTugasAkhir"); ?>" class="nav-link <?= (current_url() == base_url("/Mahasiswa/TugasAkhir/bimbinganTugasAkhir")) ? "active" : ""; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Bimbingan Tugas Akhir</p>
                                 </a>
@@ -59,8 +59,8 @@
                     </li>
                 </div>
                 <div class="user-panel mt-1 pb-1 mb-1 d-flex">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item <?= (strstr(current_url(), base_url("/Mahasiswa/Jadwal"))) ? "menu-is-opening menu-open" : ""; ?>">
+                        <a href="#" class="nav-link <?= (strstr(current_url(), base_url("/Mahasiswa/Jadwal"))) ? "active" : ""; ?>">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Jadwal
@@ -69,13 +69,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="../../index.html" class="nav-link">
+                                <a href="<?= route_to("mahasiswa.jadwal.jadwalSeminarProposal"); ?>" class="nav-link <?= (current_url() == base_url("/Mahasiswa/Jadwal/SeminarProposal")) ? "active" : ""; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Jadwal Seminar Proposal Tugas Akhir</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../index2.html" class="nav-link">
+                                <a href="<?= route_to("mahasiswa.jadwal.jadwalSeminarTugasAkhir"); ?>" class="nav-link <?= (current_url() == base_url("/Mahasiswa/Jadwal/SeminarTugasAkhir")) ? "active" : ""; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Jadwal Seminar Tugas Akhir</p>
                                 </a>
