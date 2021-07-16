@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Bimbingan Tugas Akhir</h1>
+                    <h1>DataTables</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -26,49 +26,36 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Judul Tugas Akhir</h3>
+                        </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
-                                <thead class="thead-dark">
+                                <thead>
                                     <tr>
-                                        <th>
-                                            <center>No</center>
-                                        </th>
-                                        <th>
-                                            <center>Judul</center>
-                                        </th>
-                                        <th>
-                                            <center>Deskripsi</center>
-                                        </th>
-                                        <th>
-                                            <center>Upload file</center>
-                                        </th>
-                                        <th>
-                                            <center>saran dosen</center>
-                                        </th>
-                                        <th>
-                                            <center>validasi dosen</center>
-                                        </th>
-                                        <th>
-                                            <center>nilai</center>
-                                        </th>
-                                        <th>
-                                            <center>Status Kelulusan</center>
-                                        </th>
+                                        <th>No</th>
+                                        <th>Nama Mahasiswa</th>
+                                        <th>Judul</th>
+                                        <th>Deskripsi</th>
+                                        <th>Validasi</th>
+                                        <th>Saran</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Sistem pendukung keputusan pemilihan supplier pada CV. surya abadi dengan metode AHP</td>
-                                        <td>Sistem ini membantu para pengambil keputusan melihat keputusan mana yang paling baik untuk diambil</td>
+                                        <td>Qoirudin</td>
+                                        <td>manual</td>
+                                        <td>embuh</td>
                                         <td>
-                                            <input type="file">
+                                            <button type="button" class="btn btn-success swalDefaultSuccess">
+                                                Validasi
+                                            </button>
                                         </td>
-                                        <td>-</td>
-                                        <td>progress</td>
-                                        <td>-</td>
-                                        <td>-</td>
+                                        <td>
+                                            <button type="button" class="btn btn-block btn-primary col-2" data-toggle="modal" data-target="#modal-default">Saran</button>
+                                        </td>
                                     </tr>
                                 </tbody>
                                 <!-- <tfoot>
@@ -91,6 +78,41 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
+
+        <div class="modal fade" id="modal-default">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Saran</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- <div>
+                            <div class="form-group">
+                                <label>Judul</label>
+                                <input type="text" class="form-control" placeholder="Judul">
+                            </div>
+                        </div> -->
+                        <div>
+                            <!-- textarea -->
+                            <div class="form-group">
+                                <label>Saran</label>
+                                <textarea class="form-control" rows="3" placeholder="Saran"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
     </section>
     <!-- /.content -->
 </div>
@@ -127,6 +149,23 @@
             "info": true,
             "autoWidth": false,
             "responsive": true,
+        });
+    });
+
+
+    $(function() {
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+        $('.swalDefaultSuccess').click(function() {
+            Toast.fire({
+                icon: 'Berhasil',
+                title: 'Judul telah divalidasi.'
+            })
         });
     });
 </script>

@@ -154,8 +154,8 @@
                 <!-- Prodi -->
                 <li class="nav-header">Prodi</li>
                 <div class="user-panel mt-1 pb-1 mb-1 d-flex">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item <?= (strstr(current_url(), base_url("/Prodi/Validasi"))) ? "menu-is-opening menu-open" : ""; ?>">
+                        <a href="#" class="nav-link <?= (strstr(current_url(), base_url("/Prodi/Validasi"))) ? "active" : ""; ?>">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Validasi
@@ -164,19 +164,19 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="../../index.html" class="nav-link">
+                                <a href="<?= route_to("prodi.validasi.judul"); ?>" class="nav-link <?= (current_url() == base_url("/Prodi/Validasi/Judul")) ? "active" : ""; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Judul Tugas Akhir</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../index2.html" class="nav-link">
+                                <a href="<?= route_to("prodi.validasi.proposal"); ?>" class="nav-link <?= (current_url() == base_url("/Prodi/Validasi/Proposal")) ? "active" : ""; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Data Proposal Tugas Akhir Mahasiswa</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../index2.html" class="nav-link">
+                                <a href="<?= route_to("prodi.validasi.tugasAkhir"); ?>" class="nav-link <?= (current_url() == base_url("/Prodi/Validasi/TugasAkhir")) ? "active" : ""; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Data Tugas Akhir Mahasiswa</p>
                                 </a>
@@ -185,8 +185,8 @@
                     </li>
                 </div>
                 <div class="user-panel mt-1 pb-1 mb-1 d-flex">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item <?= (strstr(current_url(), base_url("/Prodi/Jadwal"))) ? "menu-is-opening menu-open" : ""; ?>">
+                        <a href="#" class="nav-link  <?= (strstr(current_url(), base_url("/Prodi/Jadwal"))) ? "active" : ""; ?>">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Pembuatan Jadwal
@@ -195,13 +195,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="../../index.html" class="nav-link">
+                                <a href="<?= route_to("prodi.jadwal.jadwalSeminarProposal"); ?>" class="nav-link <?= (current_url() == base_url("/Prodi/Jadwal/SeminarProposal")) ? "active" : ""; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Jadwal Seminar Proposal Tugas Akhir</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../../index2.html" class="nav-link">
+                                <a href="<?= route_to("prodi.jadwal.jadwalSeminarTugasAkhir"); ?>" class="nav-link <?= (current_url() == base_url("/Prodi/Jadwal/SeminarTugasAkhir")) ? "active" : ""; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Jadwal Tugas Akhir</p>
                                 </a>

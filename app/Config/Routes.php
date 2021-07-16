@@ -46,6 +46,19 @@ $routes->group("Mahasiswa", function ($routes) {
 	});
 });
 
+$routes->group("Prodi", function ($routes) {
+	$routes->get('/', 'Prodi::index');
+	$routes->group("Validasi", function ($routes) {
+		$routes->get('Judul', 'Prodi::validasiJudul', ['as' => 'prodi.validasi.judul']);
+		$routes->get('Proposal', 'Prodi::validasiProposal', ['as' => 'prodi.validasi.proposal']);
+		$routes->get('TugasAkhir', 'Prodi::validasiTugasAkhir', ['as' => 'prodi.validasi.tugasAkhir']);
+	});
+	$routes->group("Jadwal", function ($routes) {
+		$routes->get('SeminarProposal', 'Prodi::jadwalSeminarProposal', ['as' => 'prodi.jadwal.jadwalSeminarProposal']);
+		$routes->get('SeminarTugasAkhir', 'Prodi::jadwalSeminarTugasAkhir', ['as' => 'prodi.jadwal.jadwalSeminarTugasAkhir']);
+	});
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

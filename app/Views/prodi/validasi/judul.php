@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Bimbingan Tugas Akhir</h1>
+                    <h1>Judul Tugas Akhir</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -26,6 +26,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        <div class="card-header col-12">
+                            <button type="button" class="btn btn-block btn-primary col-2" data-toggle="modal" data-target="#modal-default">Tambah Judul</button>
+                        </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
@@ -41,19 +44,13 @@
                                             <center>Deskripsi</center>
                                         </th>
                                         <th>
-                                            <center>Upload file</center>
+                                            <center>Catatan Dosen</center>
                                         </th>
                                         <th>
-                                            <center>saran dosen</center>
+                                            <center>Validasi Dosen</center>
                                         </th>
                                         <th>
-                                            <center>validasi dosen</center>
-                                        </th>
-                                        <th>
-                                            <center>nilai</center>
-                                        </th>
-                                        <th>
-                                            <center>Status Kelulusan</center>
+                                            <center>Validasi Prodi</center>
                                         </th>
                                     </tr>
                                 </thead>
@@ -62,13 +59,9 @@
                                         <td>1</td>
                                         <td>Sistem pendukung keputusan pemilihan supplier pada CV. surya abadi dengan metode AHP</td>
                                         <td>Sistem ini membantu para pengambil keputusan melihat keputusan mana yang paling baik untuk diambil</td>
-                                        <td>
-                                            <input type="file">
-                                        </td>
                                         <td>-</td>
+                                        <td>tervalidasi</td>
                                         <td>progress</td>
-                                        <td>-</td>
-                                        <td>-</td>
                                     </tr>
                                 </tbody>
                                 <!-- <tfoot>
@@ -91,6 +84,42 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
+
+        <div class="modal fade" id="modal-default">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Pengajuan Judul</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label>Judul</label>
+                                <input type="text" class="form-control" placeholder="Judul">
+                            </div>
+                        </div>
+                        <div>
+                            <!-- textarea -->
+                            <div class="form-group">
+                                <label>Deskripsi</label>
+                                <textarea class="form-control" rows="3" placeholder="Deskripsi"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
     </section>
     <!-- /.content -->
 </div>
