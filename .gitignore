@@ -96,27 +96,27 @@ _modules/*
 .php-version
 
 # Jetbrains editors (PHPStorm, etc)
-.idea/
-*.iml
+# .idea/
+# *.iml
 
 # Netbeans
-nbproject/
-build/
-nbbuild/
-dist/
-nbdist/
-nbactions.xml
-nb-configuration.xml
-.nb-gradle/
+# nbproject/
+# build/
+# nbbuild/
+# dist/
+# nbdist/
+# nbactions.xml
+# nb-configuration.xml
+# .nb-gradle/
 
 # Sublime Text
-*.tmlanguage.cache
-*.tmPreferences.cache
-*.stTheme.cache
-*.sublime-workspace
-*.sublime-project
-.phpintel
-/api/
+# *.tmlanguage.cache
+# *.tmPreferences.cache
+# *.stTheme.cache
+# *.sublime-workspace
+# *.sublime-project
+# .phpintel
+# /api/
 
 # Visual Studio Code
 .vscode/
