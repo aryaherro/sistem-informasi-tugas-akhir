@@ -27,7 +27,6 @@
                 <div class="col-12">
                     <div class="card">
                         <!-- /.card-header -->
-
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead class="thead-dark">
@@ -62,6 +61,7 @@
                                         <td><input type="text" readonly="readonly" class="form-control" value="<?php echo date("j F Y"); ?>" name="tgl"></td>
                                     </tr>
                                 </tbody>
+                            </table>
                         </div>
                         <!-- /.card-body -->
                     </div>

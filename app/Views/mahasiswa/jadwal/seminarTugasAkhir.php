@@ -53,6 +53,7 @@
                                         <td><input type="text" readonly="readonly" class="form-control" value="<?php echo date("j F Y"); ?>" name="tgl"></td>
                                     </tr>
                                 </tbody>
+                            </table>
                         </div>
                         <!-- /.card-body -->
                     </div>
