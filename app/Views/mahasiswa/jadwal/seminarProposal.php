@@ -36,6 +36,12 @@
                                             <center>No</center>
                                         </th>
                                         <th>
+                                            <center>NIM</center>
+                                        </th>
+                                        <th>
+                                            <center>Nama Mahasiswa</center>
+                                        </th>
+                                        <th>
                                             <center>Judul</center>
                                         </th>
                                         <th>
@@ -49,6 +55,8 @@
                                 <tbody>
                                     <tr>
                                         <td>1</td>
+                                        <td>201811111</td>
+                                        <td>Alexander Pierce</td>
                                         <td>Sistem pendukung keputusan pemilihan supplier pada CV. surya abadi dengan metode AHP</td>
                                         <td>Sistem ini membantu para pengambil keputusan melihat keputusan mana yang paling baik untuk diambil</td>
                                         <td><input type="text" readonly="readonly" class="form-control" value="<?php echo date("j F Y"); ?>" name="tgl"></td>
