@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>DataTables</h1>
+                    <h1>Data Bimbingan Proposal Tugas Akhir Mahasiswa</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -26,29 +26,44 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Bimbingan Proposal Tugas Akhir</h3>
-                        </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
-                                <thead>
+                                <thead class="thead-dark">
                                     <tr>
-                                        <th>No</th>
-                                        <th>Nama Mahasiswa</th>
-                                        <th>Judul</th>
-                                        <th>Deskripsi</th>
-                                        <th>Download</th>
-                                        <th>Status</th>
-                                        <th>saran dosen</th>
+                                        <th>
+                                            <center>No</center>
+                                        </th>
+                                        <th>
+                                            <center>NIM</center>
+                                        </th>
+                                        <th>
+                                            <center>Nama Mahasiswa</center>
+                                        </th>
+                                        <th>
+                                            <center>Judul</center>
+                                        </th>
+                                        <th>
+                                            <center>Deskripsi</center>
+                                        </th>
+                                        <th>
+                                            <center>Download</center>
+                                        </th>
+                                        <th>
+                                            <center>status</center>
+                                        </th>
+                                        <th>
+                                            <center>saran dosen</center>
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Qoirudin</td>
-                                        <td>coba</td>
-                                        <td>manual</td>
+                                        <td>201811111</td>
+                                        <td>Alexander Pierce</td>
+                                        <td>Sistem pendukung keputusan pemilihan supplier pada CV. surya abadi dengan metode AHP</td>
+                                        <td>Sistem ini membantu para pengambil keputusan melihat keputusan mana yang paling baik untuk diambil</td>
                                         <td>
                                             <a class="btn btn-app">
                                                 <i class="fas fa-save"></i> Save
