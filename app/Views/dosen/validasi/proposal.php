@@ -35,21 +35,31 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Nama Mahasiswa</th>
                                         <th>Judul</th>
                                         <th>Deskripsi</th>
-                                        <th>upload file</th>
+                                        <th>Download</th>
+                                        <th>Status</th>
                                         <th>saran dosen</th>
-                                        <th>validasi dosen</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>1</td>
+                                        <td>Qoirudin</td>
                                         <td>coba</td>
                                         <td>manual</td>
-                                        <td>embuh</td>
-                                        <td>Y</td>
-                                        <td>G</td>
+                                        <td>
+                                            <a class="btn btn-app">
+                                                <i class="fas fa-save"></i> Save
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-success swalDefaultSuccess">
+                                                Validasi
+                                            </button>
+                                        </td>
+                                        <td><button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-default">Saran</button></td>
                                     </tr>
                                 </tbody>
                                 <!-- <tfoot>
@@ -72,6 +82,41 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
+
+        <div class="modal fade" id="modal-default">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Saran</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- <div>
+                            <div class="form-group">
+                                <label>Judul</label>
+                                <input type="text" class="form-control" placeholder="Judul">
+                            </div>
+                        </div> -->
+                        <div>
+                            <!-- textarea -->
+                            <div class="form-group">
+                                <label>Saran</label>
+                                <textarea class="form-control" rows="3" placeholder="Saran"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
     </section>
     <!-- /.content -->
 </div>
@@ -108,6 +153,21 @@
             "info": true,
             "autoWidth": false,
             "responsive": true,
+        });
+    });
+    $(function() {
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+        $('.swalDefaultSuccess').click(function() {
+            Toast.fire({
+                icon: 'success',
+                title: 'Judul telah divalidasi.'
+            })
         });
     });
 </script>

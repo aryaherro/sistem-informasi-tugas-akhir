@@ -163,7 +163,7 @@
 
         $('.swalDefaultSuccess').click(function() {
             Toast.fire({
-                icon: 'Berhasil',
+                icon: 'success',
                 title: 'Judul telah divalidasi.'
             })
         });
