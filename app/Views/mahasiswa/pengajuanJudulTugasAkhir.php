@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>DataTables</h1>
+                    <h1>Judul Tugas Akhir</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -27,30 +27,41 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header col-12">
-                            <h3 class="card-title col-10">Judul Tugas Akhir</h3>
                             <button type="button" class="btn btn-block btn-primary col-2" data-toggle="modal" data-target="#modal-default">Tambah Judul</button>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
-                                <thead>
+                                <thead class="thead-dark">
                                     <tr>
-                                        <th>No</th>
-                                        <th>Judul</th>
-                                        <th>Deskripsi</th>
-                                        <th>Catatan Dosen</th>
-                                        <th>Validasi Dosen</th>
-                                        <th>Validasi Prodi</th>
+                                        <th>
+                                            <center>No</center>
+                                        </th>
+                                        <th>
+                                            <center>Judul</center>
+                                        </th>
+                                        <th>
+                                            <center>Deskripsi</center>
+                                        </th>
+                                        <th>
+                                            <center>Catatan Dosen</center>
+                                        </th>
+                                        <th>
+                                            <center>Validasi Dosen</center>
+                                        </th>
+                                        <th>
+                                            <center>Validasi Prodi</center>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>coba</td>
-                                        <td>manual</td>
-                                        <td>embuh</td>
-                                        <td>Y</td>
-                                        <td>G</td>
+                                        <td>Sistem pendukung keputusan pemilihan supplier pada CV. surya abadi dengan metode AHP</td>
+                                        <td>Sistem ini membantu para pengambil keputusan melihat keputusan mana yang paling baik untuk diambil</td>
+                                        <td>-</td>
+                                        <td>tervalidasi</td>
+                                        <td>progress</td>
                                     </tr>
                                 </tbody>
                                 <!-- <tfoot>
