@@ -38,8 +38,8 @@
                                         <th>Nama Mahasiswa</th>
                                         <th>Judul</th>
                                         <th>Deskripsi</th>
-                                        <th>Validasi</th>
-                                        <th>Saran</th>
+                                        <th>Nilai</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -49,12 +49,15 @@
                                         <td>manual</td>
                                         <td>embuh</td>
                                         <td>
-                                            <button type="button" class="btn btn-success swalDefaultSuccess">
-                                                Validasi
-                                            </button>
+                                            <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-default">Nilai</button>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-block btn-primary col-2" data-toggle="modal" data-target="#modal-default">Saran</button>
+                                            <button type="button" class="btn btn-success swalDefaultSuccess">
+                                                Lulus
+                                            </button>
+                                            <button type="button" class="btn btn-danger swalDefaultError">
+                                                Tidak Lulus
+                                            </button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -83,7 +86,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Saran</h4>
+                        <h4 class="modal-title">Nilai</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -98,8 +101,8 @@
                         <div>
                             <!-- textarea -->
                             <div class="form-group">
-                                <label>Saran</label>
-                                <textarea class="form-control" rows="3" placeholder="Saran"></textarea>
+                                <label>Nilai</label>
+                                <textarea class="form-control" rows="3" placeholder="Nilai"></textarea>
                             </div>
                         </div>
                     </div>
@@ -163,8 +166,14 @@
 
         $('.swalDefaultSuccess').click(function() {
             Toast.fire({
-                icon: 'Berhasil',
+                icon: 'success',
                 title: 'Judul telah divalidasi.'
+            })
+        });
+        $('.swalDefaultError').click(function() {
+            Toast.fire({
+                icon: 'error',
+                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
             })
         });
     });
