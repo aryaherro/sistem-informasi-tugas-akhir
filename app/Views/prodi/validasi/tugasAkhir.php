@@ -27,7 +27,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Bimbingan Tugas Akhir</h3>
+                            <h3 class="card-title">Tugas Akhir</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -51,7 +51,16 @@
                                         <td>R. Arya Herro. K</td>
                                         <td>Menuju tak terbatas dan melampauinya</td>
                                         <td>Ilmu Kepepet</td>
-                                        <td>Tanggal</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                                    <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate">
+                                                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td>1000</td>
                                         <td>Lulus</td>
                                     </tr>
@@ -102,22 +111,39 @@
 <!-- Toastr -->
 <script src="<?= base_url(); ?>/plugins/toastr/toastr.min.js"></script>
 
+<!-- InputMask -->
+<script src="<?= base_url(); ?>/plugins/moment/moment.min.js"></script>
+<script src="<?= base_url(); ?>/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="<?= base_url(); ?>/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="<?= base_url(); ?>/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+
 <script>
     $(function() {
         $('#example2').DataTable({
             "paging": true,
             "lengthChange": false,
-            "searching": false,
+            "searching": true,
             "ordering": true,
             "info": true,
             "autoWidth": false,
             "responsive": true,
+        });
+        //Date picker
+        $('#reservationdate').datetimepicker({
+            format: 'D/M/YYYY'
         });
     });
 </script>
 <?= $this->endSection(); ?>
 
 <?= $this->section('css'); ?>
+<!-- daterange picker -->
+<link rel="stylesheet" href="<?= base_url(); ?>/plugins/daterangepicker/daterangepicker.css">
+<!-- Tempusdominus Bootstrap 4 -->
+<link rel="stylesheet" href="<?= base_url(); ?>/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+
 <!-- DataTables -->
 <link rel="stylesheet" href="<?= base_url(); ?>/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="<?= base_url(); ?>/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">

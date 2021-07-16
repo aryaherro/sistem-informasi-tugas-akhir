@@ -27,10 +27,14 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header col-12">
-                            <button type="button" class="btn btn-block btn-primary col-2" data-toggle="modal" data-target="#modal-default">Tambah Judul</button>
+                            <div class="row">
+                                <div class="block col"></div>
+                                <button type="button" class="btn btn-inline btn-primary col-2" data-toggle="modal" data-target="#modal-default">Tambah Judul</button>
+                            </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead class="thead-dark">
                                     <tr>
@@ -151,7 +155,7 @@
         $('#example2').DataTable({
             "paging": true,
             "lengthChange": false,
-            "searching": false,
+            "searching": true,
             "ordering": true,
             "info": true,
             "autoWidth": false,

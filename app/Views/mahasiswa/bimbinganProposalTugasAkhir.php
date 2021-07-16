@@ -56,7 +56,16 @@
                                         <td>1</td>
                                         <td>Sistem pendukung keputusan pemilihan supplier pada CV. surya abadi dengan metode AHP</td>
                                         <td>Sistem ini membantu para pengambil keputusan melihat keputusan mana yang paling baik untuk diambil</td>
-                                        <td><input type="file"></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <!-- <label for="customFile">Custom File</label> -->
+
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="customFile">
+                                                    <label class="custom-file-label" for="customFile">File</label>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td>-</td>
                                         <td>progress</td>
                                     </tr>
@@ -112,7 +121,7 @@
         $('#example2').DataTable({
             "paging": true,
             "lengthChange": false,
-            "searching": false,
+            "searching": true,
             "ordering": true,
             "info": true,
             "autoWidth": false,
