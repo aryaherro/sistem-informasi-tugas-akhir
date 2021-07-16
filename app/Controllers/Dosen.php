@@ -9,28 +9,33 @@ class Dosen extends BaseController
         return view('dosen/profile');
     }
 
-    public function judul()
+    public function validasiJudul()
     {
-        return view('mahasiswa/pengajuanJudulTugasAkhir');
+        return view('dosen/validasi/judul');
     }
 
-    public function bimbinganProposal()
+    public function validasiProposal()
     {
-        return view('mahasiswa/bimbinganProposalTugasAkhir');
+        return view('dosen/validasi/proposal');
     }
 
-    public function bimbinganTugasAkhir()
+    public function validasiTugasAkhir()
     {
-        return view('mahasiswa/bimbinganTugasAkhir');
+        return view('dosen/validasi/tugasAkhir');
+    }
+
+    public function validasiNilai()
+    {
+        return view('dosen/validasi/nilai');
     }
 
     public function jadwalSeminarProposal()
     {
-        return view('mahasiswa/jadwal/seminarProposal');
+        return view('dosen/jadwal/seminarProposal');
     }
 
     public function jadwalSeminarTugasAkhir()
     {
-        return view('mahasiswa/jadwal/seminarTugasAkhir');
+        return view('dosen/jadwal/seminarTugasAkhir');
     }
 }

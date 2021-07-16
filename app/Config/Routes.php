@@ -46,6 +46,20 @@ $routes->group("Mahasiswa", function ($routes) {
 	});
 });
 
+$routes->group("Dosen", function ($routes) {
+	$routes->get('/', 'Dosen::index');
+	$routes->group("Validasi", function ($routes) {
+		$routes->get('Judul', 'Dosen::validasiJudul', ['as' => 'dosen.validasi.judul']);
+		$routes->get('Proposal', 'Dosen::validasiProposal', ['as' => 'dosen.validasi.proposal']);
+		$routes->get('TugasAkhir', 'Dosen::validasiTugasAkhir', ['as' => 'dosen.validasi.tugasAkhir']);
+		$routes->get('Nilai', 'Dosen::validasiNilai', ['as' => 'dosen.validasi.nilai']);
+	});
+	$routes->group("Jadwal", function ($routes) {
+		$routes->get('SeminarProposal', 'Dosen::jadwalSeminarProposal', ['as' => 'dosen.jadwal.seminarProposal']);
+		$routes->get('SeminarTugasAkhir', 'Dosen::jadwalSeminarTugasAkhir', ['as' => 'dosen.jadwal.seminarTugasAkhir']);
+	});
+});
+
 $routes->group("Prodi", function ($routes) {
 	$routes->get('/', 'Prodi::index');
 	$routes->group("Validasi", function ($routes) {
@@ -54,8 +68,8 @@ $routes->group("Prodi", function ($routes) {
 		$routes->get('TugasAkhir', 'Prodi::validasiTugasAkhir', ['as' => 'prodi.validasi.tugasAkhir']);
 	});
 	$routes->group("Jadwal", function ($routes) {
-		$routes->get('SeminarProposal', 'Prodi::jadwalSeminarProposal', ['as' => 'prodi.jadwal.jadwalSeminarProposal']);
-		$routes->get('SeminarTugasAkhir', 'Prodi::jadwalSeminarTugasAkhir', ['as' => 'prodi.jadwal.jadwalSeminarTugasAkhir']);
+		$routes->get('SeminarProposal', 'Prodi::jadwalSeminarProposal', ['as' => 'prodi.jadwal.seminarProposal']);
+		$routes->get('SeminarTugasAkhir', 'Prodi::jadwalSeminarTugasAkhir', ['as' => 'prodi.jadwal.seminarTugasAkhir']);
 	});
 });
 
