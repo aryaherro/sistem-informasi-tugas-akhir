@@ -35,21 +35,25 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Nim</th>
+                                        <th>Nama Mahasiswa</th>
                                         <th>Judul</th>
                                         <th>Deskripsi</th>
-                                        <th>upload file</th>
-                                        <th>saran dosen</th>
-                                        <th>validasi dosen</th>
+                                        <th>Berita Acara</th>
+                                        <th>Nilai</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>coba</td>
-                                        <td>manual</td>
-                                        <td>embuh</td>
-                                        <td>Y</td>
-                                        <td>G</td>
+                                        <td>2018420117</td>
+                                        <td>R. Arya Herro. K</td>
+                                        <td>Menuju tak terbatas dan melampauinya</td>
+                                        <td>Ilmu Kepepet</td>
+                                        <td>Tanggal</td>
+                                        <td>1000</td>
+                                        <td>Lulus</td>
                                     </tr>
                                 </tbody>
                                 <!-- <tfoot>
