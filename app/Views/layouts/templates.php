@@ -18,7 +18,7 @@
   <?php $this->renderSection('css'); ?>
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="layout-footer-fixed sidebar-mini-xs layout-navbar-fixed layout-fixed" style="height: auto;">
   <!-- Site wrapper -->
   <div class="wrapper">
     <!-- Navbar -->
