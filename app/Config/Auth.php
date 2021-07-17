@@ -38,6 +38,7 @@ class Auth extends AuthConfig
 	 */
 	public $views = [
 		'login'		   => 'Views\login',
+		// 'login'		   => 'Myth\Auth\Views\login',
 		// 'register'		=> 'Myth\Auth\Views\register',
 		// 'forgot'		  => 'Myth\Auth\Views\forgot',
 		// 'reset'		   => 'Myth\Auth\Views\reset',
