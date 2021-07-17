@@ -32,7 +32,7 @@
                     <li class="nav-item <?= (strstr(current_url(), base_url("/Mahasiswa/TugasAkhir"))) ? "menu-is-opening menu-open" : ""; ?>">
                         <!-- tambahkan active dibawah -->
                         <a href="#" class="nav-link <?= (strstr(current_url(), base_url("/Mahasiswa/TugasAkhir"))) ? "active" : ""; ?>">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="fas fa-chalkboard-teacher"></i>
                             <p>
                                 Tugas Akhir
                                 <i class="right fas fa-angle-left"></i>
@@ -41,19 +41,19 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="<?= route_to("mahasiswa.judul"); ?>" class="nav-link <?= (current_url() == base_url("/Mahasiswa/TugasAkhir/judul")) ? "active" : ""; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-caret-right"></i>
                                     <p>Pengajuan Judul Tugas Akhir</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="<?= route_to("mahasiswa.bimbinganProposal"); ?>" class="nav-link <?= (current_url() == base_url("/Mahasiswa/TugasAkhir/bimbinganProposal")) ? "active" : ""; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-caret-right"></i>
                                     <p>Bimbingan Proposal Tugas Akhir</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="<?= route_to("mahasiswa.bimbinganTugasAkhir"); ?>" class="nav-link <?= (current_url() == base_url("/Mahasiswa/TugasAkhir/bimbinganTugasAkhir")) ? "active" : ""; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-caret-right"></i>
                                     <p>Bimbingan Tugas Akhir</p>
                                 </a>
                             </li>
@@ -63,7 +63,7 @@
                 <div class="user-panel mt-1 pb-1 mb-1 d-flex">
                     <li class="nav-item <?= (strstr(current_url(), base_url("/Mahasiswa/Jadwal"))) ? "menu-is-opening menu-open" : ""; ?>">
                         <a href="#" class="nav-link <?= (strstr(current_url(), base_url("/Mahasiswa/Jadwal"))) ? "active" : ""; ?>">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="fas fa-clipboard-list"></i>
                             <p>
                                 Jadwal
                                 <i class="right fas fa-angle-left"></i>
@@ -72,13 +72,13 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="<?= route_to("mahasiswa.jadwal.jadwalSeminarProposal"); ?>" class="nav-link <?= (current_url() == base_url("/Mahasiswa/Jadwal/SeminarProposal")) ? "active" : ""; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-caret-right"></i>
                                     <p>Jadwal Seminar Proposal Tugas Akhir</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="<?= route_to("mahasiswa.jadwal.jadwalSeminarTugasAkhir"); ?>" class="nav-link <?= (current_url() == base_url("/Mahasiswa/Jadwal/SeminarTugasAkhir")) ? "active" : ""; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-caret-right"></i>
                                     <p>Jadwal Seminar Tugas Akhir</p>
                                 </a>
                             </li>
@@ -92,7 +92,7 @@
                 <div class="user-panel mt-1 pb-1 mb-1 d-flex">
                     <li class="nav-item <?= (strstr(current_url(), base_url("/Dosen/Validasi"))) ? "menu-is-opening menu-open" : ""; ?>">
                         <a href="#" class="nav-link <?= (strstr(current_url(), base_url("/Dosen/Validasi"))) ? "active" : ""; ?>">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="fas fa-file-signature"></i>
                             <p>
                                 Validasi & Saran
                                 <i class="right fas fa-angle-left"></i>
@@ -101,25 +101,25 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="<?= route_to("dosen.validasi.judul"); ?>" class="nav-link <?= (current_url() == base_url("/Dosen/Validasi/Judul")) ? "active" : ""; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-caret-right"></i>
                                     <p>Judul Tugas Akhir</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="<?= route_to("dosen.validasi.proposal"); ?>" class="nav-link <?= (current_url() == base_url("/Dosen/Validasi/Proposal")) ? "active" : ""; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-caret-right"></i>
                                     <p>Bimbingan Proposal Tugas Akhir</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="<?= route_to("dosen.validasi.tugasAkhir"); ?>" class="nav-link <?= (current_url() == base_url("/Dosen/Validasi/TugasAkhir")) ? "active" : ""; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-caret-right"></i>
                                     <p>Bimbingan Tugas Akhir</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="<?= route_to("dosen.validasi.nilai"); ?>" class="nav-link <?= (current_url() == base_url("/Dosen/Validasi/Nilai")) ? "active" : ""; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-caret-right"></i>
                                     <p>Penilaian Tugas Akhir</p>
                                 </a>
                             </li>
@@ -129,7 +129,7 @@
                 <div class="user-panel mt-1 pb-1 mb-1 d-flex">
                     <li class="nav-item nav-item <?= (strstr(current_url(), base_url("/Dosen/Jadwal"))) ? "menu-is-opening menu-open" : ""; ?>">
                         <a href="#" class="nav-link  <?= (strstr(current_url(), base_url("/Dosen/Jadwal"))) ? "active" : ""; ?>">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="fas fa-clipboard-list"></i>
                             <p>
                                 Jadwal
                                 <i class="right fas fa-angle-left"></i>
@@ -138,13 +138,13 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="<?= route_to("dosen.jadwal.seminarProposal"); ?>" class="nav-link <?= (current_url() == base_url("/Dosen/Jadwal/SeminarProposal")) ? "active" : ""; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-caret-right"></i>
                                     <p>Jadwal Seminar Proposal Tugas Akhir</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="<?= route_to("dosen.jadwal.seminarTugasAkhir"); ?>" class="nav-link <?= (current_url() == base_url("/Dosen/Jadwal/SeminarTugasAkhir")) ? "active" : ""; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-caret-right"></i>
                                     <p>Jadwal Tugas Akhir</p>
                                 </a>
                             </li>
@@ -158,7 +158,7 @@
                 <div class="user-panel mt-1 pb-1 mb-1 d-flex">
                     <li class="nav-item <?= (strstr(current_url(), base_url("/Prodi/Validasi"))) ? "menu-is-opening menu-open" : ""; ?>">
                         <a href="#" class="nav-link <?= (strstr(current_url(), base_url("/Prodi/Validasi"))) ? "active" : ""; ?>">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="fas fa-file-signature"></i>
                             <p>
                                 Validasi
                                 <i class="right fas fa-angle-left"></i>
@@ -167,19 +167,19 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="<?= route_to("prodi.validasi.judul"); ?>" class="nav-link <?= (current_url() == base_url("/Prodi/Validasi/Judul")) ? "active" : ""; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-caret-right"></i>
                                     <p>Judul Tugas Akhir</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="<?= route_to("prodi.validasi.proposal"); ?>" class="nav-link <?= (current_url() == base_url("/Prodi/Validasi/Proposal")) ? "active" : ""; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-caret-right"></i>
                                     <p>Data Proposal Tugas Akhir Mahasiswa</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="<?= route_to("prodi.validasi.tugasAkhir"); ?>" class="nav-link <?= (current_url() == base_url("/Prodi/Validasi/TugasAkhir")) ? "active" : ""; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-caret-right"></i>
                                     <p>Data Tugas Akhir Mahasiswa</p>
                                 </a>
                             </li>
@@ -189,7 +189,7 @@
                 <div class="user-panel mt-1 pb-1 mb-1 d-flex">
                     <li class="nav-item <?= (strstr(current_url(), base_url("/Prodi/Jadwal"))) ? "menu-is-opening menu-open" : ""; ?>">
                         <a href="#" class="nav-link <?= (strstr(current_url(), base_url("/Prodi/Jadwal"))) ? "active" : ""; ?>">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="fas fa-clipboard"></i>
                             <p>
                                 Pembuatan Jadwal
                                 <i class="right fas fa-angle-left"></i>
@@ -198,13 +198,13 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="<?= route_to("prodi.jadwal.seminarProposal"); ?>" class="nav-link <?= (current_url() == base_url("/Prodi/Jadwal/SeminarProposal")) ? "active" : ""; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-caret-right"></i>
                                     <p>Jadwal Seminar Proposal Tugas Akhir</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="<?= route_to("prodi.jadwal.seminarTugasAkhir"); ?>" class="nav-link <?= (current_url() == base_url("/Prodi/Jadwal/SeminarTugasAkhir")) ? "active" : ""; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-caret-right"></i>
                                     <p>Jadwal Tugas Akhir</p>
                                 </a>
                             </li>
