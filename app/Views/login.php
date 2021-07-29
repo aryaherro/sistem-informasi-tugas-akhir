@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
   <meta charset="utf-8">
@@ -26,8 +26,9 @@
       <div class="card-body login-card-body">
         <p class="login-box-msg">Sign in to start your session</p>
 
-        <form action="<?= base_url(); ?>" method="post">
-          <div class="input-group mb-3">
+        <form action="<?= route_to('/') ?>" method="post">
+          <?= csrf_field() ?>
+          <!-- <div class="input-group mb-3">
             <input type="email" class="form-control" placeholder="Email">
             <div class="input-group-append">
               <div class="input-group-text">
@@ -42,19 +43,47 @@
                 <span class="fas fa-lock"></span>
               </div>
             </div>
+          </div> -->
+          <?php if ($config->validFields === ['email']) : ?>
+            <div class="form-group">
+              <label for="login"><?= lang('Auth.email') ?></label>
+              <input type="email" class="form-control <?php if (session('errors.login')) : ?>is-invalid <?php endif ?>" name="login" placeholder="<?= lang('Auth.email') ?>">
+              <div class="invalid-feedback">
+                <?= session('errors.login') ?>
+              </div>
+            </div>
+          <?php else : ?>
+            <div class="form-group">
+              <label for="login"><?= lang('Auth.emailOrUsername') ?></label>
+              <input type="text" class="form-control <?php if (session('errors.login')) : ?>is-invalid<?php endif ?>" name="login" placeholder="<?= lang('Auth.emailOrUsername') ?>">
+              <div class="invalid-feedback">
+                <?= session('errors.login') ?>
+              </div>
+            </div>
+          <?php endif; ?>
+
+          <div class="form-group">
+            <label for="password"><?= lang('Auth.password') ?></label>
+            <input type="password" name="password" class="form-control  <?php if (session('errors.password')) : ?>is-invalid<?php endif ?>" placeholder="<?= lang('Auth.password') ?>">
+            <div class="invalid-feedback">
+              <?= session('errors.password') ?>
+            </div>
           </div>
+
           <div class="row">
             <div class="col-8">
-              <div class="icheck-primary">
-                <input type="checkbox" id="remember">
-                <label for="remember">
-                  Remember Me
-                </label>
-              </div>
+              <?php if ($config->allowRemembering) : ?>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input type="checkbox" name="remember" class="form-check-input" <?php if (old('remember')) : ?> checked <?php endif ?>>
+                    <?= lang('Auth.rememberMe') ?>
+                  </label>
+                </div>
+              <?php endif; ?>
             </div>
             <!-- /.col -->
             <div class="col-4">
-              <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+              <button type="submit" class="btn btn-primary btn-block"><?= lang('Auth.loginAction') ?></button>
             </div>
             <!-- /.col -->
           </div>

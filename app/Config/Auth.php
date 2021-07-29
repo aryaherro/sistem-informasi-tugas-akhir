@@ -44,7 +44,7 @@ class Auth extends AuthConfig
 		// 'reset'		   => 'Myth\Auth\Views\reset',
 		// 'emailForgot'	 => 'Myth\Auth\Views\emails\forgot',
 		// 'emailActivation' => 'Myth\Auth\Views\emails\activation',
-		'register'		=> '',
+		'user'		=> 'admin\user',
 		'forgot'		  => '',
 		'reset'		   => '',
 		'emailForgot'	 => '',
@@ -143,7 +143,7 @@ class Auth extends AuthConfig
 	 *
 	 * @var bool
 	 */
-	public $allowRegistration = false;
+	public $allowRegistration = true;
 
 	/**
 	 * --------------------------------------------------------------------
@@ -297,7 +297,7 @@ class Auth extends AuthConfig
 	public $passwordValidators = [
 		'Myth\Auth\Authentication\Passwords\CompositionValidator',
 		'Myth\Auth\Authentication\Passwords\NothingPersonalValidator',
-		'Myth\Auth\Authentication\Passwords\DictionaryValidator',
+		// 'Myth\Auth\Authentication\Passwords\DictionaryValidator',
 		// 'Myth\Auth\Authentication\Passwords\PwnedValidator',
 	];
 

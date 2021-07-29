@@ -31,7 +31,18 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Mahasiswa::index');
+$routes->get('/', 'Mahasiswa::index', ['as' => 'home']);
+
+$routes->group("Admin", function ($routes) {
+	$routes->get('/', 'Admin::index');
+	$routes->group("User", function ($routes) {
+		$routes->get('/', 'Admin::user', ['as' => 'User']);
+		$routes->post('/', 'Admin::attemptRegister');
+		// $routes->get('judul', 'Mahasiswa::judul', ['as' => 'mahasiswa.judul']);
+		// $routes->get('bimbinganProposal', 'Mahasiswa::bimbinganProposal', ['as' => 'mahasiswa.bimbinganProposal']);
+		// $routes->get('bimbinganTugasAkhir', 'Mahasiswa::bimbinganTugasAkhir', ['as' => 'mahasiswa.bimbinganTugasAkhir']);
+	});
+});
 
 $routes->group("Mahasiswa", function ($routes) {
 	$routes->get('/', 'Mahasiswa::index');
