@@ -161,7 +161,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <!-- <label for="customFile">Custom File</label> -->
-                                <form action="<?= route_to('bimbinganProposal') ?>" method="post" enctype="multipart/form-data">
+                                <form action="<?= route_to('bimbinganProposal') ?>" method="post">
                                     <?= csrf_field() ?>
                                     <div class="form-group">
                                         <label>Judul</label>

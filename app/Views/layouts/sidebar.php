@@ -24,31 +24,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-                <!-- Admin -->
-                <li class="nav-header">Admin</li>
-                <div class="user-panel mt-1 pb-1 mb-1 d-flex">
-                    <li class="nav-item <?= (strstr(current_url(), base_url("/Admin/User"))) ? "menu-is-opening menu-open" : ""; ?>">
-                        <!-- tambahkan active dibawah -->
-                        <a href="#" class="nav-link <?= (strstr(current_url(), base_url("/Admin/User"))) ? "active" : ""; ?>">
-                            <i class="fas fa-chalkboard-teacher"></i>
-                            <p>
-                                User
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?= route_to("User"); ?>" class="nav-link <?= (current_url() == base_url("/Admin/User")) ? "active" : ""; ?>">
-                                    <i class="fas fa-caret-right"></i>
-                                    <p>Manage</p>
-                                </a>
-                            </li>
 
-                        </ul>
-                    </li>
-                </div>
-
-                <!-- Admin -->
 
                 <?php if (in_groups("Mahasiswa")) :; ?>
                     <!-- Mahasiswa -->

@@ -72,7 +72,7 @@ class Mahasiswa extends BaseController
 
     public function tambahbimbinganProposal()
     {
-        dd(($this->request->getPost())['value']);
+        // dd(($this->request->getPost()));
         // $this->setMahasiswa();
         // $judulProposal = new JudulProposalModel();
         // $data = [
@@ -85,6 +85,7 @@ class Mahasiswa extends BaseController
         // ];
         // $judulProposal->save($data);
         // return redirect()->back();
+
     }
 
     public function bimbinganTugasAkhir()
