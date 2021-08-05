@@ -31,7 +31,7 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Mahasiswa::index', ['as' => 'home']);
+$routes->get('/', 'Home::index', ['as' => 'home']);
 
 $routes->group("Admin", function ($routes) {
 	$routes->get('/', 'Admin::index');
@@ -45,7 +45,7 @@ $routes->group("Admin", function ($routes) {
 });
 
 $routes->group("Mahasiswa", ['filter' => 'role:Mahasiswa'], function ($routes) {
-	$routes->get('/', 'Mahasiswa::index');
+	$routes->get('/', 'Mahasiswa::index', ['as' => 'mahasiswa']);
 	$routes->group("TugasAkhir", function ($routes) {
 		$routes->get('judul', 'Mahasiswa::judul', ['as' => 'mahasiswa.judul']);
 		$routes->get('bimbinganProposal', 'Mahasiswa::bimbinganProposal', ['as' => 'mahasiswa.bimbinganProposal']);
@@ -58,7 +58,7 @@ $routes->group("Mahasiswa", ['filter' => 'role:Mahasiswa'], function ($routes) {
 });
 
 $routes->group("Dosen", ['filter' => 'role:Dosen'], function ($routes) {
-	$routes->get('/', 'Dosen::index');
+	$routes->get('/', 'Dosen::index', ['as' => 'dosen']);
 	$routes->group("Validasi", function ($routes) {
 		$routes->get('Judul', 'Dosen::validasiJudul', ['as' => 'dosen.validasi.judul'], ['filter' => 'permission:Dosen Pembimbing']);
 		$routes->get('Proposal', 'Dosen::validasiProposal', ['as' => 'dosen.validasi.proposal'], ['filter' => 'permission:Dosen Pembimbing']);

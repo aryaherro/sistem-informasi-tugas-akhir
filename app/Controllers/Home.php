@@ -6,6 +6,8 @@ class Home extends BaseController
 {
 	public function index()
 	{
-		return view('welcome_message');
+		if (in_groups('Mahasiswa'))	return redirect()->route('mahasiswa');
+		if (in_groups('Dosen'))	return redirect()->route('dosen');
+		return redirect()->to(base_url("/logout"));
 	}
 }
