@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\BimbinganProposalModel;
 use App\Models\DosenModel;
 use App\Models\JudulProposalModel;
 use App\Models\MahasiswaModel;
@@ -9,12 +10,23 @@ use App\Models\MahasiswaModel;
 class Mahasiswa extends BaseController
 {
     protected $mahasiswa;
-    protected $judul;
+    protected $judulProposal;
+    protected $bimbinganProposal;
 
     private function setMahasiswa()
     {
         $this->mahasiswa = (new MahasiswaModel())->asArray()->where('users_id', user_id())->first();
-        $this->judul = (new JudulProposalModel())->asArray()->where('mahasiswa_id', $this->mahasiswa['id'],)->findAll();
+        $this->judulProposal = ((new JudulProposalModel())->asArray()->where('mahasiswa_id', $this->mahasiswa['id'],))->findAll();
+
+        // if (count($this->judulProposal) > 1) {
+        //     $i = 0;
+        //     $temp = [];
+        //     foreach ($this->judulProposal as $key => $value) {
+        //         $bimbinganProposal = ((new BimbinganProposalModel())->asArray()->whereIn('judulProposal_id', $key['id'],))->findAll();
+        //         $this->bimbinganProposal
+        //     }
+        // }
+        // $this->bimbinganProposal = (new BimbinganProposalModel())->asArray()
         // dd($this->judul());
     }
 
@@ -32,14 +44,15 @@ class Mahasiswa extends BaseController
         $this->setMahasiswa();
         $data = [
             'mahasiswa' => $this->mahasiswa,
-            'judul'     => $this->judul,
+            'judul'     => $this->judulProposal,
         ];
+        // dd(count($this->judulProposal));
         return view('mahasiswa/pengajuanJudulTugasAkhir', $data);
     }
     public function tambahjudul()
     {
         $this->setMahasiswa();
-        $judul = new JudulProposalModel();
+        $judulProposal = new JudulProposalModel();
         $data = [
             'mahasiswa_id'  => $this->mahasiswa['id'],
             'dospem1_id'    => ((new DosenModel())->asArray()->where('nama', 'Ratna Nur Tiara Shanty,S.ST., M.Kom')->first())['id'],
@@ -47,12 +60,17 @@ class Mahasiswa extends BaseController
             'judul'         => ($this->request->getPost())['judul'],
             'deskripsi'     => ($this->request->getPost())['deskripsi'],
         ];
-        $judul->save($data);
+        $judulProposal->save($data);
         return redirect()->back();
     }
 
     public function bimbinganProposal()
     {
+        $this->setMahasiswa();
+        $data = [
+            'mahasiswa' => $this->mahasiswa,
+            'judul'     => $this->judulProposal,
+        ];
         return view('mahasiswa/bimbinganProposalTugasAkhir');
     }
 
