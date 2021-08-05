@@ -48,6 +48,7 @@ $routes->group("Mahasiswa", ['filter' => 'role:Mahasiswa'], function ($routes) {
 	$routes->get('/', 'Mahasiswa::index', ['as' => 'mahasiswa']);
 	$routes->group("TugasAkhir", function ($routes) {
 		$routes->get('judul', 'Mahasiswa::judul', ['as' => 'mahasiswa.judul']);
+		$routes->post('judul', 'Mahasiswa::tambahjudul');
 		$routes->get('bimbinganProposal', 'Mahasiswa::bimbinganProposal', ['as' => 'mahasiswa.bimbinganProposal']);
 		$routes->get('bimbinganTugasAkhir', 'Mahasiswa::bimbinganTugasAkhir', ['as' => 'mahasiswa.bimbinganTugasAkhir']);
 	});

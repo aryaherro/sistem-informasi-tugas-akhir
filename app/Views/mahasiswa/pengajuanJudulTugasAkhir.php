@@ -34,41 +34,99 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            <?php if ($judul == null) :; ?>
+                                <di>Anda Belum Mengajukan Judul</di>
+                            <?php else :; ?>
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>
+                                                <center>No</center>
+                                            </th>
+                                            <th>
+                                                <center>Judul</center>
+                                            </th>
+                                            <th>
+                                                <center>Deskripsi</center>
+                                            </th>
+                                            <th>
+                                                <center>ACC Dospem 1</center>
+                                            </th>
+                                            <th>
+                                                <center>ACC Dospem 1</center>
+                                            </th>
+                                            <th>
+                                                <center>ACC Prodi</center>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                            <table id="example2" class="table table-bordered table-hover">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>
-                                            <center>No</center>
-                                        </th>
-                                        <th>
-                                            <center>Judul</center>
-                                        </th>
-                                        <th>
-                                            <center>Deskripsi</center>
-                                        </th>
-                                        <th>
-                                            <center>Catatan Dosen</center>
-                                        </th>
-                                        <th>
-                                            <center>Validasi Dosen</center>
-                                        </th>
-                                        <th>
-                                            <center>Validasi Prodi</center>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Sistem pendukung keputusan pemilihan supplier pada CV. surya abadi dengan metode AHP</td>
-                                        <td>Sistem ini membantu para pengambil keputusan melihat keputusan mana yang paling baik untuk diambil</td>
-                                        <td>-</td>
-                                        <td>tervalidasi</td>
-                                        <td>progress</td>
-                                    </tr>
-                                </tbody>
-                                <!-- <tfoot>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($judul as $key) :; ?>
+                                            <tr value="<?= $key['id']; ?>">
+                                                <td>
+                                                    <center><?= $i++; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $key['judul']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $key['deskripsi']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?php
+                                                        switch ($key['acc_dospem1']) {
+                                                            case '1':
+                                                                echo "Disetujui";
+                                                                break;
+                                                            case '0':
+                                                                echo "Ditolak";
+                                                                break;
+                                                            case null:
+                                                                echo "Dalam proses";
+                                                                break;
+                                                        }
+                                                        ?></center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?php
+                                                        switch ($key['acc_dospem2']) {
+                                                            case '1':
+                                                                echo "Disetujui";
+                                                                break;
+                                                            case '0':
+                                                                echo "Ditolak";
+                                                                break;
+                                                            case null:
+                                                                echo "Dalam proses";
+                                                                break;
+                                                        }
+                                                        ?></center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?php
+                                                        switch ($key['acc_prodi']) {
+                                                            case '1':
+                                                                echo "Disetujui";
+                                                                break;
+                                                            case '0':
+                                                                echo "Ditolak";
+                                                                break;
+                                                            case null:
+                                                                echo "Dalam proses";
+                                                                break;
+                                                        }
+                                                        ?></center>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+
+                                    </tbody>
+                                    <!-- <tfoot>
                                     <tr>
                                         <th>Rendering engine</th>
                                         <th>Browser</th>
@@ -77,7 +135,8 @@
                                         <th>CSS grade</th>
                                     </tr>
                                 </tfoot> -->
-                            </table>
+                                </table>
+                            <?php endif; ?>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -99,25 +158,21 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div>
-                            <!-- text input -->
+                        <form action="<?= route_to('judul') ?>" method="post">
+                            <?= csrf_field() ?>
+
                             <div class="form-group">
                                 <label>Judul</label>
-                                <input type="text" class="form-control" placeholder="Judul">
+                                <input type="text" class="form-control" placeholder="Judul" name="judul">
                             </div>
-                        </div>
-                        <div>
-                            <!-- textarea -->
                             <div class="form-group">
                                 <label>Deskripsi</label>
-                                <textarea class="form-control" rows="3" placeholder="Deskripsi"></textarea>
+                                <textarea class="form-control" rows="3" placeholder="Deskripsi" name='deskripsi'></textarea>
                             </div>
-                        </div>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </form>
                     </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+
                 </div>
                 <!-- /.modal-content -->
             </div>

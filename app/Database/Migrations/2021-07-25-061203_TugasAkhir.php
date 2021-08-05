@@ -273,7 +273,6 @@ class TugasAkhir extends Migration
 			'dospem2_id'	=> ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
 			'judul'			=> ['type' => 'varchar', 'constraint' => 255],
 			'deskripsi'		=> ['type' => 'varchar', 'constraint' => 255],
-			'Berkas_judul'	=> ['type' => 'varchar', 'constraint' => 255],
 			'acc_dospem1'	=> ['type' => 'tinyint', 'constraint' => 1, 'null' => true],
 			'acc_dospem2'	=> ['type' => 'tinyint', 'constraint' => 1, 'null' => true],
 			'acc_prodi'		=> ['type' => 'tinyint', 'constraint' => 1, 'null' => true],

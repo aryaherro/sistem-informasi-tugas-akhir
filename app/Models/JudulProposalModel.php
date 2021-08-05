@@ -21,7 +21,6 @@ class JudulProposalModel extends Model
         'dospem2_id',
         'judul',
         'deskripsi',
-        'Berkas_judul',
         'acc_dospem1',
         'acc_dospem2',
         'acc_prodi',
