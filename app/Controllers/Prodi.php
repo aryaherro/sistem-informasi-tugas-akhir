@@ -4,14 +4,14 @@ namespace App\Controllers;
 
 class Prodi extends BaseController
 {
-    public function index()
-    {
-        return view('prodi/profile');
-    }
-
     public function validasiJudul()
     {
         return view('prodi/validasi/judul');
+    }
+
+    public function tambahvalidasiJudul()
+    {
+        return redirect()->back();
     }
 
     public function validasiProposal()
@@ -19,9 +19,19 @@ class Prodi extends BaseController
         return view('prodi/validasi/proposal');
     }
 
+    public function tambahvalidasiProposal()
+    {
+        return redirect()->back();
+    }
+
     public function validasiTugasAkhir()
     {
         return view('prodi/validasi/tugasAkhir');
+    }
+
+    public function tambahvalidasiTugasAkhir()
+    {
+        return redirect()->back();
     }
 
     public function jadwalSeminarProposal()
@@ -29,8 +39,18 @@ class Prodi extends BaseController
         return view('prodi/jadwal/seminarProposal');
     }
 
+    public function tambahjadwalSeminarProposal()
+    {
+        return redirect()->back();
+    }
+
     public function jadwalSeminarTugasAkhir()
     {
         return view('prodi/jadwal/seminarTugasAkhir');
+    }
+
+    public function tambahjadwalSeminarTugasAkhir()
+    {
+        return redirect()->back();
     }
 }

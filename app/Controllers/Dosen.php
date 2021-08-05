@@ -14,9 +14,19 @@ class Dosen extends BaseController
         return view('dosen/validasi/judul');
     }
 
+    public function tambahvalidasiJudul()
+    {
+        return redirect()->back();
+    }
+
     public function validasiProposal()
     {
         return view('dosen/validasi/proposal');
+    }
+
+    public function tambahvalidasiProposal()
+    {
+        return redirect()->back();
     }
 
     public function validasiTugasAkhir()
@@ -24,7 +34,17 @@ class Dosen extends BaseController
         return view('dosen/validasi/tugasAkhir');
     }
 
+    public function tambahvalidasiTugasAkhir()
+    {
+        return redirect()->back();
+    }
+
     public function validasiNilai()
+    {
+        return view('dosen/validasi/nilai');
+    }
+
+    public function tambahvalidasiNilai()
     {
         return view('dosen/validasi/nilai');
     }

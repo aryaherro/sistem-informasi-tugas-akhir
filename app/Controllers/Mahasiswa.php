@@ -44,6 +44,7 @@ class Mahasiswa extends BaseController
         // dd(count($this->judulProposal));
         return view('mahasiswa/pengajuanJudulTugasAkhir', $data);
     }
+
     public function tambahjudul()
     {
         $this->setMahasiswa();
@@ -84,13 +85,17 @@ class Mahasiswa extends BaseController
         //     'deskripsi'     => ($this->request->getPost())['deskripsi'],
         // ];
         // $judulProposal->save($data);
-        // return redirect()->back();
-
+        return redirect()->back();
     }
 
     public function bimbinganTugasAkhir()
     {
         return view('mahasiswa/bimbinganTugasAkhir');
+    }
+
+    public function tambahbimbinganTugasAkhir()
+    {
+        return redirect()->back();
     }
 
     public function jadwalSeminarProposal()
