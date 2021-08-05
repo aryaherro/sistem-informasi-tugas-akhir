@@ -2,11 +2,19 @@
 
 namespace App\Controllers;
 
+use App\Models\MahasiswaModel;
+
 class Mahasiswa extends BaseController
 {
+    protected $mahasiswa;
+
     public function index()
     {
-        return view('mahasiswa/profile');
+        $this->mahasiswa = new MahasiswaModel();
+        $data = [
+            'mahasiswa' => $this->mahasiswa->asArray()->where('users_id', user_id())->find(),
+        ];
+        return view('mahasiswa/profile', $data);
     }
 
     public function judul()
