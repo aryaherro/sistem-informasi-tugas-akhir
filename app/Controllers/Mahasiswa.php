@@ -18,16 +18,11 @@ class Mahasiswa extends BaseController
         $this->mahasiswa = (new MahasiswaModel())->asArray()->where('users_id', user_id())->first();
         $this->judulProposal = ((new JudulProposalModel())->asArray()->where('mahasiswa_id', $this->mahasiswa['id'],))->findAll();
 
-        // if (count($this->judulProposal) > 1) {
-        //     $i = 0;
-        //     $temp = [];
-        //     foreach ($this->judulProposal as $key => $value) {
-        //         $bimbinganProposal = ((new BimbinganProposalModel())->asArray()->whereIn('judulProposal_id', $key['id'],))->findAll();
-        //         $this->bimbinganProposal
-        //     }
-        // }
-        // $this->bimbinganProposal = (new BimbinganProposalModel())->asArray()
-        // dd($this->judul());
+        $temp = array();
+        foreach ($this->judulProposal as $key) {
+            $temp[$key['id']] = (((new BimbinganProposalModel())->asArray()->where('judulProposal_id', $key['id'],))->findAll());
+        }
+        $this->bimbinganProposal = $temp;
     }
 
     public function index()
@@ -70,8 +65,26 @@ class Mahasiswa extends BaseController
         $data = [
             'mahasiswa' => $this->mahasiswa,
             'judul'     => $this->judulProposal,
+            'bimbingan' => $this->bimbinganProposal,
         ];
-        return view('mahasiswa/bimbinganProposalTugasAkhir');
+        return view('mahasiswa/bimbinganProposalTugasAkhir', $data);
+    }
+
+    public function tambahbimbinganProposal()
+    {
+        dd(($this->request->getPost())['value']);
+        // $this->setMahasiswa();
+        // $judulProposal = new JudulProposalModel();
+        // $data = [
+        //     'judulProposal_id' => ($this->request->getPost())['value'],
+        //     'mahasiswa_id'  => $this->mahasiswa['id'],
+        //     'dospem1_id'    => ((new DosenModel())->asArray()->where('nama', 'Ratna Nur Tiara Shanty,S.ST., M.Kom')->first())['id'],
+        //     'dospem2_id'    => ((new DosenModel())->asArray()->where('nama', 'Cempaka Ananggadipa Swastyastu, S.Kom., M.Kom')->first())['id'],
+        //     'judul'         => ($this->request->getPost())['judul'],
+        //     'deskripsi'     => ($this->request->getPost())['deskripsi'],
+        // ];
+        // $judulProposal->save($data);
+        // return redirect()->back();
     }
 
     public function bimbinganTugasAkhir()

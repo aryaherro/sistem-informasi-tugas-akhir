@@ -29,7 +29,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <img src="/profile/<?= user()->__get('username'); ?>.png" height="400">
+                        <img src="/profile/<?= user()->__get('username'); ?>.png" height="400" onerror="this.onerror=null;this.src='/profile/default.png';">
                     </div>
                     <div class="col">
                         <form action="" method="">

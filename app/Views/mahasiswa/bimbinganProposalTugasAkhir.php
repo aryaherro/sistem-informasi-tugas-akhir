@@ -64,65 +64,69 @@
                                     <tbody>
                                         <?php $i = 1; ?>
                                         <?php foreach ($judul as $key) :; ?>
-                                            <tr value="<?= $key['id']; ?>">
-                                                <td>
-                                                    <center><?= $i++; ?></center>
-                                                </td>
-                                                <td>
-                                                    <center><?= $key['judul']; ?></center>
-                                                </td>
-                                                <td>
-                                                    <center><?= $key['deskripsi']; ?></center>
-                                                </td>
-                                                <td>
-                                                    <center>
-                                                        <?php
-                                                        switch ($key['acc_dospem1']) {
-                                                            case '1':
-                                                                echo "Disetujui";
-                                                                break;
-                                                            case '0':
-                                                                echo "Ditolak";
-                                                                break;
-                                                            case null:
-                                                                echo "Dalam proses";
-                                                                break;
-                                                        }
-                                                        ?></center>
-                                                </td>
-                                                <td>
-                                                    <center>
-                                                        <?php
-                                                        switch ($key['acc_dospem2']) {
-                                                            case '1':
-                                                                echo "Disetujui";
-                                                                break;
-                                                            case '0':
-                                                                echo "Ditolak";
-                                                                break;
-                                                            case null:
-                                                                echo "Dalam proses";
-                                                                break;
-                                                        }
-                                                        ?></center>
-                                                </td>
-                                                <td>
-                                                    <center>
-                                                        <?php
-                                                        switch ($key['acc_prodi']) {
-                                                            case '1':
-                                                                echo "Disetujui";
-                                                                break;
-                                                            case '0':
-                                                                echo "Ditolak";
-                                                                break;
-                                                            case null:
-                                                                echo "Dalam proses";
-                                                                break;
-                                                        }
-                                                        ?></center>
-                                                </td>
-                                            </tr>
+                                            <?php $j = 1; ?>
+                                            <?php foreach ($bimbingan[$key['id']] as $keyB) :; ?>
+
+                                                <tr value="<?= $keyB['id']; ?>">
+                                                    <td>
+                                                        <center><?= $i++; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?= $key['judul']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?= $j++; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <?php
+                                                            switch ($key['acc_dospem1']) {
+                                                                case '1':
+                                                                    echo "Disetujui";
+                                                                    break;
+                                                                case '0':
+                                                                    echo "Ditolak";
+                                                                    break;
+                                                                case null:
+                                                                    echo "Dalam proses";
+                                                                    break;
+                                                            }
+                                                            ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <?php
+                                                            switch ($key['acc_dospem2']) {
+                                                                case '1':
+                                                                    echo "Disetujui";
+                                                                    break;
+                                                                case '0':
+                                                                    echo "Ditolak";
+                                                                    break;
+                                                                case null:
+                                                                    echo "Dalam proses";
+                                                                    break;
+                                                            }
+                                                            ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <?php
+                                                            switch ($key['acc_prodi']) {
+                                                                case '1':
+                                                                    echo "Disetujui";
+                                                                    break;
+                                                                case '0':
+                                                                    echo "Ditolak";
+                                                                    break;
+                                                                case null:
+                                                                    echo "Dalam proses";
+                                                                    break;
+                                                            }
+                                                            ?></center>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
                                         <?php endforeach; ?>
                                     </tbody>
                                     <!-- <tfoot>
@@ -155,34 +159,39 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div>
-                                <div class="form-group">
-                                    <!-- <label for="customFile">Custom File</label> -->
-
+                            <div class="form-group">
+                                <!-- <label for="customFile">Custom File</label> -->
+                                <form action="<?= route_to('bimbinganProposal') ?>" method="post" enctype="multipart/form-data">
+                                    <?= csrf_field() ?>
+                                    <div class="form-group">
+                                        <label>Judul</label>
+                                        <select class="form-select" aria-label="Default select example" name="judulProposal_id">
+                                            <?php foreach ($judul as $key) :; ?>
+                                                <option value="<?= $key['id']; ?>"><?= $key['judul']; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile">
+                                        <input type="file" class="custom-file-input form-control" id="customFile" name="Berkas_bimbingan">
                                         <label class="custom-file-label" for="customFile">File</label>
                                     </div>
-                                </div>
+                                    <!-- textarea -->
+                                    <div class="form-group">
+                                        <label>Deskripsi</label>
+                                        <textarea class="form-control" rows="3" placeholder="Deskripsi" name="Deskripsi"></textarea>
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div>
-                                <!-- textarea -->
-                                <div class="form-group">
-                                    <label>Deskripsi</label>
-                                    <textarea class="form-control" rows="3" placeholder="Deskripsi"></textarea>
-                                </div>
-                            </div>
+                            <!-- /.modal-content -->
                         </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                        <!-- /.modal-dialog -->
                     </div>
-                    <!-- /.modal-content -->
+                    <!-- /.modal -->
                 </div>
-                <!-- /.modal-dialog -->
             </div>
-            <!-- /.modal -->
         </div>
         <!-- /.container-fluid -->
     </section>
