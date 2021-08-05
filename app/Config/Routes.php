@@ -44,7 +44,7 @@ $routes->group("Admin", function ($routes) {
 	});
 });
 
-$routes->group("Mahasiswa", function ($routes) {
+$routes->group("Mahasiswa", ['filter' => 'role:Mahasiswa'], function ($routes) {
 	$routes->get('/', 'Mahasiswa::index');
 	$routes->group("TugasAkhir", function ($routes) {
 		$routes->get('judul', 'Mahasiswa::judul', ['as' => 'mahasiswa.judul']);
@@ -57,21 +57,21 @@ $routes->group("Mahasiswa", function ($routes) {
 	});
 });
 
-$routes->group("Dosen", function ($routes) {
+$routes->group("Dosen", ['filter' => 'role:Dosen'], function ($routes) {
 	$routes->get('/', 'Dosen::index');
 	$routes->group("Validasi", function ($routes) {
-		$routes->get('Judul', 'Dosen::validasiJudul', ['as' => 'dosen.validasi.judul']);
-		$routes->get('Proposal', 'Dosen::validasiProposal', ['as' => 'dosen.validasi.proposal']);
-		$routes->get('TugasAkhir', 'Dosen::validasiTugasAkhir', ['as' => 'dosen.validasi.tugasAkhir']);
-		$routes->get('Nilai', 'Dosen::validasiNilai', ['as' => 'dosen.validasi.nilai']);
+		$routes->get('Judul', 'Dosen::validasiJudul', ['as' => 'dosen.validasi.judul'], ['filter' => 'permission:Dosen Pembimbing']);
+		$routes->get('Proposal', 'Dosen::validasiProposal', ['as' => 'dosen.validasi.proposal'], ['filter' => 'permission:Dosen Pembimbing']);
+		$routes->get('TugasAkhir', 'Dosen::validasiTugasAkhir', ['as' => 'dosen.validasi.tugasAkhir'], ['filter' => 'permission:Dosen Pembimbing']);
+		$routes->get('Nilai', 'Dosen::validasiNilai', ['as' => 'dosen.validasi.nilai'], ['filter' => 'permission:Dosen Penguji']);
 	});
-	$routes->group("Jadwal", function ($routes) {
+	$routes->group("Jadwal", ['filter' => 'permission:Dosen Pembimbing'], function ($routes) {
 		$routes->get('SeminarProposal', 'Dosen::jadwalSeminarProposal', ['as' => 'dosen.jadwal.seminarProposal']);
 		$routes->get('SeminarTugasAkhir', 'Dosen::jadwalSeminarTugasAkhir', ['as' => 'dosen.jadwal.seminarTugasAkhir']);
 	});
 });
 
-$routes->group("Prodi", function ($routes) {
+$routes->group("Prodi", ['filter' => 'permission:Kaprodi'], function ($routes) {
 	$routes->get('/', 'Prodi::index');
 	$routes->group("Validasi", function ($routes) {
 		$routes->get('Judul', 'Prodi::validasiJudul', ['as' => 'prodi.validasi.judul']);

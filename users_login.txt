@@ -1,0 +1,46 @@
+langkah-langkah :
+1. buka terminal VS Code(ctrl + `)
+2. ketik (php spark migrate), jika ada masalah atau perubahan maka ketik (php spark migrate:rollback) dan ulangi lagi
+3. ketik (php spark db:seed SIUsersSeeder)
+4. jalankan servernya (php spark serve)
+
+
+edi_prihartono@unitomo.ac.id
+ediprihartono
+1029384756
+
+ratna_nur_tiara_shanty@unitomo.ac.id
+ratnanur
+1029384756
+
+cempaka_Ananggadipa_swastyastu@unitomo.ac.id
+cempakaananggadipa
+1029384756
+
+anik_vega_vitianingsih@unitomo.ac.id
+anikvega
+1029384756
+
+lambang_probo_sumirat@unitomo.ac.id
+lambangprobo
+1029384756
+
+syaiful_hidayat@unitomo.ac.id
+syaifulhidayat
+1029384756
+
+wahyu_suci_oktaviani@gmail.com
+wahyusuci
+1029384756
+
+qoirudin@gmail.com
+qoirudin
+1029384756
+
+yasmine_novtiristya@gmail.com
+yasminenov
+1029384756
+
+aryaherro@yahoo.co.id
+aryaherro
+1029384756

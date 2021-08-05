@@ -26,6 +26,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        <div class="card-header col-12">
+                            <div class="row">
+                                <div class="block col"></div>
+                                <button type="button" class="btn btn-inline btn-primary col-2" data-toggle="modal" data-target="#modal-default">Ajukan Bimbingan</button>
+                            </div>
+                        </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
@@ -38,16 +44,17 @@
                                             <center>Judul</center>
                                         </th>
                                         <th>
+                                            <center>Bimbingan ke-</center>
+                                        </th>
+
+                                        <th>
+                                            <center>bimbingan</center>
+                                        </th>
+                                        <th>
                                             <center>Deskripsi</center>
                                         </th>
                                         <th>
-                                            <center>Upload file</center>
-                                        </th>
-                                        <th>
                                             <center>saran dosen</center>
-                                        </th>
-                                        <th>
-                                            <center>validasi dosen</center>
                                         </th>
                                     </tr>
                                 </thead>
@@ -55,19 +62,12 @@
                                     <tr>
                                         <td>1</td>
                                         <td>Sistem pendukung keputusan pemilihan supplier pada CV. surya abadi dengan metode AHP</td>
-                                        <td>Sistem ini membantu para pengambil keputusan melihat keputusan mana yang paling baik untuk diambil</td>
-                                        <td>
-                                            <div class="form-group">
-                                                <!-- <label for="customFile">Custom File</label> -->
-
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="customFile">
-                                                    <label class="custom-file-label" for="customFile">File</label>
-                                                </div>
-                                            </div>
-                                        </td>
                                         <td>-</td>
-                                        <td>progress</td>
+                                        <td>
+                                            <a class="btn btn-info" href="">Download</a>
+                                        </td>
+                                        <td>Sistem ini membantu para pengambil keputusan melihat keputusan mana yang paling baik untuk diambil</td>
+                                        <td><a class="btn btn-info" href="">Download</a></td>
                                     </tr>
                                 </tbody>
                                 <!-- <tfoot>
@@ -88,6 +88,44 @@
                 <!-- /.col -->
             </div>
             <!-- /.row -->
+            <div class="modal fade" id="modal-default">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Ajukan Bimbingan</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <div class="form-group">
+                                    <!-- <label for="customFile">Custom File</label> -->
+
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile">
+                                        <label class="custom-file-label" for="customFile">File</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <!-- textarea -->
+                                <div class="form-group">
+                                    <label>Deskripsi</label>
+                                    <textarea class="form-control" rows="3" placeholder="Deskripsi"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
         </div>
         <!-- /.container-fluid -->
     </section>
