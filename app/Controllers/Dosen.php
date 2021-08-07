@@ -6,7 +6,7 @@ class Dosen extends BaseController
 {
     public function index()
     {
-        return view('dosen/profile');
+        return view('profile');
     }
 
     public function validasiJudul()

@@ -49,15 +49,18 @@
                                             <th>
                                                 <center>Bimbingan ke-</center>
                                             </th>
+                                            <th>
+                                                <center>Lihat File</center>
+                                            </th>
 
                                             <th>
-                                                <center>bimbingan</center>
+                                                <center>acc_dospem1</center>
                                             </th>
                                             <th>
-                                                <center>Deskripsi</center>
+                                                <center>acc_dospem2</center>
                                             </th>
                                             <th>
-                                                <center>saran dosen</center>
+                                                <center>acc_prodi</center>
                                             </th>
                                         </tr>
                                     </thead>
@@ -76,6 +79,11 @@
                                                     </td>
                                                     <td>
                                                         <center><?= $j++; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <a class="btn btn-info" href="">Download</a>
+                                                        </center>
                                                     </td>
                                                     <td>
                                                         <center>
@@ -159,32 +167,27 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="form-group">
-                                <!-- <label for="customFile">Custom File</label> -->
-                                <form action="<?= route_to('bimbinganProposal') ?>" method="post">
-                                    <?= csrf_field() ?>
-                                    <div class="form-group">
-                                        <label>Judul</label>
-                                        <select class="form-select" aria-label="Default select example" name="judulProposal_id">
-                                            <?php foreach ($judul as $key) :; ?>
-                                                <option value="<?= $key['id']; ?>"><?= $key['judul']; ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </div>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input form-control" id="customFile" name="Berkas_bimbingan">
-                                        <label class="custom-file-label" for="customFile">File</label>
-                                    </div>
-                                    <!-- textarea -->
-                                    <div class="form-group">
-                                        <label>Deskripsi</label>
-                                        <textarea class="form-control" rows="3" placeholder="Deskripsi" name="Deskripsi"></textarea>
-                                    </div>
-                                    <div class="modal-footer justify-content-between">
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                </form>
-                            </div>
+                            <!-- <label for="customFile">Custom File</label> -->
+                            <form action="<?= route_to('bimbinganProposal') ?>" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label>Judul</label>
+                                    <select class="form-select" aria-label="Default select example" name="judulProposal_id">
+                                        <?php foreach ($judul as $key) :; ?>
+                                            <option value="<?= $key['id']; ?>"><?= $key['judul']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div><?php echo session()->getFlashdata('error'); ?>
+                                <div class="custom-file form-group">
+                                    <input type="file" class="form-control custom-file-input" id="Berkas_bimbingan" name="Berkas_bimbingan" />
+                                    <label class="custom-file-label" for="Berkas_bimbingan">File</label>
+                                </div>
+                                <!-- textarea -->
+                                <div class="form-group">
+                                    <label>Deskripsi</label>
+                                    <textarea class="form-control" rows="3" placeholder="Deskripsi" name="Deskripsi"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </form>
                             <!-- /.modal-content -->
                         </div>
                         <!-- /.modal-dialog -->

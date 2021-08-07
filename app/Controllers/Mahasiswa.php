@@ -16,13 +16,21 @@ class Mahasiswa extends BaseController
     private function setMahasiswa()
     {
         $this->mahasiswa = (new MahasiswaModel())->asArray()->where('users_id', user_id())->first();
-        $this->judulProposal = ((new JudulProposalModel())->asArray()->where('mahasiswa_id', $this->mahasiswa['id'],))->findAll();
-
+        $this->judulProposal = ((new JudulProposalModel())->where('mahasiswa_id', $this->mahasiswa['id'],)
+            ->GroupStart()
+            ->where('acc_dospem1', true)->orWhere('acc_dospem1', null)
+            ->where('acc_dospem2', true)->orWhere('acc_dospem1', null)
+            ->where('acc_prodi', true)->orWhere('acc_dospem1', null)
+            ->groupEnd())->findAll();
         $temp = array();
         foreach ($this->judulProposal as $key) {
             $temp[$key['id']] = (((new BimbinganProposalModel())->asArray()->where('judulProposal_id', $key['id'],))->findAll());
         }
         $this->bimbinganProposal = $temp;
+    }
+
+    private function setBimbingan()
+    {
     }
 
     public function index()
@@ -31,7 +39,7 @@ class Mahasiswa extends BaseController
         $data = [
             'mahasiswa' => $this->mahasiswa,
         ];
-        return view('mahasiswa/profile', $data);
+        return view('profile', $data);
     }
 
     public function judul()
@@ -41,7 +49,6 @@ class Mahasiswa extends BaseController
             'mahasiswa' => $this->mahasiswa,
             'judul'     => $this->judulProposal,
         ];
-        // dd(count($this->judulProposal));
         return view('mahasiswa/pengajuanJudulTugasAkhir', $data);
     }
 
@@ -53,8 +60,8 @@ class Mahasiswa extends BaseController
             'mahasiswa_id'  => $this->mahasiswa['id'],
             'dospem1_id'    => ((new DosenModel())->asArray()->where('nama', 'Ratna Nur Tiara Shanty,S.ST., M.Kom')->first())['id'],
             'dospem2_id'    => ((new DosenModel())->asArray()->where('nama', 'Cempaka Ananggadipa Swastyastu, S.Kom., M.Kom')->first())['id'],
-            'judul'         => ($this->request->getPost())['judul'],
-            'deskripsi'     => ($this->request->getPost())['deskripsi'],
+            'judul'         => $this->request->getPost('judul'),
+            'deskripsi'     => $this->request->getPost('deskripsi'),
         ];
         $judulProposal->save($data);
         return redirect()->back();
@@ -73,18 +80,32 @@ class Mahasiswa extends BaseController
 
     public function tambahbimbinganProposal()
     {
-        // dd(($this->request->getPost()));
-        // $this->setMahasiswa();
-        // $judulProposal = new JudulProposalModel();
-        // $data = [
-        //     'judulProposal_id' => ($this->request->getPost())['value'],
-        //     'mahasiswa_id'  => $this->mahasiswa['id'],
-        //     'dospem1_id'    => ((new DosenModel())->asArray()->where('nama', 'Ratna Nur Tiara Shanty,S.ST., M.Kom')->first())['id'],
-        //     'dospem2_id'    => ((new DosenModel())->asArray()->where('nama', 'Cempaka Ananggadipa Swastyastu, S.Kom., M.Kom')->first())['id'],
-        //     'judul'         => ($this->request->getPost())['judul'],
-        //     'deskripsi'     => ($this->request->getPost())['deskripsi'],
-        // ];
-        // $judulProposal->save($data);
+
+
+        $this->setMahasiswa();
+        $this->judulProposal = (new JudulProposalModel())->find($this->request->getPost('judulProposal_id'));
+        $bimbinganProposal = new BimbinganProposalModel();
+        $berkas = $this->request->getFile('Berkas_bimbingan');
+        $file_name = $berkas->getRandomName();
+        $data = [
+            'Berkas_bimbingan'  => $file_name,
+            'judulProposal_id'  =>  $this->judulProposal['id'],
+            'Deskripsi'         => $this->request->getPost('Deskripsi'),
+        ];
+        if (!$this->validate([
+            'Berkas_bimbingan' => [
+                'rules' => 'uploaded[Berkas_bimbingan]|mime_in[Berkas_bimbingan,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.rar,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/zip]',
+                'errors' => [
+                    'uploaded' => 'Harus Ada File yang diupload',
+                    'mime_in' => 'File Extention Harus Berupa doc,docx,pdf,ppt,pptx,rar,txt,xls,xlsx,zip',
+                ],
+            ],
+        ],)) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
+        $berkas->move("uploads/{$this->mahasiswa['id']}/{$this->judulProposal['id']}/", $file_name);
+        $bimbinganProposal->save($data);
         return redirect()->back();
     }
 

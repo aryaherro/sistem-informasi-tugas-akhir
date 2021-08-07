@@ -125,3 +125,5 @@ _modules/*
 /phpunit*.xml
 /.phpunit.*.cache
 
+/public/uploads
+

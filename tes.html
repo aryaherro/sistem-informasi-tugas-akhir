@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>ASIK | Dashboard</title>
+    <meta name="description" content="Latest updates and statistic charts">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: {
+                "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700", "Asap+Condensed:500"]
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+
+
+    <link href="https://lik.unitomo.ac.id/assets/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
+
+    <link href="https://lik.unitomo.ac.id/assets/demo/demo10/base/style.bundle.css" rel="stylesheet" type="text/css" />
+
+
+
+    <link href="https://lik.unitomo.ac.id/assets/vendors/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet"
+        type="text/css" />
+
+
+    <link rel="shortcut icon" href="https://lik.unitomo.ac.id/assets/img/favicon.ico" />
+</head>
+
+<body
+    class="m-page--fluid m-page--loading-enabled m-page--loading m-header--fixed m-header--fixed-mobile m-footer--push m-aside--offcanvas-default">
+
+    <div class="m-page-loader m-page-loader--base">
+        <div class="m-blockui">
+            <span>Please wait...</span>
+            <span>
+                <div class="m-loader m-loader--brand"></div>
+            </span>
+        </div>
+    </div>
+
+
+    <div class="m-grid m-grid--hor m-grid--root m-page">
+
+        <header id="m_header" class="m-grid__item m-header " m-minimize="minimize" m-minimize-mobile="minimize"
+            m-minimize-offset="10" m-minimize-mobile-offset="10">
+            <div class="m-header__top">
+                <div class="m-container m-container--fluid m-container--full-height m-page__container">
+                    <div class="m-stack m-stack--ver m-stack--desktop">
+
+                        <div class="m-stack__item m-brand m-stack__item--left">
+                            <div class="m-stack m-stack--ver m-stack--general m-stack--inline">
+                                <div class="m-stack__item m-stack__item--middle m-brand__logo">
+                                    <a href="index.html" class="m-brand__logo-wrapper">
+                                        <img alt=""
+                                            src="https://lik.unitomo.ac.id/assets/app/media/img/logos/logo_ui_long2.png"
+                                            class="m-brand__logo-desktop" />
+                                        <img alt=""
+                                            src="https://lik.unitomo.ac.id/assets/app/media/img/logos/logo_ui_long2.png"
+                                            class="m-brand__logo-mobile" />
+                                    </a>
+                                </div>
+                                <div class="m-stack__item m-stack__item--middle m-brand__tools">
+
+
+
+                                    <a id="m_aside_header_menu_mobile_toggle" href="javascript:;"
+                                        class="m-brand__icon m-brand__toggler m--visible-tablet-and-mobile-inline-block">
+                                        <span></span>
+                                    </a>
+
+
+                                    <a id="m_aside_header_topbar_mobile_toggle" href="javascript:;"
+                                        class="m-brand__icon m--visible-tablet-and-mobile-inline-block">
+                                        <i class="flaticon-more"></i>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="m-stack__item m-stack__item--right m-header-head" id="m_header_nav">
+                            <div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general">
+                                <div class="m-stack__item m-topbar__nav-wrapper">
+                                    <ul class="m-topbar__nav m-nav m-nav--inline">
+                                        <li class="m-nav__item m-dropdown m-dropdown--medium m-dropdown--arrow  m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light"
+                                            m-dropdown-toggle="click">
+                                            <a href="#" class="m-nav__link m-dropdown__toggle">
+                                                <span class="m-topbar__userpic">
+                                                    <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD//gA7Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcg
+ SlBFRyB2ODApLCBxdWFsaXR5ID0gOTAK/9sAQwADAgIDAgIDAwMDBAMDBAUIBQUEBAUKBwcGCAwK
+ DAwLCgsLDQ4SEA0OEQ4LCxAWEBETFBUVFQwPFxgWFBgSFBUU/9sAQwEDBAQFBAUJBQUJFA0LDRQU
+ FBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQU/8AAEQgAyADI
+ AwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMF
+ BQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkq
+ NDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqi
+ o6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/E
+ AB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMR
+ BAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVG
+ R0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKz
+ tLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A
+ 8GPSms4KnntTm6GoWO38a+Akf1LuiM0UUmaI72Y7W1A0ypCPlzUfFJbWE2GaeWGwc1EXHPFOH3Aa
+ H7qK1El60IwUckD6mmTzKilmOweprh/EPjiGxuDEjBz656V106Mqr908fH5lRy6DdV/I7VryGNyW
+ kAA61Wm8Q2CttM6g/WvFte8YXb7ykp2t3BrlP7Tu7hz+9YfU16dPLb/Ez4Wvxik7Uqeh9NQ3kE5/
+ dzI30YU+RwRkEEe1fMlv4jv9MYrHcyDPoa1rHxtqdogk+0M/sWNOWWyeqZrS4ypbVIM+h0YDHIqT
+ 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"
+                                                        class="m--img-rounded m--marginless m--img-centered" alt="" />
+                                                </span><br>&nbsp;
+                                                <span><b>R. ARYA HERRO KUSUMA BUDITAMA</b></span>
+                                            </a>
+                                            <span class="m-nav__link-icon m-topbar__usericon  m--hide">
+                                                <span class="m-nav__link-icon-wrapper"><i
+                                                        class="flaticon-user-ok"></i></span>
+                                            </span>
+                                            </a>
+                                            <div class="m-dropdown__wrapper">
+                                                <span
+                                                    class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                                                <div class="m-dropdown__inner">
+                                                    <div class="m-dropdown__header m--align-center">
+                                                        <div class="m-card-user m-card-user--skin-light">
+                                                            <div class="m-card-user__pic">
+                                                                <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD//gA7Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcg
+ SlBFRyB2ODApLCBxdWFsaXR5ID0gOTAK/9sAQwADAgIDAgIDAwMDBAMDBAUIBQUEBAUKBwcGCAwK
+ DAwLCgsLDQ4SEA0OEQ4LCxAWEBETFBUVFQwPFxgWFBgSFBUU/9sAQwEDBAQFBAUJBQUJFA0LDRQU
+ FBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQU/8AAEQgAyADI
+ AwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMF
+ BQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkq
+ NDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqi
+ o6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/E
+ AB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMR
+ BAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVG
+ R0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKz
+ tLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A
+ 8GPSms4KnntTm6GoWO38a+Akf1LuiM0UUmaI72Y7W1A0ypCPlzUfFJbWE2GaeWGwc1EXHPFOH3Aa
+ H7qK1El60IwUckD6mmTzKilmOweprh/EPjiGxuDEjBz656V106Mqr908fH5lRy6DdV/I7VryGNyW
+ kAA61Wm8Q2CttM6g/WvFte8YXb7ykp2t3BrlP7Tu7hz+9YfU16dPLb/Ez4Wvxik7Uqeh9NQ3kE5/
+ dzI30YU+RwRkEEe1fMlv4jv9MYrHcyDPoa1rHxtqdogk+0M/sWNOWWyeqZrS4ypbVIM+h0YDHIqT
+ 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" class="m--img-rounded m--marginless" alt="" />
+                                                            </div>
+                                                            <div class="m-card-user__details">
+                                                                <span class="m-card-user__name m--font-weight-500">R.
+                                                                    ARYA HERRO KUSUMA BUDITAMA</span>
+                                                                <a
+                                                                    class="m-card-user__email m--font-weight-300">2018420117</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-dropdown__body">
+                                                        <div class="m-dropdown__content">
+                                                            <ul class="m-nav m-nav--skin-light">
+                                                                <li class="m-nav__section m--hide">
+                                                                    <span class="m-nav__section-text">Section</span>
+                                                                </li>
+                                                                <li class="m-nav__item">
+                                                                    <a href="https://lik.unitomo.ac.id/dashboard/profil"
+                                                                        class="m-nav__link">
+                                                                        <i
+                                                                            class="m-nav__link-icon flaticon-profile-1"></i>
+                                                                        <span class="m-nav__link-title">
+                                                                            <span class="m-nav__link-wrap">
+                                                                                <span class="m-nav__link-text">Ubah
+                                                                                    Profil Mahasiswa</span>
+                                                                            </span>
+                                                                        </span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="m-nav__item">
+                                                                    <a href="profile.html" class="m-nav__link">
+                                                                        <i
+                                                                            class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                        <span class="m-nav__link-text">Support</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="m-nav__separator m-nav__separator--fit">
+                                                                </li>
+                                                                <li class="m-nav__item">
+                                                                    <a href="https://lik.unitomo.ac.id/welcome/logout"
+                                                                        class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">Logout</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="m-header__bottom">
+                <div class="m-container m-container--fluid m-container--full-height m-page__container">
+                    <div class="m-stack m-stack--ver m-stack--desktop">
+
+                        <div class="m-stack__item m-stack__item--fluid m-header-menu-wrapper">
+                            <button
+                                class="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-light"
+                                id="m_aside_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
+                            <div id="m_header_menu"
+                                class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-dark m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-light m-aside-header-menu-mobile--submenu-skin-light ">
+                                <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
+                                    <li class="m-menu__item m-menu__item--submenu 
+                                                                             m-menu__item--active  m-menu__item--active-tab	
+                                                                         m-menu__item--tabs"
+                                        m-menu-submenu-toggle="tab" aria-haspopup="true"><a href="javascript:;"
+                                            class="m-menu__link m-menu__toggle" title="Non functional dummy link"><span
+                                                class="m-menu__link-text">Informasi Mahasiswa</span><i
+                                                class="m-menu__hor-arrow la la-angle-down"></i><i
+                                                class="m-menu__ver-arrow la la-angle-right"></i></a>
+                                        <div
+                                            class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left m-menu__submenu--tabs">
+                                            <span class="m-menu__arrow m-menu__arrow--adjust"></span>
+                                            <ul class="m-menu__subnav">
+                                                <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
+                                                    <a href="https://lik.unitomo.ac.id/dashboard/index"
+                                                        class="m-menu__link "><i
+                                                            class="m-menu__link-icon flaticon-squares-2"></i><span
+                                                            class="m-menu__link-text">Dashboard</span></a>
+                                                </li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a
+                                                        href="https://lik.unitomo.ac.id/dashboard/krs"
+                                                        class="m-menu__link "><i
+                                                            class="m-menu__link-icon flaticon-imac"></i><span
+                                                            class="m-menu__link-title"> <span class="m-menu__link-wrap">
+                                                                <span class="m-menu__link-text">Kartu Rencana Studi
+                                                                    (KRS)</span> </span></a></li>
+                                                <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
+                                                    <a href="https://lik.unitomo.ac.id/dashboard/khs"
+                                                        class="m-menu__link "><i
+                                                            class="m-menu__link-icon flaticon-diagram"></i><span
+                                                            class="m-menu__link-text">Kartu Hasil Studi (KHS)</span></a>
+                                                </li>
+                                                <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
+                                                    <a href="https://lik.unitomo.ac.id/dashboard/transkrip"
+                                                        class="m-menu__link "><i
+                                                            class="m-menu__link-icon flaticon-clipboard"></i><span
+                                                            class="m-menu__link-text">TRANSKRIP</span></a></li>
+                                                <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
+                                                    <a href="https://lik.unitomo.ac.id/dashboard/evaluasi"
+                                                        class="m-menu__link "><i
+                                                            class="m-menu__link-icon flaticon-clipboard"></i><span
+                                                            class="m-menu__link-text">Evaluasi Dosen</span></a></li>
+                                                <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
+                                                    <a href="https://lik.unitomo.ac.id/cetak/ijazah"
+                                                        class="m-menu__link "><i
+                                                            class="m-menu__link-icon flaticon-technology "></i><span
+                                                            class="m-menu__link-text">Format Ijazah</span></a></li>
+                                        </div>
+                                    <li class="m-menu__item  m-menu__item--submenu m-menu__item--tabs "
+                                        m-menu-submenu-toggle="tab" aria-haspopup="true"><a href="javascript:;"
+                                            class="m-menu__link m-menu__toggle" title="Non functional dummy link"><span
+                                                class="m-menu__link-text">Entry KRS</span><i
+                                                class="m-menu__hor-arrow la la-angle-down"></i><i
+                                                class="m-menu__ver-arrow la la-angle-right"></i></a>
+                                        <div
+                                            class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left m-menu__submenu--tabs">
+                                            <span class="m-menu__arrow m-menu__arrow--adjust"></span>
+                                            <ul class="m-menu__subnav">
+                                                <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
+                                                    <a href="https://lik.unitomo.ac.id/krs" class="m-menu__link "><i
+                                                            class="m-menu__link-icon flaticon-graphic-2"></i><span
+                                                            class="m-menu__link-text">Simawa</span></a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="m-menu__item  m-menu__item--submenu m-menu__item--tabs "
+                                        m-menu-submenu-toggle="tab" aria-haspopup="true"><a href="javascript:;"
+                                            class="m-menu__link m-menu__toggle" title="Non functional dummy link"><span
+                                                class="m-menu__link-text">KKN</span><i
+                                                class="m-menu__hor-arrow la la-angle-down"></i><i
+                                                class="m-menu__ver-arrow la la-angle-right"></i></a>
+                                        <div
+                                            class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left m-menu__submenu--tabs">
+                                            <span class="m-menu__arrow m-menu__arrow--adjust"></span>
+                                            <ul class="m-menu__subnav">
+                                                <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
+                                                    <a href="https://lik.unitomo.ac.id/kkn" class="m-menu__link "><i
+                                                            class="m-menu__link-icon flaticon-graphic-2"></i><span
+                                                            class="m-menu__link-text">Data KKN</span></a></li>
+                                                <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
+                                                    <a href="https://lik.unitomo.ac.id/kkn/sertifikat"
+                                                        class="m-menu__link "><i
+                                                            class="m-menu__link-icon flaticon-graphic"></i><span
+                                                            class="m-menu__link-text">Sertifikat</span></a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+        <div
+            class="m-grid__item m-grid__item--fluid  m-grid m-grid--ver-desktop m-grid--desktop m-page__container m-body">
+            <div class="m-grid__item m-grid__item--fluid m-wrapper">
+
+                <div class="m-subheader ">
+                    <div class="d-flex align-items-center">
+                        <div class="mr-auto">
+                            <h3 class="m-subheader__title m-subheader__title--separator">Profil Mahasiswa</h3>
+                            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                                <li class="m-nav__item m-nav__item--home">
+                                    <a href="#" class="m-nav__link m-nav__link--icon">
+                                        <i class="m-nav__link-icon la la-home"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
+                                <span class="m-subheader__daterange-label">
+                                    <span class="m-subheader__daterange-title"></span>
+                                    <span class="m-subheader__daterange-date m--font-brand"></span>
+                                </span>
+                                <a href="#"
+                                    class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
+                                    <i class="la la-angle-down"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="m-content">
+                    <h3>Ubah Profil Mahasiswa</h3>
+                    <hr>
+                    <br>
+                    <div class="row">
+                        <div class="col-xl-3">
+                            <div class="m-portlet">
+                                <div class="m-portlet__head">
+                                    <div class="m-portlet__head-caption">
+                                        <div class="m-portlet__head-title">
+                                            <h3 class="m-portlet__head-text">
+                                                Foto
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-portlet__body">
+                                    <div class="m-section">
+                                        <div class="m-section__content">
+                                            <img src=""></img>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-xl-9">
+                            <div class="m-portlet">
+                                <div class="m-portlet__head">
+                                    <div class="m-portlet__head-caption">
+                                        <div class="m-portlet__head-title">
+                                            <h3 class="m-portlet__head-text">
+                                                Biodata Mahasiswa
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-portlet__body">
+
+                                    <div class="m-section">
+                                        <div class="m-section__content">
+                                            <form class="form-horizontal" id="ktp">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="35%"><b>KTP</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td width="29%">
+                                                                <div class="form-group">
+                                                                    <input type="file" name="foto_ktp">
+                                                                    <br>
+                                                                    <span style="color: red">* file dibawah 500KB</span>
+                                                                    <br>
+                                                                    <span style="color: red">* File Format
+                                                                        JPG/PNG/JPEG</span>
+                                                                </div>
+                                                            </td>
+                                                            <td width="20%">
+                                                                <button class="btn btn-success" id="button_upload_ktp"
+                                                                    type="submit">Upload</button>
+                                                                <a href="" class="btn btn-success disabled"
+                                                                    id="button_view_ktp" data-toggle="modal"
+                                                                    data-target="#modal_ktp">view</a>
+                                                                <button
+                                                                    class="btn m-btn--pill m-btn--air btn-danger btn-sm"
+                                                                    id="del_ktp" type="button"
+                                                                    onclick="del('foto_ktp','7a6c740d6564e2ebe3ea9866b705afc5.jpg');">Hapus</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </form>
+                                            <form class="form-horizontal" id="kk">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="35%"><b>KK</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td width="29%">
+                                                                <div class="form-group">
+                                                                    <input type="file" name="foto_kk">
+                                                                    <br>
+                                                                    <span style="color: red">* file dibawah
+                                                                        500KB</span><br>
+                                                                    <span style="color: red">* File Format
+                                                                        JPG/PNG/JPEG</span>
+                                                                </div>
+                                                            </td>
+                                                            <td width="20%">
+                                                                <button class="btn btn-success" id="button_upload_kk"
+                                                                    type="submit">Upload</button>
+                                                                <a href="" class="btn btn-success disabled"
+                                                                    id="button_view_kk" data-toggle="modal"
+                                                                    data-target="#modal_kk">view</a>
+                                                                <button
+                                                                    class="btn m-btn--pill m-btn--air btn-danger btn-sm"
+                                                                    id="del_kk" type="button"
+                                                                    onclick="del('foto_kk','e15bfad00c4338063ddf944ff2a411bb.jpg');">Hapus</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </form>
+                                            <form class="form-horizontal" id="akta">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="35%"><b>Akta</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td width="29%">
+                                                                <div class="form-group">
+                                                                    <input type="file" name="foto_akta">
+                                                                    <br>
+                                                                    <span style="color: red">* file dibawah
+                                                                        500KB</span><br>
+                                                                    <span style="color: red">* File Format
+                                                                        JPG/PNG/JPEG</span>
+                                                                </div>
+                                                            </td>
+                                                            <td width="20%">
+                                                                <button class="btn btn-success" id="button_upload_akta"
+                                                                    type="submit">Upload</button>
+                                                                <a href="" class="btn btn-success disabled"
+                                                                    id="button_view_akta" data-toggle="modal"
+                                                                    data-target="#modal_akta">view</a>
+                                                                <button
+                                                                    class="btn m-btn--pill m-btn--air btn-danger btn-sm"
+                                                                    id="del_akta" type="button"
+                                                                    onclick="del('foto_akta','b15f56200c3089b41a12360f27a46622.jpg');">Hapus</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </form>
+                                            <form id="form_profil" name="form_profil" method="post"
+                                                enctype="multipart/form-data">
+                                                <table class="table table-striped m-table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="40%"><b>Nama Lengkap</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td><input type="text"
+                                                                    class="form-control m-input m-input--square"
+                                                                    name="namaupdate" id="namaupdate"
+                                                                    value="R. ARYA HERRO KUSUMA BUDITAMA" disabled>
+                                                                <input type="hidden"
+                                                                    class="form-control m-input m-input--square"
+                                                                    name="namamhs" id="namamhs"
+                                                                    value="R. ARYA HERRO KUSUMA BUDITAMA">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>NIM</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td>2018420117</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>NIK</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td><input type="text"
+                                                                    class="form-control m-input m-input--square"
+                                                                    height="1px" id="noktp" name="noktp"
+                                                                    value="3578190204920002"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Jurusan / Fakultas</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td>Teknik Informatika / Teknik</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>DPAM</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td> Syaiful Hidayat S.Kom., M.Kom</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Jenis Kelamin</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td>
+                                                                <div class="col-9">
+                                                                    <div class="m-radio-inline">
+                                                                        <label class="m-radio">
+                                                                            <input type="radio" name="sex" value="L"
+                                                                                checked="true"> Laki-laki
+                                                                            <span></span>
+                                                                        </label>
+                                                                        <label class="m-radio">
+                                                                            <input type="radio" name="sex" value="P">
+                                                                            Perempuan
+                                                                            <span></span>
+                                                                        </label>
+                                                                    </div>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Agama</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td><select class="form-control m-select2" id="m_select2_1"
+                                                                    name="kota" disabled="">
+                                                                    <option value="0">Lain - Lain</option>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Tempat Lahir</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td><select class="form-control m-select2" id="m_select2_2"
+                                                                    name="kota">
+                                                                    <option value="0">-PILIH KOTA-</option>
+                                                                    <option value="1">Luar Negeri</option>
+                                                                    <option value="2">Kab. Aceh Selatan</option>
+                                                                    <option value="3">Kab. Aceh Tenggara</option>
+                                                                    <option value="4">Kab. Aceh Timur</option>
+                                                                    <option value="5">Kab. Aceh Tengah</option>
+                                                                    <option value="6">Kab. Aceh Barat</option>
+                                                                    <option value="7">Kab. Aceh Besar</option>
+                                                                    <option value="8">Kab. Pidie</option>
+                                                                    <option value="9">Kab. Aceh Utara</option>
+                                                                    <option value="10">Kab. Simeulue</option>
+                                                                    <option value="11">Kab. Aceh Singkil</option>
+                                                                    <option value="12">Kab. Bireuen</option>
+                                                                    <option value="13">Kab. Aceh Barat Daya</option>
+                                                                    <option value="14">Kab. Gayo Lues</option>
+                                                                    <option value="15">Kab. Aceh Jaya</option>
+                                                                    <option value="16">Kab. Nagan Raya</option>
+                                                                    <option value="17">Kab. Aceh Tamiang</option>
+                                                                    <option value="18">Kab. Bener Meriah</option>
+                                                                    <option value="19">Kab. Pidie Jaya</option>
+                                                                    <option value="20">Kota Banda Aceh</option>
+                                                                    <option value="21">Kota Sabang</option>
+                                                                    <option value="22">Kota Lhokseumawe</option>
+                                                                    <option value="23">Kota Langsa</option>
+                                                                    <option value="24">Kota Subulussalam</option>
+                                                                    <option value="25">Kab. Tapanuli Tengah</option>
+                                                                    <option value="26">Kab. Tapanuli Utara</option>
+                                                                    <option value="27">Kab. Tapanuli Selatan</option>
+                                                                    <option value="28">Kab. Nias</option>
+                                                                    <option value="29">Kab. Langkat</option>
+                                                                    <option value="30">Kab. Karo</option>
+                                                                    <option value="31">Kab. Deli Serdang</option>
+                                                                    <option value="32">Kab. Simalungun</option>
+                                                                    <option value="33">Kab. Asahan</option>
+                                                                    <option value="34">Kab. Labuhanbatu</option>
+                                                                    <option value="35">Kab. Dairi</option>
+                                                                    <option value="36">Kab. Toba Samosir</option>
+                                                                    <option value="37">Kab. Mandailing Natal</option>
+                                                                    <option value="38">Kab. Nias Selatan</option>
+                                                                    <option value="39">Kab. Pakpak Bharat</option>
+                                                                    <option value="40">Kab. Humbang Hasundutan</option>
+                                                                    <option value="41">Kab. Samosir</option>
+                                                                    <option value="42">Kab. Serdang Bedagai</option>
+                                                                    <option value="43">Kab. Batu Bara</option>
+                                                                    <option value="44">Kab. Padang Lawas Utara</option>
+                                                                    <option value="45">Kab. Padang Lawas</option>
+                                                                    <option value="46">Kab. Labuhanbatu Selatan</option>
+                                                                    <option value="47">Kab. Labuhanbatu Utara</option>
+                                                                    <option value="48">Kab. Nias Utara</option>
+                                                                    <option value="49">Kab. Nias Barat</option>
+                                                                    <option value="50">Kota Medan</option>
+                                                                    <option value="51">Kota Pematang Siantar</option>
+                                                                    <option value="52">Kota Sibolga</option>
+                                                                    <option value="53">Kota Tanjung Balai</option>
+                                                                    <option value="54">Kota Binjai</option>
+                                                                    <option value="55">Kota Tebing Tinggi</option>
+                                                                    <option value="56">Kota Padangsidimpuan</option>
+                                                                    <option value="57">Kota Gunungsitoli</option>
+                                                                    <option value="58">Kab. Pesisir Selatan</option>
+                                                                    <option value="59">Kab. Solok</option>
+                                                                    <option value="60">Kab. Sijunjung</option>
+                                                                    <option value="61">Kab. Tanah Datar</option>
+                                                                    <option value="62">Kab. Padang Pariaman</option>
+                                                                    <option value="63">Kab. Agam</option>
+                                                                    <option value="64">Kab. Lima Puluh Kota</option>
+                                                                    <option value="65">Kab. Pasaman</option>
+                                                                    <option value="66">Kab. Kepulauan Mentawai</option>
+                                                                    <option value="67">Kab. Dharmasraya</option>
+                                                                    <option value="68">Kab. Solok Selatan</option>
+                                                                    <option value="69">Kab. Pasaman Barat</option>
+                                                                    <option value="70">Kota Padang</option>
+                                                                    <option value="71">Kota Solok</option>
+                                                                    <option value="72">Kota Sawahlunto</option>
+                                                                    <option value="73">Kota Padang Panjang</option>
+                                                                    <option value="74">Kota Bukittinggi</option>
+                                                                    <option value="75">Kota Payakumbuh</option>
+                                                                    <option value="76">Kota Pariaman</option>
+                                                                    <option value="77">Kab. Kampar</option>
+                                                                    <option value="78">Kab. Indragiri Hulu</option>
+                                                                    <option value="79">Kab. Bengkalis</option>
+                                                                    <option value="80">Kab. Indragiri Hilir</option>
+                                                                    <option value="81">Kab. Pelalawan</option>
+                                                                    <option value="82">Kab. Rokan Hulu</option>
+                                                                    <option value="83">Kab. Rokan Hilir</option>
+                                                                    <option value="84">Kab. Siak</option>
+                                                                    <option value="85">Kab. Kuantan Singingi</option>
+                                                                    <option value="86">Kab. Kepulauan Meranti</option>
+                                                                    <option value="87">Kota Pekanbaru</option>
+                                                                    <option value="88">Kota Dumai</option>
+                                                                    <option value="89">Kab. Kerinci</option>
+                                                                    <option value="90">Kab. Merangin</option>
+                                                                    <option value="91">Kab. Sarolangun</option>
+                                                                    <option value="92">Kab. Batanghari</option>
+                                                                    <option value="93">Kab. Muaro Jambi</option>
+                                                                    <option value="94">Kab. Tanjung Jabung Barat
+                                                                    </option>
+                                                                    <option value="95">Kab. Tanjung Jabung Timur
+                                                                    </option>
+                                                                    <option value="96">Kab. Bungo</option>
+                                                                    <option value="97">Kab. Tebo</option>
+                                                                    <option value="98">Kota Jambi</option>
+                                                                    <option value="99">Kota Sungai Penuh</option>
+                                                                    <option value="100">Kab. Ogan Komering Ulu</option>
+                                                                    <option value="101">Kab. Ogan Komering Ilir</option>
+                                                                    <option value="102">Kab. Muara Enim</option>
+                                                                    <option value="103">Kab. Lahat</option>
+                                                                    <option value="104">Kab. Musi Rawas</option>
+                                                                    <option value="105">Kab. Musi Banyuasin</option>
+                                                                    <option value="106">Kab. Banyuasin</option>
+                                                                    <option value="107">Kab. Oku Timur</option>
+                                                                    <option value="108">Kab. Oku Selatan</option>
+                                                                    <option value="109">Kab. Ogan Ilir</option>
+                                                                    <option value="110">Kab. Empat Lawang</option>
+                                                                    <option value="111">Kota Palembang</option>
+                                                                    <option value="112">Kota Pagar Alam</option>
+                                                                    <option value="113">Kota Lubuk Linggau</option>
+                                                                    <option value="114">Kota Prabumulih</option>
+                                                                    <option value="115">Kab. Bengkulu Selatan</option>
+                                                                    <option value="116">Kab. Rejang Lebong</option>
+                                                                    <option value="117">Kab. Bengkulu Utara</option>
+                                                                    <option value="118">Kab. Kaur</option>
+                                                                    <option value="119">Kab. Seluma</option>
+                                                                    <option value="120">Kab. Muko Muko</option>
+                                                                    <option value="121">Kab. Lebong</option>
+                                                                    <option value="122">Kab. Kepahiang</option>
+                                                                    <option value="123">Kab. Bengkulu Tengah</option>
+                                                                    <option value="124">Kota Bengkulu</option>
+                                                                    <option value="125">Kab. Lampung Selatan</option>
+                                                                    <option value="126">Kab. Lampung Tengah</option>
+                                                                    <option value="127">Kab. Lampung Utara</option>
+                                                                    <option value="128">Kab. Lampung Barat</option>
+                                                                    <option value="129">Kab. Tulang Bawang</option>
+                                                                    <option value="130">Kab. Tanggamus</option>
+                                                                    <option value="131">Kab. Lampung Timur</option>
+                                                                    <option value="132">Kab. Way Kanan</option>
+                                                                    <option value="133">Kab. Pesawaran</option>
+                                                                    <option value="134">Kab. Pringsewu</option>
+                                                                    <option value="135">Kab. Mesuji</option>
+                                                                    <option value="136">Kab. Tulang Bawang Barat
+                                                                    </option>
+                                                                    <option value="137">Kota Bandar Lampung</option>
+                                                                    <option value="138">Kota Metro</option>
+                                                                    <option value="139">Kab. Bangka</option>
+                                                                    <option value="140">Kab. Belitung</option>
+                                                                    <option value="141">Kab. Bangka Selatan</option>
+                                                                    <option value="142">Kab. Bangka Tengah</option>
+                                                                    <option value="143">Kab. Bangka Barat</option>
+                                                                    <option value="144">Kab. Belitung Timur</option>
+                                                                    <option value="145">Kota Pangkal Pinang</option>
+                                                                    <option value="146">Kab. Bintan</option>
+                                                                    <option value="147">Kab. Karimun</option>
+                                                                    <option value="148">Kab. Natuna</option>
+                                                                    <option value="149">Kab. Lingga</option>
+                                                                    <option value="150">Kab. Kepulauan Anambas</option>
+                                                                    <option value="151">Kota Batam</option>
+                                                                    <option value="152">Kota Tanjung Pinang</option>
+                                                                    <option value="153">Kab. Kepulauan Seribu</option>
+                                                                    <option value="154">Kota Jakarta Pusat</option>
+                                                                    <option value="155">Kota Jakarta Utara</option>
+                                                                    <option value="156">Kota Jakarta Barat</option>
+                                                                    <option value="157">Kota Jakarta Selatan</option>
+                                                                    <option value="158">Kota Jakarta Timur</option>
+                                                                    <option value="159">Kab. Bogor</option>
+                                                                    <option value="160">Kab. Sukabumi</option>
+                                                                    <option value="161">Kab. Cianjur</option>
+                                                                    <option value="162">Kab. Bandung</option>
+                                                                    <option value="163">Kab. Garut</option>
+                                                                    <option value="164">Kab. Tasikmalaya</option>
+                                                                    <option value="165">Kab. Ciamis</option>
+                                                                    <option value="166">Kab. Kuningan</option>
+                                                                    <option value="167">Kab. Cirebon</option>
+                                                                    <option value="168">Kab. Majalengka</option>
+                                                                    <option value="169">Kab. Sumedang</option>
+                                                                    <option value="170">Kab. Indramayu</option>
+                                                                    <option value="171">Kab. Subang</option>
+                                                                    <option value="172">Kab. Purwakarta</option>
+                                                                    <option value="173">Kab. Karawang</option>
+                                                                    <option value="174">Kab. Bekasi</option>
+                                                                    <option value="175">Kab. Bandung Barat</option>
+                                                                    <option value="176">Kota Bogor</option>
+                                                                    <option value="177">Kota Sukabumi</option>
+                                                                    <option value="178">Kota Bandung</option>
+                                                                    <option value="179">Kota Cirebon</option>
+                                                                    <option value="180">Kota Bekasi</option>
+                                                                    <option value="181">Kota Depok</option>
+                                                                    <option value="182">Kota Cimahi</option>
+                                                                    <option value="183">Kota Tasikmalaya</option>
+                                                                    <option value="184">Kota Banjar</option>
+                                                                    <option value="185">Kab. Cilacap</option>
+                                                                    <option value="186">Kab. Banyumas</option>
+                                                                    <option value="187">Kab. Purbalingga</option>
+                                                                    <option value="188">Kab. Banjarnegara</option>
+                                                                    <option value="189">Kab. Kebumen</option>
+                                                                    <option value="190">Kab. Purworejo</option>
+                                                                    <option value="191">Kab. Wonosobo</option>
+                                                                    <option value="192">Kab. Magelang</option>
+                                                                    <option value="193">Kab. Boyolali</option>
+                                                                    <option value="194">Kab. Klaten</option>
+                                                                    <option value="195">Kab. Sukoharjo</option>
+                                                                    <option value="196">Kab. Wonogiri</option>
+                                                                    <option value="197">Kab. Karanganyar</option>
+                                                                    <option value="198">Kab. Sragen</option>
+                                                                    <option value="199">Kab. Grobogan</option>
+                                                                    <option value="200">Kab. Blora</option>
+                                                                    <option value="201">Kab. Rembang</option>
+                                                                    <option value="202">Kab. Pati</option>
+                                                                    <option value="203">Kab. Kudus</option>
+                                                                    <option value="204">Kab. Jepara</option>
+                                                                    <option value="205">Kab. Demak</option>
+                                                                    <option value="206">Kab. Semarang</option>
+                                                                    <option value="207">Kab. Temanggung</option>
+                                                                    <option value="208">Kab. Kendal</option>
+                                                                    <option value="209">Kab. Batang</option>
+                                                                    <option value="210">Kab. Pekalongan</option>
+                                                                    <option value="211">Kab. Pemalang</option>
+                                                                    <option value="212">Kab. Tegal</option>
+                                                                    <option value="213">Kab. Brebes</option>
+                                                                    <option value="214">Kota Magelang</option>
+                                                                    <option value="215">Kota Surakarta</option>
+                                                                    <option value="216">Kota Salatiga</option>
+                                                                    <option value="217">Kota Semarang</option>
+                                                                    <option value="218">Kota Pekalongan</option>
+                                                                    <option value="219">Kota Tegal</option>
+                                                                    <option value="220">Kab. Kulon Progo</option>
+                                                                    <option value="221">Kab. Bantul</option>
+                                                                    <option value="222">Kab. Gunung Kidul</option>
+                                                                    <option value="223">Kab. Sleman</option>
+                                                                    <option value="224">Kota Yogyakarta</option>
+                                                                    <option value="225">Kab. Pacitan</option>
+                                                                    <option value="226">Kab. Ponorogo</option>
+                                                                    <option value="227">Kab. Trenggalek</option>
+                                                                    <option value="228">Kab. Tulungagung</option>
+                                                                    <option value="229">Kab. Blitar</option>
+                                                                    <option value="230">Kab. Kediri</option>
+                                                                    <option value="231">Kab. Malang</option>
+                                                                    <option value="232">Kab. Lumajang</option>
+                                                                    <option value="233">Kab. Jember</option>
+                                                                    <option value="234">Kab. Banyuwangi</option>
+                                                                    <option value="235">Kab. Bondowoso</option>
+                                                                    <option value="236">Kab. Situbondo</option>
+                                                                    <option value="237">Kab. Probolinggo</option>
+                                                                    <option value="238">Kab. Pasuruan</option>
+                                                                    <option value="239">Kab. Sidoarjo</option>
+                                                                    <option value="240">Kab. Mojokerto</option>
+                                                                    <option value="241">Kab. Jombang</option>
+                                                                    <option value="242">Kab. Nganjuk</option>
+                                                                    <option value="243">Kab. Madiun</option>
+                                                                    <option value="244">Kab. Magetan</option>
+                                                                    <option value="245">Kab. Ngawi</option>
+                                                                    <option value="246">Kab. Bojonegoro</option>
+                                                                    <option value="247">Kab. Tuban</option>
+                                                                    <option value="248">Kab. Lamongan</option>
+                                                                    <option value="249">Kab. Gresik</option>
+                                                                    <option value="250">Kab. Bangkalan</option>
+                                                                    <option value="251">Kab. Sampang</option>
+                                                                    <option value="252">Kab. Pamekasan</option>
+                                                                    <option value="253">Kab. Sumenep</option>
+                                                                    <option value="254">Kota Kediri</option>
+                                                                    <option value="255">Kota Blitar</option>
+                                                                    <option value="256">Kota Malang</option>
+                                                                    <option value="257">Kota Probolinggo</option>
+                                                                    <option value="258">Kota Pasuruan</option>
+                                                                    <option value="259">Kota Mojokerto</option>
+                                                                    <option value="260">Kota Madiun</option>
+                                                                    <option value="261" selected="selected">Kota
+                                                                        Surabaya</option>
+                                                                    <option value="262">Kota Batu</option>
+                                                                    <option value="263">Kab. Pandeglang</option>
+                                                                    <option value="264">Kab. Lebak</option>
+                                                                    <option value="265">Kab. Tangerang</option>
+                                                                    <option value="266">Kab. Serang</option>
+                                                                    <option value="267">Kota Tangerang</option>
+                                                                    <option value="268">Kota Cilegon</option>
+                                                                    <option value="269">Kota Serang</option>
+                                                                    <option value="270">Kota Tangerang Selatan</option>
+                                                                    <option value="271">Kab. Jembrana</option>
+                                                                    <option value="272">Kab. Tabanan</option>
+                                                                    <option value="273">Kab. Badung</option>
+                                                                    <option value="274">Kab. Gianyar</option>
+                                                                    <option value="275">Kab. Klungkung</option>
+                                                                    <option value="276">Kab. Bangli</option>
+                                                                    <option value="277">Kab. Karangasem</option>
+                                                                    <option value="278">Kab. Buleleng</option>
+                                                                    <option value="279">Kota Denpasar</option>
+                                                                    <option value="280">Kab. Lombok Barat</option>
+                                                                    <option value="281">Kab. Lombok Tengah</option>
+                                                                    <option value="282">Kab. Lombok Timur</option>
+                                                                    <option value="283">Kab. Sumbawa</option>
+                                                                    <option value="284">Kab. Dompu</option>
+                                                                    <option value="285">Kab. Bima</option>
+                                                                    <option value="286">Kab. Sumbawa Barat</option>
+                                                                    <option value="287">Kab. Lombok Utara</option>
+                                                                    <option value="288">Kota Mataram</option>
+                                                                    <option value="289">Kota Bima</option>
+                                                                    <option value="290">Kab. Kupang</option>
+                                                                    <option value="291">Kab. Timor Tengah Selatan
+                                                                    </option>
+                                                                    <option value="292">Kab. Timor Tengah Utara</option>
+                                                                    <option value="293">Kab. Belu</option>
+                                                                    <option value="294">Kab. Alor</option>
+                                                                    <option value="295">Kab. Flores Timur</option>
+                                                                    <option value="296">Kab. Sikka</option>
+                                                                    <option value="297">Kab. Ende</option>
+                                                                    <option value="298">Kab. Ngada</option>
+                                                                    <option value="299">Kab. Manggarai</option>
+                                                                    <option value="300">Kab. Sumba Timur</option>
+                                                                    <option value="301">Kab. Sumba Barat</option>
+                                                                    <option value="302">Kab. Lembata</option>
+                                                                    <option value="303">Kab. Rote Ndao</option>
+                                                                    <option value="304">Kab. Manggarai Barat</option>
+                                                                    <option value="305">Kab. Nagekeo</option>
+                                                                    <option value="306">Kab. Sumba Tengah</option>
+                                                                    <option value="307">Kab. Sumba Barat Daya</option>
+                                                                    <option value="308">Kab. Manggarai Timur</option>
+                                                                    <option value="309">Kab. Sabu Raijua</option>
+                                                                    <option value="310">Kota Kupang</option>
+                                                                    <option value="311">Kab. Sambas</option>
+                                                                    <option value="312">Kab. Pontianak</option>
+                                                                    <option value="313">Kab. Sanggau</option>
+                                                                    <option value="314">Kab. Ketapang</option>
+                                                                    <option value="315">Kab. Sintang</option>
+                                                                    <option value="316">Kab. Kapuas Hulu</option>
+                                                                    <option value="317">Kab. Bengkayang</option>
+                                                                    <option value="318">Kab. Landak</option>
+                                                                    <option value="319">Kab. Sekadau</option>
+                                                                    <option value="320">Kab. Melawi</option>
+                                                                    <option value="321">Kab. Kayong Utara</option>
+                                                                    <option value="322">Kab. Kubu Raya</option>
+                                                                    <option value="323">Kota Pontianak</option>
+                                                                    <option value="324">Kota Singkawang</option>
+                                                                    <option value="325">Kab. Kotawaringin Barat</option>
+                                                                    <option value="326">Kab. Kotawaringin Timur</option>
+                                                                    <option value="327">Kab. Kapuas</option>
+                                                                    <option value="328">Kab. Barito Selatan</option>
+                                                                    <option value="329">Kab. Barito Utara</option>
+                                                                    <option value="330">Kab. Katingan</option>
+                                                                    <option value="331">Kab. Seruyan</option>
+                                                                    <option value="332">Kab. Sukamara</option>
+                                                                    <option value="333">Kab. Lamandau</option>
+                                                                    <option value="334">Kab. Gunung Mas</option>
+                                                                    <option value="335">Kab. Pulang Pisau</option>
+                                                                    <option value="336">Kab. Murung Raya</option>
+                                                                    <option value="337">Kab. Barito Timur</option>
+                                                                    <option value="338">Kota Palangkaraya</option>
+                                                                    <option value="339">Kab. Tanah Laut</option>
+                                                                    <option value="340">Kab. Kotabaru</option>
+                                                                    <option value="341">Kab. Banjar</option>
+                                                                    <option value="342">Kab. Barito Kuala</option>
+                                                                    <option value="343">Kab. Tapin</option>
+                                                                    <option value="344">Kab. Hulu Sungai Selatan
+                                                                    </option>
+                                                                    <option value="345">Kab. Hulu Sungai Tengah</option>
+                                                                    <option value="346">Kab. Hulu Sungai Utara</option>
+                                                                    <option value="347">Kab. Tabalong</option>
+                                                                    <option value="348">Kab. Tanah Bumbu</option>
+                                                                    <option value="349">Kab. Balangan</option>
+                                                                    <option value="350">Kota Banjarmasin</option>
+                                                                    <option value="351">Kota Banjarbaru</option>
+                                                                    <option value="352">Kab. Paser</option>
+                                                                    <option value="353">Kab. Kutai Kartanegara</option>
+                                                                    <option value="354">Kab. Berau</option>
+                                                                    <option value="355">Kab. Bulungan</option>
+                                                                    <option value="356">Kab. Nunukan</option>
+                                                                    <option value="357">Kab. Malinau</option>
+                                                                    <option value="358">Kab. Kutai Barat</option>
+                                                                    <option value="359">Kab. Kutai Timur</option>
+                                                                    <option value="360">Kab. Penajam Paser Utara
+                                                                    </option>
+                                                                    <option value="361">Kab. Tana Tidung</option>
+                                                                    <option value="362">Kota Balikpapan</option>
+                                                                    <option value="363">Kota Samarinda</option>
+                                                                    <option value="364">Kota Tarakan</option>
+                                                                    <option value="365">Kota Bontang</option>
+                                                                    <option value="366">Kab. Bulungan</option>
+                                                                    <option value="367">Kab. Malinau</option>
+                                                                    <option value="368">Kab. Nunukan</option>
+                                                                    <option value="369">Kab. Tana Tidung</option>
+                                                                    <option value="370">Kota Tarakan</option>
+                                                                    <option value="371">Kab. Bolaang Mongondow</option>
+                                                                    <option value="372">Kab. Minahasa</option>
+                                                                    <option value="373">Kab. Kepulauan Sangihe</option>
+                                                                    <option value="374">Kab. Kepulauan Talaud</option>
+                                                                    <option value="375">Kab. Minahasa Selatan</option>
+                                                                    <option value="376">Kab. Minahasa Utara</option>
+                                                                    <option value="377">Kab. Minahasa Tenggara</option>
+                                                                    <option value="378">Kab. Bolaang Mongondow Utara
+                                                                    </option>
+                                                                    <option value="379">Kab. Kep. Siau Tagulandang Barat
+                                                                    </option>
+                                                                    <option value="380">Kab. Bolaang Mongondow Timur
+                                                                    </option>
+                                                                    <option value="381">Kab. Bolaang Mongondow Selatan
+                                                                    </option>
+                                                                    <option value="382">Kota Manado</option>
+                                                                    <option value="383">Kota Bitung</option>
+                                                                    <option value="384">Kota Tomohon</option>
+                                                                    <option value="385">Kota Kotamobagu</option>
+                                                                    <option value="386">Kab. Banggai</option>
+                                                                    <option value="387">Kab. Poso</option>
+                                                                    <option value="388">Kab. Donggala</option>
+                                                                    <option value="389">Kab. Toli Toli</option>
+                                                                    <option value="390">Kab. Buol</option>
+                                                                    <option value="391">Kab. Morowali</option>
+                                                                    <option value="392">Kab. Banggai Kepulauan</option>
+                                                                    <option value="393">Kab. Parigi Moutong</option>
+                                                                    <option value="394">Kab. Tojo Una Una</option>
+                                                                    <option value="395">Kab. Sigi</option>
+                                                                    <option value="396">Kota Palu</option>
+                                                                    <option value="397">Kab. Kepulauan Selayar</option>
+                                                                    <option value="398">Kab. Bulukumba</option>
+                                                                    <option value="399">Kab. Bantaeng</option>
+                                                                    <option value="400">Kab. Jeneponto</option>
+                                                                    <option value="401">Kab. Takalar</option>
+                                                                    <option value="402">Kab. Gowa</option>
+                                                                    <option value="403">Kab. Sinjai</option>
+                                                                    <option value="404">Kab. Bone</option>
+                                                                    <option value="405">Kab. Maros</option>
+                                                                    <option value="406">Kab. Pangkajene Kepulauan
+                                                                    </option>
+                                                                    <option value="407">Kab. Barru</option>
+                                                                    <option value="408">Kab. Soppeng</option>
+                                                                    <option value="409">Kab. Wajo</option>
+                                                                    <option value="410">Kab. Sidenreng Rappang</option>
+                                                                    <option value="411">Kab. Pinrang</option>
+                                                                    <option value="412">Kab. Enrekang</option>
+                                                                    <option value="413">Kab. Luwu</option>
+                                                                    <option value="414">Kab. Tana Toraja</option>
+                                                                    <option value="415">Kab. Luwu Utara</option>
+                                                                    <option value="416">Kab. Luwu Timur</option>
+                                                                    <option value="417">Kab. Toraja Utara</option>
+                                                                    <option value="418">Kota Makassar</option>
+                                                                    <option value="419">Kota Pare Pare</option>
+                                                                    <option value="420">Kota Palopo</option>
+                                                                    <option value="421">Kab. Kolaka</option>
+                                                                    <option value="422">Kab. Konawe</option>
+                                                                    <option value="423">Kab. Muna</option>
+                                                                    <option value="424">Kab. Buton</option>
+                                                                    <option value="425">Kab. Konawe Selatan</option>
+                                                                    <option value="426">Kab. Bombana</option>
+                                                                    <option value="427">Kab. Wakatobi</option>
+                                                                    <option value="428">Kab. Kolaka Utara</option>
+                                                                    <option value="429">Kab. Konawe Utara</option>
+                                                                    <option value="430">Kab. Buton Utara</option>
+                                                                    <option value="431">Kota Kendari</option>
+                                                                    <option value="432">Kota Bau Bau</option>
+                                                                    <option value="433">Kab. Gorontalo</option>
+                                                                    <option value="434">Kab. Boalemo</option>
+                                                                    <option value="435">Kab. Bone Bolango</option>
+                                                                    <option value="436">Kab. Pohuwato</option>
+                                                                    <option value="437">Kab. Gorontalo Utara</option>
+                                                                    <option value="438">Kota Gorontalo</option>
+                                                                    <option value="439">Kab. Mamuju Utara</option>
+                                                                    <option value="440">Kab. Mamuju</option>
+                                                                    <option value="441">Kab. Mamasa</option>
+                                                                    <option value="442">Kab. Polewali Mandar</option>
+                                                                    <option value="443">Kab. Majene</option>
+                                                                    <option value="444">Kab. Maluku Tengah</option>
+                                                                    <option value="445">Kab. Maluku Tenggara</option>
+                                                                    <option value="446">Kab. Maluku Tenggara Barat
+                                                                    </option>
+                                                                    <option value="447">Kab. Buru</option>
+                                                                    <option value="448">Kab. Seram Bagian Timur</option>
+                                                                    <option value="449">Kab. Seram Bagian Barat</option>
+                                                                    <option value="450">Kab. Kepulauan Aru</option>
+                                                                    <option value="451">Kab. Maluku Barat Daya</option>
+                                                                    <option value="452">Kab. Buru Selatan</option>
+                                                                    <option value="453">Kota Ambon</option>
+                                                                    <option value="454">Kota Tual</option>
+                                                                    <option value="455">Kab. Halmahera Barat</option>
+                                                                    <option value="456">Kab. Halmahera Tengah</option>
+                                                                    <option value="457">Kab. Halmahera Utara</option>
+                                                                    <option value="458">Kab. Halmahera Selatan</option>
+                                                                    <option value="459">Kab. Kepulauan Sula</option>
+                                                                    <option value="460">Kab. Halmahera Timur</option>
+                                                                    <option value="461">Kab. Pulau Morotai</option>
+                                                                    <option value="462">Kota Ternate</option>
+                                                                    <option value="463">Kota Tidore Kepulauan</option>
+                                                                    <option value="464">Kab. Merauke</option>
+                                                                    <option value="465">Kab. Jayawijaya</option>
+                                                                    <option value="466">Kab. Jayapura</option>
+                                                                    <option value="467">Kab. Nabire</option>
+                                                                    <option value="468">Kab. Kepulauan Yapen</option>
+                                                                    <option value="469">Kab. Biak Numfor</option>
+                                                                    <option value="470">Kab. Puncak Jaya</option>
+                                                                    <option value="471">Kab. Paniai</option>
+                                                                    <option value="472">Kab. Mimika</option>
+                                                                    <option value="473">Kab. Sarmi</option>
+                                                                    <option value="474">Kab. Keerom</option>
+                                                                    <option value="475">Kab. Pegunungan Bintang</option>
+                                                                    <option value="476">Kab. Yahukimo</option>
+                                                                    <option value="477">Kab. Tolikara</option>
+                                                                    <option value="478">Kab. Waropen</option>
+                                                                    <option value="479">Kab. Boven Digoel</option>
+                                                                    <option value="480">Kab. Mappi</option>
+                                                                    <option value="481">Kab. Asmat</option>
+                                                                    <option value="482">Kab. Supiori</option>
+                                                                    <option value="483">Kab. Mamberamo Raya</option>
+                                                                    <option value="484">Kab. Mamberamo Tengah</option>
+                                                                    <option value="485">Kab. Yalimo</option>
+                                                                    <option value="486">Kab. Lanny Jaya</option>
+                                                                    <option value="487">Kab. Nduga</option>
+                                                                    <option value="488">Kab. Puncak</option>
+                                                                    <option value="489">Kab. Dogiyai</option>
+                                                                    <option value="490">Kab. Intan Jaya</option>
+                                                                    <option value="491">Kab. Deiyai</option>
+                                                                    <option value="492">Kota Jayapura</option>
+                                                                    <option value="493">Kab. Sorong</option>
+                                                                    <option value="494">Kab. Manokwari</option>
+                                                                    <option value="495">Kab. Fak Fak</option>
+                                                                    <option value="496">Kab. Sorong Selatan</option>
+                                                                    <option value="497">Kab. Raja Ampat</option>
+                                                                    <option value="498">Kab. Teluk Bintuni</option>
+                                                                    <option value="499">Kab. Teluk Wondama</option>
+                                                                    <option value="500">Kab. Kaimana</option>
+                                                                    <option value="501">Kab. Tambrauw</option>
+                                                                    <option value="502">Kab. Maybrat</option>
+                                                                    <option value="503">Kota Sorong</option>
+                                                                    <option value="0">Lain - Lain</option>
+                                                                </select>
+                                                                <input type="text" id="kota_custom" name="kota_custom"
+                                                                    value=""
+                                                                    class="form-control m-input m-input--square" hidden>
+                                                                <span style="color: red">*Pilih Lain-Lain jika tidak
+                                                                    ditemukan Tempat Lahir Yang Sesuai</span><br>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Tanggal Lahir</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td>
+                                                                <div class="form-group m-form__group row">
+                                                                    <div class="col-lg-12 col-md-9 col-sm-12">
+                                                                        <div class="input-group date">
+                                                                            <input type="text"
+                                                                                class="form-control m-input"
+                                                                                value="04/02/1992" id="m_datepicker_2"
+                                                                                name="tgllahir" />
+                                                                            <div class="input-group-append">
+                                                                                <span class="input-group-text">
+                                                                                    <i class="la la-calendar"></i>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Alamat</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td><textarea class="form-control" name="address"
+                                                                    id="address" rows="2"
+                                                                    data-error-container="#editor2_error">Jl.  Sememi Jaya V Utara Blok 1/69</textarea>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>No. Telp</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td><input type="text"
+                                                                    class="form-control m-input m-input--square"
+                                                                    id="phone" name="phone" value="082264643233"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Email</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td><input type="text"
+                                                                    class="form-control m-input m-input--square"
+                                                                    id="email" name="email"
+                                                                    value="aryaherro@yahoo.co.id"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Pin</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td><input type="text"
+                                                                    class="form-control m-input m-input--square"
+                                                                    id="nopin" name="nopin" value="190708"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Nama Ayah</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td><input type="text"
+                                                                    class="form-control m-input m-input--square"
+                                                                    id="nama_ayah" name="nama_ayah" value="Sukardji">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Nama Ibu</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td><input type="text"
+                                                                    class="form-control m-input m-input--square"
+                                                                    id="nama_ibu" name="nama_ibu" value="Enny"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>HP Ortu/Wali</b></td>
+                                                            <td width="1%">:</td>
+                                                            <td><input type="text"
+                                                                    class="form-control m-input m-input--square"
+                                                                    id="hportu" name="hportu" value="08123234422"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </form>
+                                        </div>
+                                        <br>
+                                        <button
+                                            class="btn m-btn--pill m-btn--air m-btn m-btn--gradient-from-primary m-btn--gradient-to-info"
+                                            name="kirim" id="kirim" style="float: right;">Proses</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <footer class="m-grid__item m-footer ">
+            <div class="m-container m-container--fluid m-container--full-height m-page__container">
+                <div class="m-footer__wrapper">
+                    <div class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
+                        <div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
+                            <span class="m-footer__copyright">
+                                2019 &copy; UPT KOMPUTER <a href="https://unitomo.ac.id" class="m-link">UNITOMO</a>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script src="https://lik.unitomo.ac.id/assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
+    <script src="https://lik.unitomo.ac.id/assets/demo/demo10/base/scripts.bundle.js" type="text/javascript"></script>
+
+
+    <script src="https://lik.unitomo.ac.id/assets/vendors/custom/fullcalendar/fullcalendar.bundle.js"
+        type="text/javascript"></script>
+    <script src="https://lik.unitomo.ac.id/assets/vendors/custom/flot/flot.bundle.js" type="text/javascript"></script>
+
+
+    <script src="https://lik.unitomo.ac.id/assets/app/js/dashboard.js" type="text/javascript"></script>
+
+    <script src="https://lik.unitomo.ac.id/assets/demo/custom/components/base/sweetalert2.js" type="text/javascript">
+    </script>
+
+
+    <script>
+        $(window).on('load', function () {
+            $('body').removeClass('m-page--loading');
+        });
+    </script>
+
+    <script src="https://lik.unitomo.ac.id/assets/demo/custom/crud/forms/widgets/bootstrap-datepicker.js"
+        type="text/javascript"></script>
+    <script src="https://lik.unitomo.ac.id/assets/demo/custom/crud/forms/widgets/select2.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            tampil_data();
+            var tgllahir = $('#m_datepicker_2').datepicker({
+                dateFormat: 'yyyy-mm-dd H:i:s'
+            }).val();
+            $('#kirim').on('click', function () {
+                $.ajax({
+                    type: "POST",
+                    url: "https://lik.unitomo.ac.id/dashboard/profil_update",
+                    dataType: "JSON",
+                    data: $('#form_profil').serializeArray(),
+                    success: function (data) {
+                        window.location.href = "https://lik.unitomo.ac.id/dashboard";
+                    }
+                });
+            });
+
+            $('#ktp').submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: 'https://lik.unitomo.ac.id/dashboard/ktp',
+                    type: "post",
+                    data: new FormData(this),
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    async: false,
+                    success: function (data) {
+                        if (data == true) {
+                            alert("Upload KTP Berhasil.");
+                            window.location.href =
+                                "https://lik.unitomo.ac.id/dashboard/profil";
+                        } else {
+                            alert("Tidak Ada Data Yang Diupload.");
+                        }
+                    }
+                });
+            });
+
+            $('#kk').submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: 'https://lik.unitomo.ac.id/dashboard/kk',
+                    type: "post",
+                    data: new FormData(this),
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    async: false,
+                    success: function (data) {
+                        if (data == true) {
+                            alert("Upload KK Berhasil.");
+                            window.location.href =
+                                "https://lik.unitomo.ac.id/dashboard/profil";
+                        } else {
+                            alert("Tidak Ada Data Yang Diupload.");
+                        }
+                    }
+                });
+            });
+
+            $('#akta').submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: 'https://lik.unitomo.ac.id/dashboard/akta',
+                    type: "post",
+                    data: new FormData(this),
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    async: false,
+                    success: function (data) {
+                        if (data == true) {
+                            alert("Upload Akta Berhasil.");
+                            window.location.href =
+                                "https://lik.unitomo.ac.id/dashboard/profil";
+                        } else {
+                            alert("Tidak Ada Data Yang Diupload.");
+                        }
+                    }
+                });
+            });
+
+            $('#m_select2_2').change(function () {
+                if ($('#m_select2_2').val() == '0') {
+                    $('#kota_custom').removeAttr('hidden');
+                } else {
+                    $('#kota_custom').hide();
+                }
+            });
+        });
+
+
+
+
+
+        function tampil_data() {
+            $.ajax({
+                type: 'ajax',
+                url: 'https://lik.unitomo.ac.id/dashboard/checkeddata',
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.foto_ktp === null) {
+                        $("#button_view_ktp").hide();
+                        $("#del_ktp").hide();
+                        $("#button_upload_ktp").show();
+                    } else {
+                        $("#button_view_ktp").show();
+                        $("#del_ktp").show();
+                        $("#button_upload_ktp").hide();
+                    }
+
+                    if (data.foto_kk === null) {
+                        $("#button_view_kk").hide();
+                        $("#del_kk").hide();
+                        $("#button_upload_kk").show();
+                    } else {
+                        $("#button_view_kk").show();
+                        $("#del_kk").show();
+                        $("#button_upload_kk").hide();
+                    }
+
+                    if (data.foto_akta === null) {
+                        $("#button_view_akta").hide();
+                        $("#del_akta").hide();
+                        $("#button_upload_akta").show();
+                    } else {
+                        $("#button_view_akta").show();
+                        $("#del_akta").show();
+                        $("#button_upload_akta").hide();
+                    }
+                }
+
+            });
+        }
+
+        function del(id, nama) {
+            // Pemanggilan hapus
+            $.ajax({
+                type: "POST",
+                url: "https://lik.unitomo.ac.id/dashboard/del_foto",
+                data: {
+                    id: id,
+                    nama: nama
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data == true) {
+                        alert("Hapus Dokumen Berhasil.");
+                        window.location.href = "https://lik.unitomo.ac.id/dashboard/profil";
+                    } else {
+                        alert("Tidak Ada Data Yang Dihapus.");
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
