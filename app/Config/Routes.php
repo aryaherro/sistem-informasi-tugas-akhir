@@ -39,6 +39,7 @@ $routes->group("Mahasiswa", ['filter' => 'role:Mahasiswa'], function ($routes) {
 	$routes->group("TugasAkhir", function ($routes) {
 		$routes->get('judul', 'Mahasiswa::judul', ['as' => 'mahasiswa.judul']);
 		$routes->post('judul', 'Mahasiswa::tambahjudul');
+		$routes->get('downloadBimbingan/(:num)/(:num)/(:alpha)/(:num)', 'Mahasiswa::downloadBimbingan/$1/$2/$3/$4');
 		$routes->get('bimbinganProposal', 'Mahasiswa::bimbinganProposal', ['as' => 'mahasiswa.bimbinganProposal']);
 		$routes->post('bimbinganProposal', 'Mahasiswa::tambahbimbinganProposal');
 		$routes->get('bimbinganTugasAkhir', 'Mahasiswa::bimbinganTugasAkhir', ['as' => 'mahasiswa.bimbinganTugasAkhir']);
@@ -50,40 +51,40 @@ $routes->group("Mahasiswa", ['filter' => 'role:Mahasiswa'], function ($routes) {
 	});
 });
 
-// $routes->group("Dosen", ['filter' => 'role:Dosen'], function ($routes) {
-// 	$routes->get('/', 'Dosen::index', ['as' => 'dosen']);
-// 	$routes->group("Validasi", function ($routes) {
-// 		$routes->get('Judul', 'Dosen::validasiJudul', ['as' => 'dosen.validasi.judul'], ['filter' => 'permission:Dosen Pembimbing']);
-// 		$routes->post('Judul', 'Dosen::tambahvalidasiJudul');
-// 		$routes->get('Proposal', 'Dosen::validasiProposal', ['as' => 'dosen.validasi.proposal'], ['filter' => 'permission:Dosen Pembimbing']);
-// 		$routes->post('Proposal', 'Dosen::tambahvalidasiProposal');
-// 		$routes->get('TugasAkhir', 'Dosen::validasiTugasAkhir', ['as' => 'dosen.validasi.tugasAkhir'], ['filter' => 'permission:Dosen Pembimbing']);
-// 		$routes->post('TugasAkhir', 'Dosen::tambahvalidasiTugasAkhir');
-// 		$routes->get('Nilai', 'Dosen::validasiNilai', ['as' => 'dosen.validasi.nilai'], ['filter' => 'permission:Dosen Penguji']);
-// 		$routes->post('Nilai', 'Dosen::tambahvalidasiNilai');
-// 	});
-// 	$routes->group("Jadwal", ['filter' => 'permission:Dosen Pembimbing'], function ($routes) {
-// 		$routes->get('SeminarProposal', 'Dosen::jadwalSeminarProposal', ['as' => 'dosen.jadwal.seminarProposal']);
-// 		$routes->get('SeminarTugasAkhir', 'Dosen::jadwalSeminarTugasAkhir', ['as' => 'dosen.jadwal.seminarTugasAkhir']);
-// 	});
-// });
+$routes->group("Dosen", ['filter' => 'role:Dosen'], function ($routes) {
+	$routes->get('/', 'Dosen::index', ['as' => 'dosen']);
+	$routes->group("Validasi", function ($routes) {
+		$routes->get('Judul', 'Dosen::validasiJudul', ['as' => 'dosen.validasi.judul'], ['filter' => 'permission:Dosen Pembimbing']);
+		$routes->post('Judul', 'Dosen::tambahvalidasiJudul');
+		$routes->get('Proposal', 'Dosen::validasiProposal', ['as' => 'dosen.validasi.proposal'], ['filter' => 'permission:Dosen Pembimbing']);
+		$routes->post('Proposal', 'Dosen::tambahvalidasiProposal');
+		$routes->get('TugasAkhir', 'Dosen::validasiTugasAkhir', ['as' => 'dosen.validasi.tugasAkhir'], ['filter' => 'permission:Dosen Pembimbing']);
+		$routes->post('TugasAkhir', 'Dosen::tambahvalidasiTugasAkhir');
+		$routes->get('Nilai', 'Dosen::validasiNilai', ['as' => 'dosen.validasi.nilai'], ['filter' => 'permission:Dosen Penguji']);
+		$routes->post('Nilai', 'Dosen::tambahvalidasiNilai');
+	});
+	$routes->group("Jadwal", ['filter' => 'permission:Dosen Pembimbing'], function ($routes) {
+		$routes->get('SeminarProposal', 'Dosen::jadwalSeminarProposal', ['as' => 'dosen.jadwal.seminarProposal']);
+		$routes->get('SeminarTugasAkhir', 'Dosen::jadwalSeminarTugasAkhir', ['as' => 'dosen.jadwal.seminarTugasAkhir']);
+	});
+});
 
-// $routes->group("Prodi", ['filter' => 'permission:Kaprodi'], function ($routes) {
-// 	$routes->group("Validasi", function ($routes) {
-// 		$routes->get('Judul', 'Prodi::validasiJudul', ['as' => 'prodi.validasi.judul']);
-// 		$routes->post('Judul', 'Prodi::tambahvalidasiJudul');
-// 		$routes->get('Proposal', 'Prodi::validasiProposal', ['as' => 'prodi.validasi.proposal']);
-// 		$routes->post('Proposal', 'Prodi::tambahvalidasiProposal');
-// 		$routes->get('TugasAkhir', 'Prodi::validasiTugasAkhir', ['as' => 'prodi.validasi.tugasAkhir']);
-// 		$routes->post('TugasAkhir', 'Prodi::tambahvalidasiTugasAkhir');
-// 	});
-// 	$routes->group("Jadwal", function ($routes) {
-// 		$routes->get('SeminarProposal', 'Prodi::jadwalSeminarProposal', ['as' => 'prodi.jadwal.seminarProposal']);
-// 		$routes->post('SeminarProposal', 'Prodi::tambahjadwalSeminarProposal');
-// 		$routes->get('SeminarTugasAkhir', 'Prodi::jadwalSeminarTugasAkhir', ['as' => 'prodi.jadwal.seminarTugasAkhir']);
-// 		$routes->post('SeminarTugasAkhir', 'Prodi::tambahjadwalSeminarTugasAkhir');
-// 	});
-// });
+$routes->group("Prodi", ['filter' => 'permission:Kaprodi'], function ($routes) {
+	$routes->group("Validasi", function ($routes) {
+		$routes->get('Judul', 'Prodi::validasiJudul', ['as' => 'prodi.validasi.judul']);
+		$routes->post('Judul', 'Prodi::tambahvalidasiJudul');
+		$routes->get('Proposal', 'Prodi::validasiProposal', ['as' => 'prodi.validasi.proposal']);
+		$routes->post('Proposal', 'Prodi::tambahvalidasiProposal');
+		$routes->get('TugasAkhir', 'Prodi::validasiTugasAkhir', ['as' => 'prodi.validasi.tugasAkhir']);
+		$routes->post('TugasAkhir', 'Prodi::tambahvalidasiTugasAkhir');
+	});
+	$routes->group("Jadwal", function ($routes) {
+		$routes->get('SeminarProposal', 'Prodi::jadwalSeminarProposal', ['as' => 'prodi.jadwal.seminarProposal']);
+		$routes->post('SeminarProposal', 'Prodi::tambahjadwalSeminarProposal');
+		$routes->get('SeminarTugasAkhir', 'Prodi::jadwalSeminarTugasAkhir', ['as' => 'prodi.jadwal.seminarTugasAkhir']);
+		$routes->post('SeminarTugasAkhir', 'Prodi::tambahjadwalSeminarTugasAkhir');
+	});
+});
 
 /*
  * --------------------------------------------------------------------

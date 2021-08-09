@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -47,26 +47,26 @@
           <?php if ($config->validFields === ['email']) : ?>
             <div class="form-group">
               <label for="login"><?= lang('Auth.email') ?></label>
-              <input type="email" class="form-control <?php if (session('errors.login')) : ?>is-invalid <?php endif ?>" name="login" placeholder="<?= lang('Auth.email') ?>">
+              <input type="email" class="form-control <?php (session('errors.login')) ? 'is-invalid' : ''; ?>" name="login" placeholder="<?= lang('Auth.email'); ?>">
               <div class="invalid-feedback">
-                <?= session('errors.login') ?>
+                <?= session('errors.login'); ?>
               </div>
             </div>
           <?php else : ?>
             <div class="form-group">
               <label for="login"><?= lang('Auth.emailOrUsername') ?></label>
-              <input type="text" class="form-control <?php if (session('errors.login')) : ?>is-invalid<?php endif ?>" name="login" placeholder="<?= lang('Auth.emailOrUsername') ?>">
+              <input type="text" class="form-control <?php (session('errors.login')) ? 'is-invalid' : ''; ?>" name="login" placeholder="<?= lang('Auth.emailOrUsername'); ?>">
               <div class="invalid-feedback">
-                <?= session('errors.login') ?>
+                <?= session('errors.login'); ?>
               </div>
             </div>
           <?php endif; ?>
 
           <div class="form-group">
             <label for="password"><?= lang('Auth.password') ?></label>
-            <input type="password" name="password" class="form-control  <?php if (session('errors.password')) : ?>is-invalid<?php endif ?>" placeholder="<?= lang('Auth.password') ?>">
+            <input type="password" name="password" class="form-control  <?php (session('errors.password')) ? 'is-invalid' : '' ?>" placeholder="<?= lang('Auth.password') ?>">
             <div class="invalid-feedback">
-              <?= session('errors.password') ?>
+              <?= session('errors.password'); ?>
             </div>
           </div>
 

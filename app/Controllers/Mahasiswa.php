@@ -4,18 +4,25 @@ namespace App\Controllers;
 
 use App\Models\BimbinganProposalModel;
 use App\Models\DosenModel;
+use App\Models\FakultasModel;
 use App\Models\JudulProposalModel;
 use App\Models\MahasiswaModel;
+use App\Models\ProdiModel;
 
 class Mahasiswa extends BaseController
 {
     protected $mahasiswa;
+    protected $prodi;
+    protected $fakultas;
     protected $judulProposal;
     protected $bimbinganProposal;
 
     private function setMahasiswa()
     {
         $this->mahasiswa = (new MahasiswaModel())->asArray()->where('users_id', user_id())->first();
+        $this->prodi = (new ProdiModel())->find($this->mahasiswa['prodi_id']);
+        $this->fakultas = (new FakultasModel())->find($this->prodi['fakultas_id']);
+
         $this->judulProposal = ((new JudulProposalModel())->where('mahasiswa_id', $this->mahasiswa['id'],)
             ->GroupStart()
             ->where('acc_dospem1', true)->orWhere('acc_dospem1', null)
@@ -29,15 +36,13 @@ class Mahasiswa extends BaseController
         $this->bimbinganProposal = $temp;
     }
 
-    private function setBimbingan()
-    {
-    }
-
     public function index()
     {
         $this->setMahasiswa();
         $data = [
             'mahasiswa' => $this->mahasiswa,
+            'prodi'     => $this->prodi,
+            'fakultas'  => $this->fakultas,
         ];
         return view('profile', $data);
     }
@@ -80,8 +85,6 @@ class Mahasiswa extends BaseController
 
     public function tambahbimbinganProposal()
     {
-
-
         $this->setMahasiswa();
         $this->judulProposal = (new JudulProposalModel())->find($this->request->getPost('judulProposal_id'));
         $bimbinganProposal = new BimbinganProposalModel();
@@ -104,9 +107,15 @@ class Mahasiswa extends BaseController
             session()->setFlashdata('error', $this->validator->listErrors());
             return redirect()->back()->withInput();
         }
-        $berkas->move("uploads/{$this->mahasiswa['id']}/{$this->judulProposal['id']}/", $file_name);
+        $berkas->move("uploads/{$this->mahasiswa['id']}/{$this->judulProposal['id']}/P/", $file_name);
         $bimbinganProposal->save($data);
         return redirect()->back();
+    }
+
+    public function downloadBimbingan($type, $mahasiswa_id, $judul_id, $bimbingan_id)
+    {
+        $data = (new BimbinganProposalModel())->find($bimbingan_id);
+        return $this->response->download("uploads/{$mahasiswa_id}/{$judul_id}/{$type}" . $data['Berkas_bimbingan'], null);
     }
 
     public function bimbinganTugasAkhir()

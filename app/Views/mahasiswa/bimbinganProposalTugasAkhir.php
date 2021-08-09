@@ -82,7 +82,7 @@
                                                     </td>
                                                     <td>
                                                         <center>
-                                                            <a class="btn btn-info" href="">Download</a>
+                                                            <a class="btn btn-info" href="<?= base_url("Mahasiswa/TugasAkhir/downloadBimbingan/{$key['mahasiswa_id']}/{$key['id']}/{$keyB['id']}"); ?>">Download</a>
                                                         </center>
                                                     </td>
                                                     <td>

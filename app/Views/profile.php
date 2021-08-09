@@ -5,6 +5,7 @@ use PHPUnit\TextUI\XmlConfiguration\Group;
 <?= $this->extend('layouts/templates'); ?>
 
 <?= $this->section('content'); ?>
+<?php (in_groups("Mahasiswa")) ? $person = $mahasiswa : $person = $dosen; ?>
 <div class="content-wrapper">
     <div class="m-grid__item m-grid__item--fluid  m-grid m-grid--ver-desktop m-grid--desktop m-page__container m-body">
         <div class="m-grid__item m-grid__item--fluid m-wrapper">
@@ -76,48 +77,36 @@ use PHPUnit\TextUI\XmlConfiguration\Group;
                                                     <tr>
                                                         <td width="40%"><b>Nama Lengkap</b></td>
                                                         <td width="1%">:</td>
-                                                        <td><input type="text" class="form-control m-input m-input--square" name="namaupdate" id="namaupdate" value="" disabled>
-                                                            <input type="hidden" class="form-control m-input m-input--square" name="namamhs" id="namamhs" value="">
+                                                        <td><input type="text" class="form-control m-input m-input--square" name="namaupdate" id="namaupdate" value="<?= $person['nama']; ?>" disabled>
+                                                            <input type="hidden" class="form-control m-input m-input--square" name="namamhs" id="namamhs" value="<?= $person['nama']; ?>">
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td><b>NIM/NIP</b></td>
+                                                        <td><b><?= (in_groups("Mahasiswa")) ? "NIM" : "NIP"; ?></b></td>
                                                         <td width="1%">:</td>
-                                                        <td></td>
+                                                        <td><?= $person[(in_groups('Mahasiswa')) ? 'nim' : 'nip']; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>NIK</b></td>
                                                         <td width="1%">:</td>
-                                                        <td><input type="text" class="form-control m-input m-input--square" height="1px" id="noktp" name="noktp" value=""></td>
+                                                        <td><input type="text" class="form-control m-input m-input--square" height="1px" id="noktp" name="noktp" value="<?= $person['nik']; ?>" disabled></td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Jurusan / Fakultas</b></td>
                                                         <td width="1%">:</td>
-                                                        <td> / </td>
+                                                        <td> <?= $prodi['nama']; ?>/<?= $fakultas['nama']; ?> </td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Jenis Kelamin</b></td>
                                                         <td width="1%">:</td>
                                                         <td>
-                                                            <div class="col-9">
-                                                                <div class="m-radio-inline">
-                                                                    <label class="m-radio">
-                                                                        <input type="radio" name="sex" value="L" checked="true"> Laki-laki
-                                                                        <span></span>
-                                                                    </label>
-                                                                    <label class="m-radio">
-                                                                        <input type="radio" name="sex" value="P">
-                                                                        Perempuan
-                                                                        <span></span>
-                                                                    </label>
-                                                                </div>
+                                                            <?= ($person['jk'] == "L") ? 'Laki-Laki' : 'Perempuan'; ?>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Agama</b></td>
                                                         <td width="1%">:</td>
-                                                        <td><select class="form-control m-select2" id="m_select2_1" name="kota" disabled="">
-                                                                <option value="0">Lain - Lain</option>
-                                                            </select>
+                                                        <td>
+                                                            <?= $person['agama']; ?>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -655,7 +644,7 @@ use PHPUnit\TextUI\XmlConfiguration\Group;
                                                             <div class="form-group m-form__group row">
                                                                 <div class="col-lg-12 col-md-9 col-sm-12">
                                                                     <div class="input-group date">
-                                                                        <input type="text" class="form-control m-input" value="" id="m_datepicker_2" name="tgllahir" />
+                                                                        <input type="text" class="form-control m-input" value="<?= $person['tgl_lahir']; ?>" id="m_datepicker_2" name="tgllahir" />
                                                                         <div class="input-group-append">
                                                                             <span class="input-group-text">
                                                                                 <i class="la la-calendar"></i>
@@ -669,261 +658,84 @@ use PHPUnit\TextUI\XmlConfiguration\Group;
                                                     <tr>
                                                         <td><b>Alamat</b></td>
                                                         <td width="1%">:</td>
-                                                        <td><textarea class="form-control" name="address" id="address" rows="2" data-error-container="#editor2_error"></textarea>
+                                                        <td><textarea class="form-control" name="address" id="address" rows="2" data-error-container="#editor2_error"><?= $person['alamat']; ?></textarea>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>No. Telp</b></td>
                                                         <td width="1%">:</td>
-                                                        <td><input type="text" class="form-control m-input m-input--square" id="phone" name="phone" value=""></td>
+                                                        <td><input type="text" class="form-control m-input m-input--square" id="phone" name="phone" value="<?= $person['no_telp']; ?>"></td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Email</b></td>
                                                         <td width="1%">:</td>
-                                                        <td><input type="text" class="form-control m-input m-input--square" id="email" name="email" value=""></td>
+                                                        <td><input type="text" class="form-control m-input m-input--square" id="email" name="email" value="<?= user()->email; ?>"></td>
                                                     </tr>
-                                                    <tr>
+                                                    <!-- <tr>
                                                         <td><b>Pin</b></td>
                                                         <td width="1%">:</td>
                                                         <td><input type="text" class="form-control m-input m-input--square" id="nopin" name="nopin" value=""></td>
-                                                    </tr>
+                                                    </tr> -->
                                                 </tbody>
                                             </table>
                                         </form>
+                                        <br>
+                                        <!-- <button class="btn m-btn--pill m-btn--air m-btn m-btn--gradient-from-primary m-btn--gradient-to-info" name="kirim" id="kirim" style="float: right;">Proses</button> -->
                                     </div>
-                                    <br>
-                                    <button class="btn m-btn--pill m-btn--air m-btn m-btn--gradient-from-primary m-btn--gradient-to-info" name="kirim" id="kirim" style="float: right;">Proses</button>
+
                                 </div>
 
                             </div>
-
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
     </div>
-</div>
-<?= $this->endSection(); ?>
+    <?= $this->endSection(); ?>
 
-<?= $this->section('css'); ?>
-<!-- DataTables -->
-<link rel="stylesheet" href="<?= base_url(); ?>/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="<?= base_url(); ?>/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-<link rel="stylesheet" href="<?= base_url(); ?>/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <?= $this->section('css'); ?>
+    <!-- DataTables -->
+    <link rel="stylesheet" href="<?= base_url(); ?>/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
-<!-- SweetAlert2 -->
-<link rel="stylesheet" href="<?= base_url(); ?>/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-<!-- Toastr -->
-<link rel="stylesheet" href="<?= base_url(); ?>/plugins/toastr/toastr.min.css">
-
-<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
-<script>
-    WebFont.load({
-        google: {
-            "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700", "Asap+Condensed:500"]
-        },
-        active: function() {
-            sessionStorage.fonts = true;
-        }
-    });
-</script>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="<?= base_url(); ?>/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="<?= base_url(); ?>/plugins/toastr/toastr.min.css">
 
 
-<link href="https://lik.unitomo.ac.id/assets/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="https://lik.unitomo.ac.id/assets/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
 
-<link href="https://lik.unitomo.ac.id/assets/demo/demo10/base/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="https://lik.unitomo.ac.id/assets/demo/demo10/base/style.bundle.css" rel="stylesheet" type="text/css" />
 
 
 
-<link href="https://lik.unitomo.ac.id/assets/vendors/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="https://lik.unitomo.ac.id/assets/vendors/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
 
 
-<link rel="shortcut icon" href="https://lik.unitomo.ac.id/assets/img/favicon.ico" />
-<?= $this->endSection(); ?>
+    <link rel="shortcut icon" href="https://lik.unitomo.ac.id/assets/img/favicon.ico" />
+    <?= $this->endSection(); ?>
 
-<?= $this->section('script'); ?>
-<script src="https://lik.unitomo.ac.id/assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
-<script src="https://lik.unitomo.ac.id/assets/demo/demo10/base/scripts.bundle.js" type="text/javascript"></script>
-
-
-<script src="https://lik.unitomo.ac.id/assets/vendors/custom/fullcalendar/fullcalendar.bundle.js" type="text/javascript"></script>
-<script src="https://lik.unitomo.ac.id/assets/vendors/custom/flot/flot.bundle.js" type="text/javascript"></script>
+    <?= $this->section('script'); ?>
+    <script src="https://lik.unitomo.ac.id/assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
+    <script src="https://lik.unitomo.ac.id/assets/demo/demo10/base/scripts.bundle.js" type="text/javascript"></script>
 
 
-<script src="https://lik.unitomo.ac.id/assets/app/js/dashboard.js" type="text/javascript"></script>
-
-<script src="https://lik.unitomo.ac.id/assets/demo/custom/components/base/sweetalert2.js" type="text/javascript">
-</script>
+    <script src="https://lik.unitomo.ac.id/assets/vendors/custom/fullcalendar/fullcalendar.bundle.js" type="text/javascript"></script>
+    <script src="https://lik.unitomo.ac.id/assets/vendors/custom/flot/flot.bundle.js" type="text/javascript"></script>
 
 
-<script>
-    $(window).on('load', function() {
-        $('body').removeClass('m-page--loading');
-    });
-</script>
+    <script src="https://lik.unitomo.ac.id/assets/app/js/dashboard.js" type="text/javascript"></script>
 
-<script src="https://lik.unitomo.ac.id/assets/demo/custom/crud/forms/widgets/bootstrap-datepicker.js" type="text/javascript"></script>
-<script src="https://lik.unitomo.ac.id/assets/demo/custom/crud/forms/widgets/select2.js" type="text/javascript">
-</script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        tampil_data();
-        var tgllahir = $('#m_datepicker_2').datepicker({
-            dateFormat: 'yyyy-mm-dd H:i:s'
-        }).val();
-        $('#kirim').on('click', function() {
-            $.ajax({
-                type: "POST",
-                url: "https://lik.unitomo.ac.id/dashboard/profil_update",
-                dataType: "JSON",
-                data: $('#form_profil').serializeArray(),
-                success: function(data) {
-                    window.location.href = "https://lik.unitomo.ac.id/dashboard";
-                }
-            });
-        });
-
-        $('#ktp').submit(function(e) {
-            e.preventDefault();
-            $.ajax({
-                url: 'https://lik.unitomo.ac.id/dashboard/ktp',
-                type: "post",
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                cache: false,
-                async: false,
-                success: function(data) {
-                    if (data == true) {
-                        alert("Upload KTP Berhasil.");
-                        window.location.href =
-                            "https://lik.unitomo.ac.id/dashboard/profil";
-                    } else {
-                        alert("Tidak Ada Data Yang Diupload.");
-                    }
-                }
-            });
-        });
-
-        $('#kk').submit(function(e) {
-            e.preventDefault();
-            $.ajax({
-                url: 'https://lik.unitomo.ac.id/dashboard/kk',
-                type: "post",
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                cache: false,
-                async: false,
-                success: function(data) {
-                    if (data == true) {
-                        alert("Upload KK Berhasil.");
-                        window.location.href =
-                            "https://lik.unitomo.ac.id/dashboard/profil";
-                    } else {
-                        alert("Tidak Ada Data Yang Diupload.");
-                    }
-                }
-            });
-        });
-
-        $('#akta').submit(function(e) {
-            e.preventDefault();
-            $.ajax({
-                url: 'https://lik.unitomo.ac.id/dashboard/akta',
-                type: "post",
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                cache: false,
-                async: false,
-                success: function(data) {
-                    if (data == true) {
-                        alert("Upload Akta Berhasil.");
-                        window.location.href =
-                            "https://lik.unitomo.ac.id/dashboard/profil";
-                    } else {
-                        alert("Tidak Ada Data Yang Diupload.");
-                    }
-                }
-            });
-        });
-
-        $('#m_select2_2').change(function() {
-            if ($('#m_select2_2').val() == '0') {
-                $('#kota_custom').removeAttr('hidden');
-            } else {
-                $('#kota_custom').hide();
-            }
-        });
-    });
+    <script src="https://lik.unitomo.ac.id/assets/demo/custom/components/base/sweetalert2.js" type="text/javascript">
+    </script>
 
 
 
-
-
-    function tampil_data() {
-        $.ajax({
-            type: 'ajax',
-            url: 'https://lik.unitomo.ac.id/dashboard/checkeddata',
-            async: false,
-            dataType: 'json',
-            success: function(data) {
-                if (data.foto_ktp === null) {
-                    $("#button_view_ktp").hide();
-                    $("#del_ktp").hide();
-                    $("#button_upload_ktp").show();
-                } else {
-                    $("#button_view_ktp").show();
-                    $("#del_ktp").show();
-                    $("#button_upload_ktp").hide();
-                }
-
-                if (data.foto_kk === null) {
-                    $("#button_view_kk").hide();
-                    $("#del_kk").hide();
-                    $("#button_upload_kk").show();
-                } else {
-                    $("#button_view_kk").show();
-                    $("#del_kk").show();
-                    $("#button_upload_kk").hide();
-                }
-
-                if (data.foto_akta === null) {
-                    $("#button_view_akta").hide();
-                    $("#del_akta").hide();
-                    $("#button_upload_akta").show();
-                } else {
-                    $("#button_view_akta").show();
-                    $("#del_akta").show();
-                    $("#button_upload_akta").hide();
-                }
-            }
-
-        });
-    }
-
-    function del(id, nama) {
-        // Pemanggilan hapus
-        $.ajax({
-            type: "POST",
-            url: "https://lik.unitomo.ac.id/dashboard/del_foto",
-            data: {
-                id: id,
-                nama: nama
-            },
-            dataType: "json",
-            success: function(data) {
-                if (data == true) {
-                    alert("Hapus Dokumen Berhasil.");
-                    window.location.href = "https://lik.unitomo.ac.id/dashboard/profil";
-                } else {
-                    alert("Tidak Ada Data Yang Dihapus.");
-                }
-            }
-        });
-    }
-</script>
-<?= $this->endSection(); ?>
+    <script src="https://lik.unitomo.ac.id/assets/demo/custom/crud/forms/widgets/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="https://lik.unitomo.ac.id/assets/demo/custom/crud/forms/widgets/select2.js" type="text/javascript">
+    </script>
+    <?= $this->endSection(); ?>
