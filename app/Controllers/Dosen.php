@@ -24,7 +24,7 @@ class Dosen extends BaseController
     {
         $this->setDosen();
         $data = [
-            'dosen' => $this->dosen,
+            'person' => $this->dosen,
             'prodi'     => $this->prodi,
             'fakultas'  => $this->fakultas,
         ];

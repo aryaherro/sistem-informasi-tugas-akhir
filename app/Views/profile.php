@@ -5,7 +5,6 @@ use PHPUnit\TextUI\XmlConfiguration\Group;
 <?= $this->extend('layouts/templates'); ?>
 
 <?= $this->section('content'); ?>
-<?php (in_groups("Mahasiswa")) ? $person = $mahasiswa : $person = $dosen; ?>
 <div class="content-wrapper">
     <div class="m-grid__item m-grid__item--fluid  m-grid m-grid--ver-desktop m-grid--desktop m-page__container m-body">
         <div class="m-grid__item m-grid__item--fluid m-wrapper">

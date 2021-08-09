@@ -10,12 +10,7 @@
                 <div class="col-sm-6">
                     <h1>Judul Tugas Akhir</h1>
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">DataTables</li>
-                    </ol>
-                </div>
+
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -28,6 +23,7 @@
                     <div class="card">
                         <div class="card-header col-12">
                             <div class="row">
+
                                 <div class="block col"></div>
                                 <button type="button" class="btn btn-inline btn-primary col-2" data-toggle="modal" data-target="#modal-default">Tambah Judul</button>
                             </div>

@@ -12,7 +12,7 @@
                 <img src="/profile/<?= user()->__get('username'); ?>.png" class="img-circle elevation-2 backup_picture" alt="User Image" onerror="this.onerror=null;this.src='/profile/default.png';">
             </div>
             <div class="info">
-                <a href="<?= base_url("/" . (in_groups('Mahasiswa') ? "Mahasiswa" : "Dosen")); ?>" class="d-block"><?= user()->__get('username'); ?></a>
+                <a href="<?= base_url("/" . (in_groups('Mahasiswa') ? "Mahasiswa" : "Dosen")); ?>" class="d-block"><?= $person['nama']; ?></a>
             </div>
         </div>
 

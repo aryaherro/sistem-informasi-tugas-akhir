@@ -40,7 +40,7 @@ class Mahasiswa extends BaseController
     {
         $this->setMahasiswa();
         $data = [
-            'mahasiswa' => $this->mahasiswa,
+            'person' => $this->mahasiswa,
             'prodi'     => $this->prodi,
             'fakultas'  => $this->fakultas,
         ];
@@ -51,7 +51,7 @@ class Mahasiswa extends BaseController
     {
         $this->setMahasiswa();
         $data = [
-            'mahasiswa' => $this->mahasiswa,
+            'person' => $this->mahasiswa,
             'judul'     => $this->judulProposal,
         ];
         return view('mahasiswa/pengajuanJudulTugasAkhir', $data);
@@ -76,7 +76,7 @@ class Mahasiswa extends BaseController
     {
         $this->setMahasiswa();
         $data = [
-            'mahasiswa' => $this->mahasiswa,
+            'person' => $this->mahasiswa,
             'judul'     => $this->judulProposal,
             'bimbingan' => $this->bimbinganProposal,
         ];
