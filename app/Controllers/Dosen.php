@@ -65,20 +65,18 @@ class Dosen extends BaseController
     {
         $this->setDosen();
         $judul = (new JudulProposalModel())->find($id);
-        $dospem = ($judul['dospem1_id'] == $this->dosen['id']) ? "acc_dospem1" : "acc_dospem2";
         $a = true;
         if ($acc == 'A') $a = true;
         if ($acc == 'R') $a = false;
 
-        (new JudulProposalModel())->where('id', "{$judul['id']}")->set([(($judul['dospem1_id'] == $this->dosen['id']) ? "acc_dospem1" : "acc_dospem2") => $a])->update();
-        // ->save(
-        //     [
-        //         'id'    => $id,
-        //         $dospem => $a,
-        //     ],
-        // );
+        (new JudulProposalModel())
+            ->where('id', "{$judul['id']}")
+            ->set([
+                (($judul['dospem1_id'] == $this->dosen['id']) ? "acc_dospem1" : "acc_dospem2") => $a
+            ])
+            ->update();
 
-        return redirect()->route('dosen.validasi.judul');
+        return redirect()->back();
     }
 
     public function validasiProposal()
