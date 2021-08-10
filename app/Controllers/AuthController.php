@@ -52,7 +52,10 @@ class AuthController extends BaseController
 		}
 
 		// Set a return URL if none is specified
-		$_SESSION['redirect_url'] = session('redirect_url') ?? previous_url() ?? site_url('/');
+		$_SESSION['redirect_url'] =
+			// session('redirect_url') ?? 
+			// previous_url() ?? 
+			site_url('/');
 
 		return $this->_render($this->config->views['login'], ['config' => $this->config]);
 	}
@@ -94,13 +97,14 @@ class AuthController extends BaseController
 
 
 
-		$redirectURL = session('redirect_url') ?? site_url('/');
-		dd($redirectURL);
+		$redirectURL =
+			// session('redirect_url') ?? 
+			site_url('/');
 
 
 		// unset($_SESSION['redirect_url']);
 
-		// return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
+		return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
 	}
 
 	/**

@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Models\DosenModel;
 use App\Models\FakultasModel;
+use App\Models\JudulProposalModel;
+use App\Models\MahasiswaModel;
 use App\Models\ProdiModel;
 
 class Dosen extends BaseController
@@ -11,6 +13,7 @@ class Dosen extends BaseController
     protected $dosen;
     protected $prodi;
     protected $fakultas;
+    protected $judulProposal;
 
 
     private function setDosen()
@@ -33,12 +36,49 @@ class Dosen extends BaseController
 
     public function validasiJudul()
     {
-        return view('dosen/validasi/judul');
+        $this->setDosen();
+        $this->judulProposal = [
+            'dospem1' => ((new JudulProposalModel())->where('dospem1_id', $this->dosen['id'],)
+                ->GroupStart()
+                ->where('acc_dospem1', true)->orWhere('acc_dospem1', null)
+                ->where('acc_dospem2', true)->orWhere('acc_dospem1', null)
+                ->where('acc_prodi', true)->orWhere('acc_dospem1', null)
+                ->groupEnd())->findAll(),
+            'dospem2' => ((new JudulProposalModel())->where('dospem2_id', $this->dosen['id'],)
+                ->GroupStart()
+                ->where('acc_dospem1', true)->orWhere('acc_dospem1', null)
+                ->where('acc_dospem2', true)->orWhere('acc_dospem2', null)
+                ->where('acc_prodi', true)->orWhere('acc_prodi', null)
+                ->groupEnd())->findAll(),
+        ];
+        $data = [
+            'person' => $this->dosen,
+            'prodi'     => $this->prodi,
+            'fakultas'  => $this->fakultas,
+            'judul' => $this->judulProposal,
+            'mahasiswa' => new MahasiswaModel(),
+        ];
+        return view('dosen/validasi/judul', $data);
     }
 
-    public function tambahvalidasiJudul()
+    public function tambahvalidasiJudul($id, $acc)
     {
-        return redirect()->back();
+        $this->setDosen();
+        $judul = (new JudulProposalModel())->find($id);
+        $dospem = ($judul['dospem1_id'] == $this->dosen['id']) ? "acc_dospem1" : "acc_dospem2";
+        $a = true;
+        if ($acc == 'A') $a = true;
+        if ($acc == 'R') $a = false;
+
+        (new JudulProposalModel())->where('id', "{$judul['id']}")->set([(($judul['dospem1_id'] == $this->dosen['id']) ? "acc_dospem1" : "acc_dospem2") => $a])->update();
+        // ->save(
+        //     [
+        //         'id'    => $id,
+        //         $dospem => $a,
+        //     ],
+        // );
+
+        return redirect()->route('dosen.validasi.judul');
     }
 
     public function validasiProposal()

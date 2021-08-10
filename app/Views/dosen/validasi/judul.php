@@ -10,12 +10,6 @@
                 <div class="col-sm-6">
                     <h1>Judul Tugas Akhir Mahasiswa</h1>
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">DataTables</li>
-                    </ol>
-                </div>
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -28,50 +22,86 @@
                     <div class="card">
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>
-                                            <center>No</center>
-                                        </th>
-                                        <th>
-                                            <center>NIM</center>
-                                        </th>
-                                        <th>
-                                            <center>Nama Mahasiswa</center>
-                                        </th>
-                                        <th>
-                                            <center>Judul</center>
-                                        </th>
-                                        <th>
-                                            <center>Deskripsi</center>
-                                        </th>
-                                        <th>
-                                            <center>Validasi</center>
-                                        </th>
-                                        <th>
-                                            <center>Saran</center>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>201811111</td>
-                                        <td>Alexander Pierce</td>
-                                        <td>Sistem pendukung keputusan pemilihan supplier pada CV. surya abadi dengan metode AHP</td>
-                                        <td>Sistem ini membantu para pengambil keputusan melihat keputusan mana yang paling baik untuk diambil</td>
-                                        <td>
-                                            <button type="button" class="btn btn-success swalDefaultSuccess">
-                                                Validasi
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-default">Saran</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <!-- <tfoot>
+                            <?php if (($judul['dospem1'] == null) && ($judul['dospem2'] == null)) :; ?>
+                                <div>Anda Belum Mengajukan Judul</div>
+                            <?php else :; ?>
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>
+                                                <center>No</center>
+                                            </th>
+                                            <th>
+                                                <center>NIM</center>
+                                            </th>
+                                            <th>
+                                                <center>Nama Mahasiswa</center>
+                                            </th>
+                                            <th>
+                                                <center>Judul</center>
+                                            </th>
+                                            <th>
+                                                <center>Deskripsi</center>
+                                            </th>
+                                            <th>
+                                                <center>Validasi</center>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($judul as $key) : ?>
+                                            <?php foreach ($key as $keyB) : ?>
+                                                <?php $m = $mahasiswa->find($keyB['mahasiswa_id']); ?>
+                                                <tr>
+                                                    <td>
+                                                        <center><?= $i++; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?= $m['nim']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?= $m['nama']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?= $keyB['judul']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?= $keyB['deskripsi']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <?php
+                                                            switch ($keyB['acc_dospem1']) {
+                                                                case '1':
+                                                                    echo "Disetujui";
+                                                                    break;
+                                                                case '0':
+                                                                    echo "Ditolak";
+                                                                    break;
+                                                                case null:
+                                                            ?>
+                                                                    <a href="<?= base_url("/Dosen/Validasi/Judul/{$keyB['id']}/A"); ?>">
+                                                                        <button type="button" class="btn btn-success swalDefaultSuccess">
+                                                                            Setuju
+                                                                        </button>
+                                                                    </a>
+                                                                    <a href="<?= base_url("/Dosen/Validasi/Judul/{$keyB['id']}/R"); ?>">
+                                                                        <button type="button" class="btn btn-danger swalDefaultDanger">
+                                                                            Tolak
+                                                                        </button>
+                                                                    </a>
+                                                            <?php
+                                                                    break;
+                                                            }
+                                                            ?>
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                    <!-- <tfoot>
                                     <tr>
                                         <th>Rendering engine</th>
                                         <th>Browser</th>
@@ -80,7 +110,8 @@
                                         <th>CSS grade</th>
                                     </tr>
                                 </tfoot> -->
-                            </table>
+                                </table>
+                            <?php endif; ?>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -91,41 +122,6 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
-
-        <div class="modal fade" id="modal-default">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Saran</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- <div>
-                            <div class="form-group">
-                                <label>Judul</label>
-                                <input type="text" class="form-control" placeholder="Judul">
-                            </div>
-                        </div> -->
-                        <div>
-                            <!-- textarea -->
-                            <div class="form-group">
-                                <label>Saran</label>
-                                <textarea class="form-control" rows="3" placeholder="Saran"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save</button>
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
     </section>
     <!-- /.content -->
 </div>
@@ -177,7 +173,13 @@
         $('.swalDefaultSuccess').click(function() {
             Toast.fire({
                 icon: 'success',
-                title: 'Judul telah divalidasi.'
+                title: 'Judul telah diapprove.'
+            })
+        });
+        $('.swalDefaultDanger').click(function() {
+            Toast.fire({
+                icon: 'error',
+                title: 'Judul telah ditolak.'
             })
         });
     });

@@ -31,7 +31,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <?php if ($judul == null) :; ?>
-                                <di>Anda Belum Mengajukan Judul</di>
+                                <div>Anda Belum Mengajukan Judul</div>
                             <?php else :; ?>
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead class="thead-dark">
@@ -57,7 +57,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         <?php $i = 1; ?>
                                         <?php foreach ($judul as $key) :; ?>
                                             <tr value="<?= $key['id']; ?>">
@@ -84,7 +83,8 @@
                                                                 echo "Dalam proses";
                                                                 break;
                                                         }
-                                                        ?></center>
+                                                        ?>
+                                                    </center>
                                                 </td>
                                                 <td>
                                                     <center>

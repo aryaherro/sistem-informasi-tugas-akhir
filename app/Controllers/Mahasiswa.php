@@ -26,8 +26,8 @@ class Mahasiswa extends BaseController
         $this->judulProposal = ((new JudulProposalModel())->where('mahasiswa_id', $this->mahasiswa['id'],)
             ->GroupStart()
             ->where('acc_dospem1', true)->orWhere('acc_dospem1', null)
-            ->where('acc_dospem2', true)->orWhere('acc_dospem1', null)
-            ->where('acc_prodi', true)->orWhere('acc_dospem1', null)
+            ->where('acc_dospem2', true)->orWhere('acc_dospem2', null)
+            ->where('acc_prodi', true)->orWhere('acc_prodi', null)
             ->groupEnd())->findAll();
         $temp = array();
         foreach ($this->judulProposal as $key) {
