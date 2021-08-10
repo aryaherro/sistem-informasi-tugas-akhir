@@ -65,7 +65,6 @@ class Dosen extends BaseController
     {
         $this->setDosen();
         $judul = (new JudulProposalModel())->find($id);
-        $a = true;
         if ($acc == 'A') $a = true;
         if ($acc == 'R') $a = false;
 
