@@ -10,12 +10,6 @@
                 <div class="col-sm-6">
                     <h1>Bimbingan Proposal Tugas Akhir</h1>
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">DataTables</li>
-                    </ol>
-                </div>
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -26,16 +20,23 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header col-12">
-                            <div class="row">
-                                <div class="block col"></div>
-                                <button type="button" class="btn btn-inline btn-primary col-2" data-toggle="modal" data-target="#modal-default">Ajukan Bimbingan</button>
+
+                        <?php if ($judul != null) :; ?>
+                            <div class="card-header col-12">
+                                <div class="row">
+                                    <div class="block col"></div>
+                                    <button type="button" class="btn btn-inline btn-primary col-2" data-toggle="modal" data-target="#modal-default">Ajukan Bimbingan</button>
+                                </div>
                             </div>
-                        </div>
+                        <?php endif; ?>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <?php if ($judul == null) :; ?>
-                                <di>Anda Belum Mengajukan Judul</di>
+                                <div>
+                                    Judul yang anda ajukan belum memenuhi syarat untuk melakukan bimbingan!
+                                    <br>
+                                    Silahkan hubungi dosen pembimbing anda.
+                                </div>
                             <?php else :; ?>
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead class="thead-dark">
@@ -54,13 +55,10 @@
                                             </th>
 
                                             <th>
-                                                <center>acc_dospem1</center>
+                                                <center>Saran dosen pembimbing 1</center>
                                             </th>
                                             <th>
-                                                <center>acc_dospem2</center>
-                                            </th>
-                                            <th>
-                                                <center>acc_prodi</center>
+                                                <center>Saran dosen pembimbing 2</center>
                                             </th>
                                         </tr>
                                     </thead>
@@ -69,7 +67,6 @@
                                         <?php foreach ($judul as $key) :; ?>
                                             <?php $j = 1; ?>
                                             <?php foreach ($bimbingan[$key['id']] as $keyB) :; ?>
-
                                                 <tr value="<?= $keyB['id']; ?>">
                                                     <td>
                                                         <center><?= $i++; ?></center>
@@ -82,56 +79,26 @@
                                                     </td>
                                                     <td>
                                                         <center>
-                                                            <a class="btn btn-info" href="<?= base_url("Mahasiswa/TugasAkhir/downloadBimbingan/{$key['mahasiswa_id']}/{$key['id']}/{$keyB['id']}"); ?>">Download</a>
+                                                            <a class="btn btn-info" href="<?= base_url("Mahasiswa/TugasAkhir/downloadBimbingan/{$key['mahasiswa_id']}/{$key['id']}/P/{$keyB['id']}"); ?>">Download</a>
                                                         </center>
                                                     </td>
                                                     <td>
                                                         <center>
-                                                            <?php
-                                                            switch ($key['acc_dospem1']) {
-                                                                case '1':
-                                                                    echo "Disetujui";
-                                                                    break;
-                                                                case '0':
-                                                                    echo "Ditolak";
-                                                                    break;
-                                                                case null:
-                                                                    echo "Dalam proses";
-                                                                    break;
-                                                            }
-                                                            ?></center>
+                                                            <?php if ($keyB['Berkas_saran_dospem1'] == null) : ?>
+                                                                Dalam Proses
+                                                            <?php else : ?>
+                                                                <a class="btn btn-info" href="<?= base_url("Mahasiswa/TugasAkhir/downloadBimbingan/{$key['mahasiswa_id']}/{$key['id']}/P/{$keyB['id']}/1"); ?>">Download</a>
+                                                            <?php endif; ?>
+                                                        </center>
                                                     </td>
                                                     <td>
                                                         <center>
-                                                            <?php
-                                                            switch ($key['acc_dospem2']) {
-                                                                case '1':
-                                                                    echo "Disetujui";
-                                                                    break;
-                                                                case '0':
-                                                                    echo "Ditolak";
-                                                                    break;
-                                                                case null:
-                                                                    echo "Dalam proses";
-                                                                    break;
-                                                            }
-                                                            ?></center>
-                                                    </td>
-                                                    <td>
-                                                        <center>
-                                                            <?php
-                                                            switch ($key['acc_prodi']) {
-                                                                case '1':
-                                                                    echo "Disetujui";
-                                                                    break;
-                                                                case '0':
-                                                                    echo "Ditolak";
-                                                                    break;
-                                                                case null:
-                                                                    echo "Dalam proses";
-                                                                    break;
-                                                            }
-                                                            ?></center>
+                                                            <?php if ($keyB['Berkas_saran_dospem2'] == null) : ?>
+                                                                Dalam Proses
+                                                            <?php else : ?>
+                                                                <a class="btn btn-info" href="<?= base_url("Mahasiswa/TugasAkhir/downloadBimbingan/{$key['mahasiswa_id']}/{$key['id']}/P/{$keyB['id']}/2"); ?>">Download</a>
+                                                            <?php endif; ?>
+                                                        </center>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>

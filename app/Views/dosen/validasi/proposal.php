@@ -10,12 +10,6 @@
                 <div class="col-sm-6">
                     <h1>Data Bimbingan Proposal Tugas Akhir Mahasiswa</h1>
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">DataTables</li>
-                    </ol>
-                </div>
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -28,56 +22,90 @@
                     <div class="card">
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>
-                                            <center>No</center>
-                                        </th>
-                                        <th>
-                                            <center>NIM</center>
-                                        </th>
-                                        <th>
-                                            <center>Nama Mahasiswa</center>
-                                        </th>
-                                        <th>
-                                            <center>Judul</center>
-                                        </th>
-                                        <th>
-                                            <center>Deskripsi</center>
-                                        </th>
-                                        <th>
-                                            <center>Download</center>
-                                        </th>
-                                        <th>
-                                            <center>status</center>
-                                        </th>
-                                        <th>
-                                            <center>saran dosen</center>
+                            <?php if ($judul == null) :; ?>
+                                <div>
+                                    Judul yang anda ajukan belum memenuhi syarat untuk melakukan bimbingan!
+                                    <br>
+                                    Silahkan hubungi dosen pembimbing anda.
+                                </div>
+                            <?php else :; ?>
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>
+                                                <center>No</center>
+                                            </th>
+                                            <th>
+                                                <center>NIM</center>
+                                            </th>
+                                            <th>
+                                                <center>Nama Mahasiswa</center>
+                                            </th>
+                                            <th>
+                                                <center>Judul</center>
+                                            </th>
+                                            <th>
+                                                <center>Bimbingan Ke-</center>
+                                            </th>
+                                            <th>
+                                                <center>Berkas Bimbingan</center>
+                                            </th>
+                                            <th>
+                                                <center>Saran Dosen</center>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($judul as $key) :; ?>
+                                            <?php $j = 1; ?>
+                                            <?php $m = $mahasiswa->find($key['mahasiswa_id']); ?>
+                                            <?php foreach ($bimbingan[$key['id']] as $keyB) :; ?>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>201811111</td>
-                                        <td>Alexander Pierce</td>
-                                        <td>Sistem pendukung keputusan pemilihan supplier pada CV. surya abadi dengan metode AHP</td>
-                                        <td>Sistem ini membantu para pengambil keputusan melihat keputusan mana yang paling baik untuk diambil</td>
-                                        <td>
-                                            <a class="btn btn-app">
-                                                <i class="fas fa-save"></i> Save
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-success swalDefaultSuccess">
-                                                Validasi
-                                            </button>
-                                        </td>
-                                        <td><button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-default">Saran</button></td>
-                                    </tr>
-                                </tbody>
-                                <!-- <tfoot>
+                                                <tr>
+                                                    <td>
+                                                        <center><?= $i++; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?= $m['nim']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?= $m['nama']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?= $key['judul']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?= $j++; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <a class="btn btn-info" href="<?= base_url("Dosen/TugasAkhir/downloadBimbingan/{$key['mahasiswa_id']}/{$key['id']}/P/{$keyB['id']}"); ?>">Download</a>
+                                                        </center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <?php if ($key['dospem1_id'] == $person['id']) : ?>
+                                                                <?php if ($keyB['Berkas_saran_dospem1'] == null) : ?>
+                                                                    <a data-toggle="modal" data-nim="<?= $m['nim']; ?>" data-nama="<?= $m['nama']; ?>" data-judul="<?= $key['judul']; ?>" data-bimbingan="<?= $j - 1; ?>" data-bim=<?= $keyB['id']; ?> data-jud=<?= $key['id']; ?> title="Add this item" class="open-AddBimbingan btn btn-info" href="#AddBimbingan">Upload</a>
+                                                                <?php else : ?>
+                                                                    <a class="btn btn-info" href="<?= base_url("Dosen/TugasAkhir/downloadBimbingan/{$key['mahasiswa_id']}/{$key['id']}/P/{$keyB['id']}/1"); ?>">Download</a>
+                                                                <?php endif; ?>
+                                                            <?php endif; ?>
+                                                            <?php if ($key['dospem2_id'] == $person['id']) : ?>
+                                                                <?php if ($keyB['Berkas_saran_dospem2'] == null) : ?>
+                                                                    <a data-toggle="modal" data-nim="<?= $m['nim']; ?>" data-nama="<?= $m['nama']; ?>" data-judul="<?= $key['judul']; ?>" data-bimbingan="<?= $j - 1; ?>" data-bim=<?= $keyB['id']; ?> data-jud=<?= $key['id']; ?> title="Add this item" class="open-AddBimbingan btn btn-info" href="#AddBimbingan">Upload</a>
+                                                                <?php else : ?>
+                                                                    <a class="btn btn-info" href="<?= base_url("Dosen/TugasAkhir/downloadBimbingan/{$key['mahasiswa_id']}/{$key['id']}/P/{$keyB['id']}/2"); ?>">Download</a>
+                                                                <?php endif; ?>
+                                                            <?php endif; ?>
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                    <!-- <tfoot>
                                     <tr>
                                         <th>Rendering engine</th>
                                         <th>Browser</th>
@@ -86,7 +114,8 @@
                                         <th>CSS grade</th>
                                     </tr>
                                 </tfoot> -->
-                            </table>
+                                </table>
+                            <?php endif; ?>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -98,39 +127,60 @@
         </div>
         <!-- /.container-fluid -->
 
-        <div class="modal fade" id="modal-default">
+        <div class="modal fade" id="AddBimbingan">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Saran</h4>
+                        <h3>Upload Bimbingan</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <!-- <div>
-                            <div class="form-group">
-                                <label>Judul</label>
-                                <input type="text" class="form-control" placeholder="Judul">
+                        <form action="<?= route_to('Proposal') ?>" method="post" enctype="multipart/form-data">
+                            <?= csrf_field() ?>
+                            <input type="text" class="form-control visually-hidden" id="jud" name="jud" />
+                            <input type="text" class="form-control visually-hidden" id="bim" name="bim" />
+                            <div class="row align-items-center m-1 form-group">
+                                <div class="col-3">Nim</div>
+                                <div class="col-1">:</div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" id="nim" name="nim" readonly />
+                                </div>
                             </div>
-                        </div> -->
-                        <div>
-                            <!-- textarea -->
-                            <div class="form-group">
-                                <label>Saran</label>
-                                <textarea class="form-control" rows="3" placeholder="Saran"></textarea>
+                            <div class="row align-items-center m-1 form-group">
+                                <div class="col-3">Nama</div>
+                                <div class="col-1">:</div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" id="nama" name="nama" readonly />
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save</button>
+                            <div class="row align-items-center m-1 form-group">
+                                <div class="col-3">Judul</div>
+                                <div class="col-1">:</div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" id="judul" name="judul" readonly />
+                                </div>
+                            </div>
+                            <div class="row align-items-center m-1 form-group">
+                                <div class="col-3">Bimbingan Ke</div>
+                                <div class="col-1">:</div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" id="bimbingan" name="bimbingan" readonly />
+                                </div>
+                            </div>
+                            <div class="custom-file form-group m-1">
+                                <input type="file" class="form-control custom-file-input" id="Berkas_bimbingan" name="Berkas_bimbingan" />
+                                <label class="custom-file-label" for="Berkas_bimbingan">File</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </form>
                     </div>
                 </div>
-                <!-- /.modal-content -->
             </div>
-            <!-- /.modal-dialog -->
+            <!-- /.modal-content -->
         </div>
+        <!-- /.modal-dialog -->
         <!-- /.modal -->
     </section>
     <!-- /.content -->
@@ -184,6 +234,23 @@
                 title: 'Judul telah divalidasi.'
             })
         });
+    });
+    $(document).on("click", ".open-AddBimbingan", function() {
+        var nim = $(this).data('nim');
+        var nama = $(this).data('nama');
+        var judul = $(this).data('judul');
+        var ke = $(this).data('bimbingan');
+        var bim = $(this).data('bim');
+        var jud = $(this).data('jud');
+        $(".modal-body #nim").attr("value", nim);
+        $(".modal-body #nama").attr("value", nama);
+        $(".modal-body #judul").attr("value", judul);
+        $(".modal-body #bimbingan").attr("value", ke);
+        $(".modal-body #bim").attr("value", bim);
+        $(".modal-body #jud").attr("value", jud);
+        // As pointed out in comments, 
+        // it is unnecessary to have to manually call the modal.
+        // $('#AddBimbingan').modal('show');
     });
 </script>
 <?= $this->endSection(); ?>

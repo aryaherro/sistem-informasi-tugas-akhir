@@ -31,7 +31,7 @@ class Mahasiswa extends BaseController
             ->groupEnd())->findAll();
         $temp = array();
         foreach ($this->judulProposal as $key) {
-            $temp[$key['id']] = (((new BimbinganProposalModel())->asArray()->where('judulProposal_id', $key['id'],))->findAll());
+            $temp[$key['id']] = (((new BimbinganProposalModel())->where('judulProposal_id', $key['id'],))->findAll());
         }
         $this->bimbinganProposal = $temp;
     }
@@ -75,6 +75,13 @@ class Mahasiswa extends BaseController
     public function bimbinganProposal()
     {
         $this->setMahasiswa();
+        $this->judulProposal = ((new JudulProposalModel())->where('mahasiswa_id', $this->mahasiswa['id'],)
+            ->GroupStart()
+            ->where('acc_dospem1', true)
+            ->where('acc_dospem2', true)
+            ->where('acc_prodi', true)
+            ->groupEnd())->findAll();
+        // dd($this->judulProposal);
         $data = [
             'person' => $this->mahasiswa,
             'judul'     => $this->judulProposal,
@@ -112,10 +119,23 @@ class Mahasiswa extends BaseController
         return redirect()->back();
     }
 
-    public function downloadBimbingan($type, $mahasiswa_id, $judul_id, $bimbingan_id)
+    public function downloadBimbingan($mahasiswa_id, $judul_id, $type, $bimbingan_id, $sardos = null)
     {
+        switch ($sardos) {
+            case 1:
+                $berkas = 'Berkas_saran_dospem1';
+                break;
+
+            case 2:
+                $berkas = 'Berkas_saran_dospem2';
+                break;
+
+            case null:
+                $berkas = 'Berkas_bimbingan';
+                break;
+        }
         $data = (new BimbinganProposalModel())->find($bimbingan_id);
-        return $this->response->download("uploads/{$mahasiswa_id}/{$judul_id}/{$type}" . $data['Berkas_bimbingan'], null);
+        return $this->response->download("uploads/{$mahasiswa_id}/{$judul_id}/{$type}/" . $data[$berkas], null);
     }
 
     public function bimbinganTugasAkhir()

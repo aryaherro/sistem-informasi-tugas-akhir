@@ -10,12 +10,6 @@
                 <div class="col-sm-6">
                     <h1>Judul Tugas Akhir</h1>
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">DataTables</li>
-                    </ol>
-                </div>
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -26,45 +20,79 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header col-12">
-                            <button type="button" class="btn btn-block btn-primary col-2" data-toggle="modal" data-target="#modal-default">Tambah Judul</button>
-                        </div>
-                        <!-- /.card-header -->
+                        <?php if ($judul != null) :; ?>
+                            <div class="card-header col-12">
+                                <div class="row">
+                                    <div class="block col"></div>
+                                    <button type="button" class="btn btn-inline btn-primary col-2" data-toggle="modal" data-target="#modal-default">Ajukan Bimbingan</button>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                         <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>
-                                            <center>No</center>
-                                        </th>
-                                        <th>
-                                            <center>Judul</center>
-                                        </th>
-                                        <th>
-                                            <center>Deskripsi</center>
-                                        </th>
-                                        <th>
-                                            <center>Catatan Dosen</center>
-                                        </th>
-                                        <th>
-                                            <center>Validasi Dosen</center>
-                                        </th>
-                                        <th>
-                                            <center>Validasi Prodi</center>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Sistem pendukung keputusan pemilihan supplier pada CV. surya abadi dengan metode AHP</td>
-                                        <td>Sistem ini membantu para pengambil keputusan melihat keputusan mana yang paling baik untuk diambil</td>
-                                        <td>-</td>
-                                        <td>tervalidasi</td>
-                                        <td>progress</td>
-                                    </tr>
-                                </tbody>
-                                <!-- <tfoot>
+                            <?php if ($judul == null) :; ?>
+                                <div>Tidak ada judul yang perlu divalidasi</div>
+                            <?php else :; ?>
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>
+                                                <center>No</center>
+                                            </th>
+                                            <th>
+                                                <center>NIM</center>
+                                            </th>
+                                            <th>
+                                                <center>Nama Mahasiswa</center>
+                                            </th>
+                                            <th>
+                                                <center>Judul</center>
+                                            </th>
+                                            <th>
+                                                <center>Deskripsi</center>
+                                            </th>
+                                            <th>
+                                                <center>Validasi</center>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($judul as $key) : ?>
+                                            <?php $m = $mahasiswa->find($key['mahasiswa_id']); ?>
+                                            <tr>
+                                                <td>
+                                                    <center><?= $i++; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $m['nim']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $m['nama']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $key['judul']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $key['deskripsi']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <a href="<?= base_url("/Prodi/Validasi/Judul/{$key['id']}/A"); ?>">
+                                                            <button type="button" class="btn btn-success swalDefaultSuccess">
+                                                                Setuju
+                                                            </button>
+                                                        </a>
+                                                        <a href="<?= base_url("/Prodi/Validasi/Judul/{$key['id']}/R"); ?>">
+                                                            <button type="button" class="btn btn-danger swalDefaultDanger">
+                                                                Tolak
+                                                            </button>
+                                                        </a>
+                                                    </center>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                    <!-- <tfoot>
                                     <tr>
                                         <th>Rendering engine</th>
                                         <th>Browser</th>
@@ -73,7 +101,8 @@
                                         <th>CSS grade</th>
                                     </tr>
                                 </tfoot> -->
-                            </table>
+                                </table>
+                            <?php endif; ?>
                         </div>
                         <!-- /.card-body -->
                     </div>

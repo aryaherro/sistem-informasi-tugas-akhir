@@ -22,8 +22,8 @@
                     <div class="card">
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <?php if (($judul['dospem1'] == null) && ($judul['dospem2'] == null)) :; ?>
-                                <div>Anda Belum Mengajukan Judul</div>
+                            <?php if ($judul == null) :; ?>
+                                <div>Tidak ada judul yang perlu divalidasi</div>
                             <?php else :; ?>
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead class="thead-dark">
@@ -51,54 +51,77 @@
                                     <tbody>
                                         <?php $i = 1; ?>
                                         <?php foreach ($judul as $key) : ?>
-                                            <?php foreach ($key as $keyB) : ?>
-                                                <?php $m = $mahasiswa->find($keyB['mahasiswa_id']); ?>
-                                                <tr>
-                                                    <td>
-                                                        <center><?= $i++; ?></center>
-                                                    </td>
-                                                    <td>
-                                                        <center><?= $m['nim']; ?></center>
-                                                    </td>
-                                                    <td>
-                                                        <center><?= $m['nama']; ?></center>
-                                                    </td>
-                                                    <td>
-                                                        <center><?= $keyB['judul']; ?></center>
-                                                    </td>
-                                                    <td>
-                                                        <center><?= $keyB['deskripsi']; ?></center>
-                                                    </td>
-                                                    <td>
-                                                        <center>
-                                                            <?php
-                                                            switch ($keyB['acc_dospem1']) {
-                                                                case '1':
-                                                                    echo "Disetujui";
-                                                                    break;
-                                                                case '0':
-                                                                    echo "Ditolak";
-                                                                    break;
-                                                                case null:
-                                                            ?>
-                                                                    <a href="<?= base_url("/Dosen/Validasi/Judul/{$keyB['id']}/A"); ?>">
-                                                                        <button type="button" class="btn btn-success swalDefaultSuccess">
-                                                                            Setuju
-                                                                        </button>
-                                                                    </a>
-                                                                    <a href="<?= base_url("/Dosen/Validasi/Judul/{$keyB['id']}/R"); ?>">
-                                                                        <button type="button" class="btn btn-danger swalDefaultDanger">
-                                                                            Tolak
-                                                                        </button>
-                                                                    </a>
-                                                            <?php
-                                                                    break;
-                                                            }
-                                                            ?>
-                                                        </center>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; ?>
+                                            <?php $m = $mahasiswa->find($key['mahasiswa_id']); ?>
+                                            <tr>
+                                                <td>
+                                                    <center><?= $i++; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $m['nim']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $m['nama']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $key['judul']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $key['deskripsi']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?php if (($key['acc_dospem1'] == 'false') || ($key['acc_dospem2'] == 'false') || ($key['acc_prodi'] == 'false')) : ?>
+                                                            Ditolak
+                                                        <?php else : ?>
+                                                            <?php if ($key['dospem1_id'] == $person['id']) : ?>
+                                                                <?php
+                                                                switch ($key['acc_dospem1']) {
+                                                                    case '1':
+                                                                        echo "Disetujui";
+                                                                        break;
+                                                                    case null:
+                                                                ?>
+                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/{$key['id']}/A"); ?>">
+                                                                            <button type="button" class="btn btn-success swalDefaultSuccess">
+                                                                                Setuju
+                                                                            </button>
+                                                                        </a>
+                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/{$key['id']}/R"); ?>">
+                                                                            <button type="button" class="btn btn-danger swalDefaultDanger">
+                                                                                Tolak
+                                                                            </button>
+                                                                        </a>
+
+                                                                <?php break;
+                                                                }
+                                                                ?>
+                                                            <?php elseif ($key['dospem2_id'] == $person['id']) : ?>
+                                                                <?php
+                                                                switch ($key['acc_dospem2']) {
+                                                                    case '1':
+                                                                        echo "Disetujui";
+                                                                        break;
+                                                                    case null:
+                                                                ?>
+                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/{$key['id']}/A"); ?>">
+                                                                            <button type="button" class="btn btn-success swalDefaultSuccess">
+                                                                                Setuju
+                                                                            </button>
+                                                                        </a>
+                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/{$key['id']}/R"); ?>">
+                                                                            <button type="button" class="btn btn-danger swalDefaultDanger">
+                                                                                Tolak
+                                                                            </button>
+                                                                        </a>
+
+                                                                <?php break;
+                                                                }
+                                                                ?>
+                                                            <?php endif; ?>
+                                                        <?php endif; ?>
+                                                    </center>
+                                                </td>
+                                            </tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                     <!-- <tfoot>
