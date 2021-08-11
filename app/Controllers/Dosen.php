@@ -86,10 +86,13 @@ class Dosen extends BaseController
             ->where('acc_dospem1', true)
             ->where('acc_dospem2', true)
             ->where('acc_prodi', true))->findAll();
-        foreach ($this->judulProposal as $key) {
-            $temp[$key['id']] = (((new BimbinganProposalModel())->where('judulProposal_id', $key['id'],))->findAll());
+        $this->bimbinganProposal = new BimbinganProposalModel();
+        if ($this->judulProposal != null) {
+            foreach ($this->judulProposal as $key) {
+                $temp[$key['id']] = (((new BimbinganProposalModel())->where('judulProposal_id', $key['id'],))->findAll());
+            }
+            $this->bimbinganProposal = $temp;
         }
-        $this->bimbinganProposal = $temp;
         $data = [
             'person' => $this->dosen,
             'prodi'     => $this->prodi,

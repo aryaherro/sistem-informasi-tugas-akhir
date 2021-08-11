@@ -80,7 +80,10 @@
                                                                 echo "Ditolak";
                                                                 break;
                                                             case null:
-                                                                echo "Dalam proses";
+                                                                if ($key['acc_dospem2'] == 0)
+                                                                    echo "-";
+                                                                else
+                                                                    echo "Dalam proses";
                                                                 break;
                                                         }
                                                         ?>
@@ -97,7 +100,10 @@
                                                                 echo "Ditolak";
                                                                 break;
                                                             case null:
-                                                                echo "Dalam proses";
+                                                                if ($key['acc_dospem1'] == 0)
+                                                                    echo "-";
+                                                                else
+                                                                    echo "Dalam proses";
                                                                 break;
                                                         }
                                                         ?></center>
@@ -113,7 +119,10 @@
                                                                 echo "Ditolak";
                                                                 break;
                                                             case null:
-                                                                echo "Dalam proses";
+                                                                if (($key['acc_dospem1'] == 0) || ($key['acc_dospem2'] == 0))
+                                                                    echo "-";
+                                                                else
+                                                                    echo "Dalam proses";
                                                                 break;
                                                         }
                                                         ?></center>

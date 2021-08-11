@@ -23,12 +23,8 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <?php if ($judul == null) :; ?>
-                                <div>
-                                    Judul yang anda ajukan belum memenuhi syarat untuk melakukan bimbingan!
-                                    <br>
-                                    Silahkan hubungi dosen pembimbing anda.
-                                </div>
-                            <?php else :; ?>
+                                <div>Tidak ada mahasiswa yang mengajukan bimbingan</div>
+                            <?php else : ?>
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead class="thead-dark">
                                         <tr>

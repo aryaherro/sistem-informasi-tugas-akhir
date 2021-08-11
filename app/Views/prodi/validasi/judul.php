@@ -20,14 +20,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <?php if ($judul != null) :; ?>
-                            <div class="card-header col-12">
-                                <div class="row">
-                                    <div class="block col"></div>
-                                    <button type="button" class="btn btn-inline btn-primary col-2" data-toggle="modal" data-target="#modal-default">Ajukan Bimbingan</button>
-                                </div>
-                            </div>
-                        <?php endif; ?>
                         <div class="card-body">
                             <?php if ($judul == null) :; ?>
                                 <div>Tidak ada judul yang perlu divalidasi</div>
