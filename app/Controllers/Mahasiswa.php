@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\BimbinganProposalModel;
 use App\Models\DosenModel;
 use App\Models\FakultasModel;
+use App\Models\JadwalSeminarProposalModel;
 use App\Models\JudulProposalModel;
 use App\Models\MahasiswaModel;
 use App\Models\ProdiModel;
@@ -150,7 +151,24 @@ class Mahasiswa extends BaseController
 
     public function jadwalSeminarProposal()
     {
-        return view('mahasiswa/jadwal/seminarProposal');
+        $this->setMahasiswa();
+        $jadwal = (new JadwalSeminarProposalModel())->findAll();
+        $list_jadwal = null;
+        $i = 0;
+        foreach ($jadwal as $key) {
+            $judul = (new JudulProposalModel())->find($key['judulProposal_id']);
+            $mahasiswa = (new MahasiswaModel())->find($judul['mahasiswa_id']);
+            if ($mahasiswa['id'] == $this->mahasiswa['id']) {
+                $list_jadwal[$i] = $key;
+                $i++;
+            }
+        }
+        $data = [
+            'person' => $this->mahasiswa,
+            'jadwal' => $list_jadwal,
+            'judul' => new JudulProposalModel(),
+        ];
+        return view('mahasiswa/jadwal/seminarProposal', $data);
     }
 
     public function jadwalSeminarTugasAkhir()
