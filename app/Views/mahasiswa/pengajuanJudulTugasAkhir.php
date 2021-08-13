@@ -54,6 +54,15 @@
                                             <th>
                                                 <center>ACC Prodi</center>
                                             </th>
+                                            <th>
+                                                <center>Kelayakan Dospem 1</center>
+                                            </th>
+                                            <th>
+                                                <center>Kelayakan Dospem 2</center>
+                                            </th>
+                                            <th>
+                                                <center>Kelayakan Prodi</center>
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -80,7 +89,7 @@
                                                                 echo "Ditolak";
                                                                 break;
                                                             case null:
-                                                                if ($key['acc_dospem2'] == 0)
+                                                                if ($key['acc_dospem2'] == '0')
                                                                     echo "-";
                                                                 else
                                                                     echo "Dalam proses";
@@ -100,7 +109,7 @@
                                                                 echo "Ditolak";
                                                                 break;
                                                             case null:
-                                                                if ($key['acc_dospem1'] == 0)
+                                                                if ($key['acc_dospem1'] == '0')
                                                                     echo "-";
                                                                 else
                                                                     echo "Dalam proses";
@@ -119,7 +128,68 @@
                                                                 echo "Ditolak";
                                                                 break;
                                                             case null:
-                                                                if (($key['acc_dospem1'] == 0) || ($key['acc_dospem2'] == 0))
+                                                                if (($key['acc_dospem1'] == '0') || ($key['acc_dospem2'] == '0'))
+                                                                    echo "-";
+                                                                else
+                                                                    echo "Dalam proses";
+                                                                break;
+                                                        }
+                                                        ?></center>
+                                                </td>
+
+                                                <!-- kelayakan -->
+
+                                                <td>
+                                                    <center>
+                                                        <?php
+                                                        switch ($key['layak_dospem1']) {
+                                                            case '1':
+                                                                echo "Disetujui";
+                                                                break;
+                                                            case '0':
+                                                                echo "Ditolak";
+                                                                break;
+                                                            case null:
+                                                                if (($key['layak_dospem2'] == false) && ($key['acc_prodi'] != true))
+                                                                    echo "-";
+                                                                else
+                                                                    echo "Dalam proses";
+                                                                break;
+                                                        }
+                                                        ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?php
+                                                        switch ($key['layak_dospem2']) {
+                                                            case '1':
+                                                                echo "Disetujui";
+                                                                break;
+                                                            case '0':
+                                                                echo "Ditolak";
+                                                                break;
+                                                            case null:
+                                                                if (($key['layak_dospem1'] == false) && ($key['acc_prodi'] != true))
+                                                                    echo "-";
+                                                                else
+                                                                    echo "Dalam proses";
+                                                                break;
+                                                        }
+                                                        ?></center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?php
+                                                        switch ($key['layak_prodi']) {
+                                                            case '1':
+                                                                echo "Disetujui";
+                                                                break;
+                                                            case '0':
+                                                                echo "Ditolak";
+                                                                break;
+                                                            case null:
+                                                                if (((($key['layak_dospem1'] == false) && ($key['layak_dospem1'] != null)) || (($key['layak_dospem2'] == false) && ($key['layak_dospem2'] != null))) || ($key['acc_prodi'] != true))
                                                                     echo "-";
                                                                 else
                                                                     echo "Dalam proses";

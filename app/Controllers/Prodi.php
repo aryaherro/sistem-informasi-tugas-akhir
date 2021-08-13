@@ -25,17 +25,21 @@ class Prodi extends BaseController
     public function validasiJudul()
     {
         $this->setDosen();
-        $judulProposal = (new JudulProposalModel())->findAll();
-        // dd($judulProposal); kaprodi_id
+        $judulProposal = (new JudulProposalModel())
+            ->groupStart()
+            ->Where('acc_dospem1', true)
+            ->Where('acc_dospem2', true)
+            ->Where('acc_prodi', null)
+            ->orWhere('acc_prodi', true)
+            ->groupEnd()
+            ->findAll();
         $urut = 0;
         for ($i = 0; $i < count($judulProposal); $i++) {
             $mahasiswa = (new MahasiswaModel())->find($judulProposal[$i]['mahasiswa_id']);
             $prodi = (new ProdiModel())->find($mahasiswa['prodi_id']);
-            if (($judulProposal[$i]['acc_dospem1'] == 1) && ($judulProposal[$i]['acc_dospem2'] == 1) && ($judulProposal[$i]['acc_prodi'] == null) && ($prodi['kaprodi_id'] == $this->dosen['id'])) {
-                // if (($judulProposal[$i]['dospem1_id'] == $this->dosen['id']) || ($judulProposal[$i]['dospem2_id'] == $this->dosen['id'])) {
+            if ($prodi['kaprodi_id'] == $this->dosen['id']) {
                 $this->judulProposal[$urut] = $judulProposal[$i];
                 $urut++;
-                // }
             }
         }
         $data = [
@@ -48,16 +52,16 @@ class Prodi extends BaseController
         return view('prodi/validasi/judul', $data);
     }
 
-    public function tambahvalidasiJudul($id, $acc)
+    public function tambahvalidasiJudul($type, $id, $acc)
     {
         $this->setDosen();
-        // $judul = (new JudulProposalModel())->find($id);
         if ($acc == 'A') $a = true;
         if ($acc == 'R') $a = false;
-
+        if ($type == 'A') $key = "acc_prodi";
+        if ($type == 'L') $key = "layak_prodi";
         (new JudulProposalModel())
             ->where('id', $id)
-            ->set(["acc_prodi" => $a])
+            ->set([$key => $a])
             ->update();
         return redirect()->back();
     }

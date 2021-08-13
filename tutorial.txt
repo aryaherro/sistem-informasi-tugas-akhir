@@ -2,7 +2,8 @@ langkah-langkah :
 1. buka terminal VS Code(ctrl + `)
 2. ketik (php spark migrate), jika ada masalah atau perubahan maka ketik (php spark migrate:rollback) dan ulangi lagi
 3. ketik (php spark db:seed SIUsersSeeder)
-4. jalankan servernya (php spark serve)
+4. ketik (php spark db:seed SIUpdateDosen)
+5. jalankan servernya (php spark serve)
 
 
 edi_prihartono@unitomo.ac.id

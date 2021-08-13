@@ -38,17 +38,24 @@ class Dosen extends BaseController
     public function validasiJudul()
     {
         $this->setDosen();
-        $judulProposal = (new JudulProposalModel())->where('dospem1_id', $this->dosen['id'],)->orWhere('dospem2_id', $this->dosen['id'],)->findAll();
-
-        $urut = 0;
-        for ($i = 0; $i < count($judulProposal); $i++) {
-            if ((($judulProposal[$i]['acc_dospem1'] == 1) || ($judulProposal[$i]['acc_dospem1'] == null)) && (($judulProposal[$i]['acc_dospem2'] == 1) || ($judulProposal[$i]['acc_dospem2'] == null))) {
-                if (($judulProposal[$i]['dospem1_id'] == $this->dosen['id']) || ($judulProposal[$i]['dospem2_id'] == $this->dosen['id'])) {
-                    $this->judulProposal[$urut] = $judulProposal[$i];
-                    $urut++;
-                }
-            }
-        }
+        $this->judulProposal = (new JudulProposalModel())
+            ->groupStart()
+            ->where('dospem1_id', $this->dosen['id'],)
+            ->orWhere('dospem2_id', $this->dosen['id'],)
+            ->groupEnd()
+            ->groupStart()
+            ->Where('acc_dospem1', true)
+            ->orWhere('acc_dospem1', null)
+            ->groupEnd()
+            ->groupStart()
+            ->Where('acc_dospem2', true)
+            ->orWhere('acc_dospem2', null)
+            ->groupEnd()
+            ->groupStart()
+            ->Where('acc_prodi', true)
+            ->orWhere('acc_prodi', null)
+            ->groupEnd()
+            ->findAll();
         $data = [
             'person' => $this->dosen,
             'prodi'     => $this->prodi,
@@ -59,17 +66,18 @@ class Dosen extends BaseController
         return view('dosen/validasi/judul', $data);
     }
 
-    public function tambahvalidasiJudul($id, $acc)
+    public function tambahvalidasiJudul($type, $id, $acc)
     {
         $this->setDosen();
         $judul = (new JudulProposalModel())->find($id);
         if ($acc == 'A') $a = true;
         if ($acc == 'R') $a = false;
-
+        if ($type == 'A') $key = ($judul['dospem1_id'] == $this->dosen['id']) ? "acc_dospem1" : "acc_dospem2";
+        if ($type == 'L') $key = ($judul['dospem1_id'] == $this->dosen['id']) ? "layak_dospem1" : "layak_dospem2";
         (new JudulProposalModel())
             ->where('id', "{$judul['id']}")
             ->set([
-                (($judul['dospem1_id'] == $this->dosen['id']) ? "acc_dospem1" : "acc_dospem2") => $a
+                $key => $a
             ])
             ->update();
 

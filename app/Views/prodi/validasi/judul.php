@@ -45,6 +45,9 @@
                                             <th>
                                                 <center>Validasi</center>
                                             </th>
+                                            <th>
+                                                <center>Maju Seminar</center>
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,18 +70,58 @@
                                                 <td>
                                                     <center><?= $key['deskripsi']; ?></center>
                                                 </td>
+                                                <!-- acc -->
                                                 <td>
                                                     <center>
-                                                        <a href="<?= base_url("/Prodi/Validasi/Judul/{$key['id']}/A"); ?>">
-                                                            <button type="button" class="btn btn-success swalDefaultSuccess">
-                                                                Setuju
-                                                            </button>
-                                                        </a>
-                                                        <a href="<?= base_url("/Prodi/Validasi/Judul/{$key['id']}/R"); ?>">
-                                                            <button type="button" class="btn btn-danger swalDefaultDanger">
-                                                                Tolak
-                                                            </button>
-                                                        </a>
+                                                        <?php
+                                                        switch ($key['acc_prodi']) {
+                                                            case '1':
+                                                                echo "Disetujui";
+                                                                break;
+                                                            case null:
+                                                        ?>
+                                                                <a href="<?= base_url("/Prodi/Validasi/Judul/A/{$key['id']}/A"); ?>">
+                                                                    <button type="button" class="btn btn-success swalDefaultSuccess">
+                                                                        Setuju
+                                                                    </button>
+                                                                </a>
+                                                                <a href="<?= base_url("/Prodi/Validasi/Judul/A/{$key['id']}/R"); ?>">
+                                                                    <button type="button" class="btn btn-danger swalDefaultDanger">
+                                                                        Tolak
+                                                                    </button>
+                                                                </a>
+                                                        <?php break;
+                                                        }
+                                                        ?>
+                                                    </center>
+                                                </td>
+                                                <!-- layak -->
+                                                <td>
+                                                    <center>
+                                                        <?php
+                                                        switch ($key['layak_prodi']) {
+                                                            case '1':
+                                                                echo "Disetujui";
+                                                                break;
+                                                            case null:
+                                                        ?>
+                                                                <?php if (($key['layak_dospem1'] == true) && ($key['layak_dospem2'] == true)) : ?>
+                                                                    <a href="<?= base_url("/Prodi/Validasi/Judul/L/{$key['id']}/A"); ?>">
+                                                                        <button type="button" class="btn btn-success swalDefaultSuccess">
+                                                                            Setuju
+                                                                        </button>
+                                                                    </a>
+                                                                    <a href="<?= base_url("/Prodi/Validasi/Judul/L/{$key['id']}/R"); ?>">
+                                                                        <button type="button" class="btn btn-danger swalDefaultDanger">
+                                                                            Tolak
+                                                                        </button>
+                                                                    </a>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
+                                                        <?php break;
+                                                        }
+                                                        ?>
                                                     </center>
                                                 </td>
                                             </tr>
