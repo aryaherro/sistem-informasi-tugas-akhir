@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\DosenModel;
 use App\Models\FakultasModel;
+use App\Models\JadwalSeminarProposalModel;
 use App\Models\JudulProposalModel;
 use App\Models\MahasiswaModel;
 use App\Models\ProdiModel;
@@ -88,11 +89,54 @@ class Prodi extends BaseController
 
     public function jadwalSeminarProposal()
     {
-        return view('prodi/jadwal/seminarProposal');
+        $this->setDosen();
+        $judulProposal = (new JudulProposalModel())
+            ->groupStart()
+            ->Where('layak_dospem1', true)
+            ->Where('layak_dospem2', true)
+            ->Where('layak_prodi', true)
+            ->groupEnd()
+            ->findAll();
+        $this->judulProposal = null;
+        $i = 0;
+        foreach ($judulProposal as $key) {
+            if ((new JadwalSeminarProposalModel())->asArray()->where('judulProposal_id', $key['id'])->first() == null) {
+                $this->judulProposal['$i'] = $key;
+                $i++;
+            }
+        }
+        $jadwalSeminarProposal = (new JadwalSeminarProposalModel())->findAll();
+        $list_jadwal_seminar_proposal = null;
+        $i = 0;
+        foreach ($jadwalSeminarProposal as $jsp) {
+            $judulProposal = (new JudulProposalModel())->find($jsp['judulProposal_id']);
+            $mahasiswa = (new MahasiswaModel())->find($judulProposal['mahasiswa_id']);
+            if ($mahasiswa['prodi_id'] == $this->prodi['id']) {
+                $list_jadwal_seminar_proposal[$i] = $jsp;
+                $i++;
+            }
+        }
+        $data = [
+            'person' => $this->dosen,
+            'prodi'     => $this->prodi,
+            'fakultas'  => $this->fakultas,
+            'judul' => $this->judulProposal,
+            'list_jadwal' => $list_jadwal_seminar_proposal,
+            'jud' => new JudulProposalModel(),
+            'mahasiswa' => new MahasiswaModel(),
+        ];
+        return view('prodi/jadwal/seminarProposal', $data);
     }
 
     public function tambahjadwalSeminarProposal()
     {
+        $this->setDosen();
+        $this->judulProposal = (new JudulProposalModel())->find($this->request->getPost('judulProposal_id'));
+        $data = [
+            'judulProposal_id'  =>  $this->judulProposal['id'],
+            'jadwal' => $this->request->getPost('tgl_seminar'),
+        ];
+        (new JadwalSeminarProposalModel())->save($data);
         return redirect()->back();
     }
 
