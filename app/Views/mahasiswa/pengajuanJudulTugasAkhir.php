@@ -30,9 +30,9 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <?php if ($judul == null) :; ?>
+                            <?php if ($judul == null) : ?>
                                 <div>Anda Belum Mengajukan Judul</div>
-                            <?php else :; ?>
+                            <?php else : ?>
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead class="thead-dark">
                                         <tr>
@@ -67,7 +67,7 @@
                                     </thead>
                                     <tbody>
                                         <?php $i = 1; ?>
-                                        <?php foreach ($judul as $key) :; ?>
+                                        <?php foreach ($judul as $key) : ?>
                                             <tr value="<?= $key['id']; ?>">
                                                 <td>
                                                     <center><?= $i++; ?></center>

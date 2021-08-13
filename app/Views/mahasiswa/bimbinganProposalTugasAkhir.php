@@ -21,7 +21,7 @@
                 <div class="col-12">
                     <div class="card">
 
-                        <?php if ($judul != null) :; ?>
+                        <?php if ($judul != null) : ?>
                             <div class="card-header col-12">
                                 <div class="row">
                                     <div class="block col"></div>
@@ -31,13 +31,13 @@
                         <?php endif; ?>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <?php if ($judul == null) :; ?>
+                            <?php if ($judul == null) : ?>
                                 <div>
                                     Judul yang anda ajukan belum memenuhi syarat untuk melakukan bimbingan!
                                     <br>
                                     Silahkan hubungi dosen pembimbing anda.
                                 </div>
-                            <?php else :; ?>
+                            <?php else : ?>
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead class="thead-dark">
                                         <tr>
@@ -64,9 +64,9 @@
                                     </thead>
                                     <tbody>
                                         <?php $i = 1; ?>
-                                        <?php foreach ($judul as $key) :; ?>
+                                        <?php foreach ($judul as $key) : ?>
                                             <?php $j = 1; ?>
-                                            <?php foreach ($bimbingan[$key['id']] as $keyB) :; ?>
+                                            <?php foreach ($bimbingan[$key['id']] as $keyB) : ?>
                                                 <tr value="<?= $keyB['id']; ?>">
                                                     <td>
                                                         <center><?= $i++; ?></center>

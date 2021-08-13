@@ -22,9 +22,9 @@
                     <div class="card">
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <?php if ($judul == null) :; ?>
+                            <?php if ($judul == null) : ?>
                                 <div>Tidak ada judul yang perlu divalidasi</div>
-                            <?php else :; ?>
+                            <?php else : ?>
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead class="thead-dark">
                                         <tr>
