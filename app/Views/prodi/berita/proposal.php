@@ -21,7 +21,12 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Proposal Tugas Akhir</h3>
+                            <h3 class="card-title">Berita Acara Proposal Tugas Akhir</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -31,47 +36,145 @@
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th rowspan="2">
+                                            <th>
                                                 <center>
                                                     No
                                                 </center>
                                             </th>
-                                            <th rowspan="2">
+                                            <th>
                                                 <center>
                                                     Nim
                                                 </center>
                                             </th>
-                                            <th rowspan="2">
+                                            <th>
                                                 <center>
                                                     Nama Mahasiswa
                                                 </center>
                                             </th>
-                                            <th rowspan="2">
+                                            <th>
                                                 <center>
                                                     Judul
                                                 </center>
                                             </th>
-                                            <th rowspan="2">
+                                            <th>
                                                 <center>
                                                     Saran Penguji 1
                                                 </center>
                                             </th>
-                                            <th rowspan="2">
+                                            <th>
                                                 <center>
                                                     Saran Penguji 2
                                                 </center>
                                             </th>
-
-                                            <th colspan="4">
+                                            <th>
                                                 <center>
-                                                    Bimbingan
+                                                    ketentuan
                                                 </center>
                                             </th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($berita_acara as $key) : ?>
+                                            <tr>
+                                                <td>
+                                                    <center>
+                                                        <?= $i++; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?= $key['nim']; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?= $key['nama']; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?= $key['judul']; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?php if ($key['Berkas_saran_dosuji1'] != null) : ?>
+                                                            <a class="btn btn-info" href="<?= base_url("Prodi/BA/Download/{$key['mahasiswa_id']}/{$key['judulProposal_id']}/P/1"); ?>">Download</a>
+                                                        <?php else : ?>
+                                                            -
+                                                        <?php endif; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?php if ($key['Berkas_saran_dosuji2'] != null) : ?>
+                                                            <a class="btn btn-info" href="<?= base_url("Prodi/BA/Download/{$key['mahasiswa_id']}/{$key['judulProposal_id']}/P/2"); ?>">Download</a>
+                                                        <?php else : ?>
+                                                            -
+                                                        <?php endif; ?>
+                                                    </center>
+                                                </td>
+                                                <td>11</td>
+                                            </tr>
+
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                    <!-- <tfoot>
+                                    <tr>
+                                        <th>Rendering engine</th>
+                                        <th>Browser</th>
+                                        <th>Platform(s)</th>
+                                        <th>Engine version</th>
+                                        <th>CSS grade</th>
+                                    </tr>
+                                </tfoot> -->
+                                </table>
+                            <?php endif; ?>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Bimbingan Proposal Tugas Akhir</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <?php if ($berita_acara == null) :; ?>
+                                <div>Tidak ada mahasiswa yang melakukan Ujian Seminar Proposal</div>
+                            <?php else : ?>
+                                <table id="example1" class="table table-bordered table-hover">
+                                    <thead>
                                         <tr>
                                             <th>
                                                 <center>
-                                                    Ke
+                                                    No
+                                                </center>
+                                            </th>
+                                            <th>
+                                                <center>
+                                                    Nim
+                                                </center>
+                                            </th>
+                                            <th>
+                                                <center>
+                                                    Nama Mahasiswa
+                                                </center>
+                                            </th>
+                                            <th>
+                                                <center>
+                                                    Judul
+                                                </center>
+                                            </th>
+                                            <th>
+                                                <center>
+                                                    Bimbingan Ke
                                                 </center>
                                             </th>
                                             <th>
@@ -94,92 +197,39 @@
                                     <tbody>
                                         <?php $i = 1; ?>
                                         <?php foreach ($berita_acara as $key) : ?>
+
                                             <?php $j = 1; ?>
                                             <?php $bim = $bimbingan->where('judulProposal_id', $key['judulProposal_id'])->findAll(); ?>
-                                            <?php $jumlah = count($bim); ?>
-                                            <tr>
-                                                <td rowspan="<?= $jumlah; ?>">
-                                                    <center>
-                                                        <?= $i++; ?>
-                                                    </center>
-                                                </td>
-                                                <td rowspan="<?= $jumlah; ?>">
-                                                    <center>
-                                                        <?= $key['nim']; ?>
-                                                    </center>
-                                                </td>
-                                                <td rowspan="<?= $jumlah; ?>">
-                                                    <center>
-                                                        <?= $key['nama']; ?>
-                                                    </center>
-                                                </td>
-                                                <td rowspan="<?= $jumlah; ?>">
-                                                    <center>
-                                                        <?= $key['judul']; ?>
-                                                    </center>
-                                                </td>
-                                                <td rowspan="<?= $jumlah; ?>">
-                                                    <center>
-                                                        <?php if ($key['Berkas_saran_dosuji1'] != null) : ?>
-                                                            <a class="btn btn-info" href="<?= base_url("Prodi/BA/Download/{$key['mahasiswa_id']}/{$key['judulProposal_id']}/P/1"); ?>">Download</a>
-                                                        <?php else : ?>
-                                                            -
-                                                        <?php endif; ?>
-                                                    </center>
-                                                </td>
-                                                <td rowspan="<?= $jumlah; ?>">
-                                                    <center>
-                                                        <?php if ($key['Berkas_saran_dosuji2'] != null) : ?>
-                                                            <a class="btn btn-info" href="<?= base_url("Prodi/BA/Download/{$key['mahasiswa_id']}/{$key['judulProposal_id']}/P/2"); ?>">Download</a>
-                                                        <?php else : ?>
-                                                            -
-                                                        <?php endif; ?>
-                                                    </center>
-                                                </td>
-                                                <?php if ($jumlah  == 1) : ?>
-                                                    <td>
-                                                        <center>
-                                                            <?= $j++; ?>
-                                                        </center>
-                                                    </td>
-                                                    <td>
-                                                        <center>
-                                                            <?php if ($bim[0]['Berkas_bimbingan'] != null) : ?>
-                                                                <a class="btn btn-info" href="<?= base_url("Prodi/BA/downloadBimbingan/{$key['mahasiswa_id']}/{$key['judulProposal_id']}/P/{$bim[0]['id']}"); ?>">Download</a>
-                                                            <?php else : ?>
-                                                                -
-                                                            <?php endif; ?>
-                                                        </center>
-                                                    </td>
-                                                    <td>
-                                                        <center>
-                                                            <?php if ($bim[0]['Berkas_saran_dospem1'] != null) : ?>
-                                                                <a class="btn btn-info" href="<?= base_url("Prodi/BA/downloadBimbingan/{$key['mahasiswa_id']}/{$key['judulProposal_id']}/P/{$bim[0]['id']}/1"); ?>">Download</a>
-                                                            <?php else : ?>
-                                                                -
-                                                            <?php endif; ?>
-                                                        </center>
-                                                    </td>
-                                                    <td>
-                                                        <center>
-                                                            <?php if ($bim[0]['Berkas_saran_dospem2'] != null) : ?>
-                                                                <a class="btn btn-info" href="<?= base_url("Prodi/BA/downloadBimbingan/{$key['mahasiswa_id']}/{$key['judulProposal_id']}/P/{$bim[0]['id']}/2"); ?>">Download</a>
-                                                            <?php else : ?>
-                                                                -
-                                                            <?php endif; ?>
-                                                        </center>
-                                                    </td>
-                                            </tr>
-                                        <?php else : ?>
-                                            </tr>
+                                            <?php $jumlah = count($bim) + 1; ?>
+
                                             <?php foreach ($bim as $keyB) : ?>
                                                 <tr>
-                                                    <td rowspan="1">
+                                                    <td>
+                                                        <center>
+                                                            <?= $i++; ?>
+                                                        </center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <?= $key['nim']; ?>
+                                                        </center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <?= $key['nama']; ?>
+                                                        </center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <?= $key['judul']; ?>
+                                                        </center>
+                                                    </td>
+                                                    <td>
                                                         <center>
                                                             <?= $j++; ?>
                                                         </center>
                                                     </td>
-                                                    <td rowspan="1">
+                                                    <td>
                                                         <center>
                                                             <?php if ($keyB['Berkas_bimbingan'] != null) : ?>
                                                                 <a class="btn btn-info" href="<?= base_url("Prodi/BA/downloadBimbingan/{$key['mahasiswa_id']}/{$key['judulProposal_id']}/P/{$keyB['id']}"); ?>">Download</a>
@@ -188,7 +238,7 @@
                                                             <?php endif; ?>
                                                         </center>
                                                     </td>
-                                                    <td rowspan="1">
+                                                    <td>
                                                         <center>
                                                             <?php if ($keyB['Berkas_saran_dospem1'] != null) : ?>
                                                                 <a class="btn btn-info" href="<?= base_url("Prodi/BA/downloadBimbingan/{$key['mahasiswa_id']}/{$key['judulProposal_id']}/P/{$keyB['id']}/1"); ?>">Download</a>
@@ -197,7 +247,7 @@
                                                             <?php endif; ?>
                                                         </center>
                                                     </td>
-                                                    <td rowspan="1">
+                                                    <td>
                                                         <center>
                                                             <?php if ($keyB['Berkas_saran_dospem2'] != null) : ?>
                                                                 <a class="btn btn-info" href="<?= base_url("Prodi/BA/downloadBimbingan/{$key['mahasiswa_id']}/{$key['judulProposal_id']}/P/{$keyB['id']}/2"); ?>">Download</a>
@@ -208,8 +258,8 @@
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
+
+                                        <?php endforeach; ?>
                                     </tbody>
                                     <!-- <tfoot>
                                     <tr>
@@ -225,7 +275,6 @@
                         </div>
                         <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
                 </div>
                 <!-- /.col -->
             </div>
@@ -269,6 +318,15 @@
 <script>
     $(function() {
         $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+        $('#example1').DataTable({
             "paging": true,
             "lengthChange": false,
             "searching": true,
