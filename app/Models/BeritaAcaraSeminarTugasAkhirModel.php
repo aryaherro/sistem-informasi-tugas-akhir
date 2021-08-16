@@ -18,7 +18,12 @@ class BeritaAcaraSeminarTugasAkhirModel extends Model
     [
         'jadwalSeminarTugasAkhir_id',
         'ketentuan',
-        'nilai',
+        'dosuji1_id',
+        'dosuji2_id',
+        'Berkas_saran_dosuji1',
+        'Berkas_saran_dosuji2',
+        'dosuji1_nilai',
+        'dosuji2_nilai',
     ];
 
     protected $useTimestamps = true;

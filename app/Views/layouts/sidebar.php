@@ -120,14 +120,6 @@
                                         <p>Bimbingan Tugas Akhir</p>
                                     </a>
                                 </li>
-                                <?php if (has_permission("Dosen Penguji")) :; ?>
-                                    <li class="nav-item">
-                                        <a href="<?= route_to("dosen.validasi.nilai"); ?>" class="nav-link <?= (current_url() == base_url("/Dosen/Validasi/Nilai")) ? "active" : ""; ?>">
-                                            <i class="fas fa-caret-right"></i>
-                                            <p>Penilaian Tugas Akhir</p>
-                                        </a>
-                                    </li>
-                                <?php endif; ?>
                             </ul>
                         </li>
                     </div>
@@ -156,6 +148,33 @@
                             </ul>
                         </li>
                     </div>
+                    <?php if (has_permission("Dosen Penguji")) :; ?>
+                        <div class="user-panel mt-1 pb-1 mb-1 d-flex">
+                            <li class="nav-item nav-item <?= (strstr(current_url(), base_url("/Dosen/UjiSeminar"))) ? "menu-is-opening menu-open" : ""; ?>">
+                                <a href="#" class="nav-link  <?= (strstr(current_url(), base_url("/Dosen/UjiSeminar"))) ? "active" : ""; ?>">
+                                    <i class="fab fa-leanpub"></i>
+                                    <p>
+                                        Uji Seminar
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="<?= route_to("dosen.uji.proposal"); ?>" class="nav-link <?= (current_url() == base_url("/Dosen/UjiSeminar/Nilai")) ? "active" : ""; ?>">
+                                            <i class="fas fa-caret-right"></i>
+                                            <p>Uji Proposal</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= route_to("dosen.validasi.nilai"); ?>" class="nav-link <?= (current_url() == base_url("/Dosen/UjiSeminar/Nilai")) ? "active" : ""; ?>">
+                                            <i class="fas fa-caret-right"></i>
+                                            <p>Penilaian Tugas Akhir</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </div>
+                    <?php endif; ?>
                     <!-- Dosen -->
                 <?php endif; ?>
 
@@ -213,6 +232,26 @@
                                     <a href="<?= route_to("prodi.jadwal.seminarTugasAkhir"); ?>" class="nav-link <?= (current_url() == base_url("/Prodi/Jadwal/SeminarTugasAkhir")) ? "active" : ""; ?>">
                                         <i class="fas fa-caret-right"></i>
                                         <p>Jadwal Tugas Akhir</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+
+                    <div class="user-panel mt-1 pb-1 mb-1 d-flex">
+                        <li class="nav-item <?= (strstr(current_url(), base_url("/Prodi/BA"))) ? "menu-is-opening menu-open" : ""; ?>">
+                            <a href="#" class="nav-link <?= (strstr(current_url(), base_url("/Prodi/BA"))) ? "active" : ""; ?>">
+                                <i class="fas fa-clipboard"></i>
+                                <p>
+                                    Berita Acara Seminar
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?= route_to("prodi.berita.proposal"); ?>" class="nav-link <?= (current_url() == base_url("/Prodi/BA/Proposal")) ? "active" : ""; ?>">
+                                        <i class="fas fa-caret-right"></i>
+                                        <p>Proposal</p>
                                     </a>
                                 </li>
                             </ul>

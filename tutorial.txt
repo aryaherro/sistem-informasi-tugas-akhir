@@ -5,23 +5,27 @@ langkah-langkah :
 4. ketik (php spark db:seed SIUpdateDosen)
 5. jalankan servernya (php spark serve)
 
-
+Kaprodi:
 edi_prihartono@unitomo.ac.id
 ediprihartono
 1029384756
 
+Dosen Pembimbing 1:
 ratna_nur_tiara_shanty@unitomo.ac.id
 ratnanur
 1029384756
 
+Dosen Pembimbing 2:
 cempaka_Ananggadipa_swastyastu@unitomo.ac.id
 cempakaananggadipa
 1029384756
 
+Dosen Penguji 1:
 anik_vega_vitianingsih@unitomo.ac.id
 anikvega
 1029384756
 
+Dosen Penguji 2:
 lambang_probo_sumirat@unitomo.ac.id
 lambangprobo
 1029384756

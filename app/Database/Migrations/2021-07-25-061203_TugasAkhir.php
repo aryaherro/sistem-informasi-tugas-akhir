@@ -425,6 +425,27 @@ class TugasAkhir extends Migration
 
 	public function down()
 	{
-		//
+		$this->forge->dropTable('users');
+		$this->forge->dropTable('auth_logins');
+		$this->forge->dropTable('auth_tokens');
+		$this->forge->dropTable('auth_reset_attempts');
+		$this->forge->dropTable('auth_activation_attempts');
+		$this->forge->dropTable('auth_groups');
+		$this->forge->dropTable('auth_permissions');
+		$this->forge->dropTable('auth_groups_permissions');
+		$this->forge->dropTable('auth_groups_users');
+		$this->forge->dropTable('auth_users_permissions');
+		$this->forge->dropTable('fakultas');
+		$this->forge->dropTable('dosen');
+		$this->forge->dropTable('prodi');
+		$this->forge->dropTable('mahasiswa');
+		$this->forge->dropTable('judulProposal');
+		$this->forge->dropTable('bimbinganProposal');
+		$this->forge->dropTable('jadwalSeminarProposal');
+		$this->forge->dropTable('beritaAcaraSeminarProposal');
+		$this->forge->dropTable('judulTugasAkhir');
+		$this->forge->dropTable('bimbinganTugasAkhir');
+		$this->forge->dropTable('jadwalSeminarTugasAkhir');
+		$this->forge->dropTable('beritaAcaraSeminarTugasAkhir');
 	}
 }

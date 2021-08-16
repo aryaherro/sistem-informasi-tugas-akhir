@@ -7,7 +7,7 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
+                <div class="col">
                     <h1>Bimbingan Proposal Tugas Akhir</h1>
                 </div>
             </div>
@@ -51,6 +51,9 @@
                                                 <center>Bimbingan ke-</center>
                                             </th>
                                             <th>
+                                                <center>Deskripsi</center>
+                                            </th>
+                                            <th>
                                                 <center>Lihat File</center>
                                             </th>
 
@@ -76,6 +79,9 @@
                                                     </td>
                                                     <td>
                                                         <center><?= $j++; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?= $keyB['Deskripsi']; ?></center>
                                                     </td>
                                                     <td>
                                                         <center>

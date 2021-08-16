@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\BeritaAcaraSeminarProposalModel;
 use App\Models\BimbinganProposalModel;
 use App\Models\DosenModel;
 use App\Models\FakultasModel;
@@ -212,5 +213,84 @@ class Dosen extends BaseController
     public function jadwalSeminarTugasAkhir()
     {
         return view('dosen/jadwal/seminarTugasAkhir');
+    }
+
+    public function ujiProposal()
+    {
+        $this->setDosen();
+        $berita_acara = (new BeritaAcaraSeminarProposalModel())
+            ->where('dosuji1_id', $this->dosen['id'])
+            ->orWhere('dosuji2_id', $this->dosen['id'])
+            ->join('jadwalseminarproposal', 'jadwalseminarproposal.id = beritaacaraseminarproposal.jadwalSeminarProposal_id')
+            ->join('judulproposal', 'judulproposal.id = jadwalseminarproposal.judulProposal_id')
+            ->join('mahasiswa', 'mahasiswa.id = judulproposal.mahasiswa_id')
+            ->findAll();
+        $data = [
+            'person' => $this->dosen,
+            'berita_acara' => $berita_acara,
+        ];
+        return view('dosen/uji/proposal', $data);
+    }
+
+    public function tambahUjiProposal()
+    {
+        $this->setDosen();
+        $berita_acara = (new BeritaAcaraSeminarProposalModel())->asArray()->where('jadwalSeminarProposal_id', $this->request->getPost('jad'))->first();
+        $jadwal = (new JadwalSeminarProposalModel())->find($this->request->getPost('jad'));
+        $judulProposal = (new JudulProposalModel())->find($jadwal['judulProposal_id']);
+        $this->mahasiswa = (new MahasiswaModel())->find($judulProposal['mahasiswa_id']);
+        $berkas = $this->request->getFile('Berkas_saran');
+        $file_name = $berkas->getRandomName();
+        $val = [
+            'Berkas_saran' => [
+                'rules' => 'uploaded[Berkas_saran]|mime_in[Berkas_saran,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.rar,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/zip]',
+                'errors' => [
+                    'uploaded' => 'Harus Ada File yang diupload',
+                    'mime_in' => 'File Extention Harus Berupa doc,docx,pdf,ppt,pptx,rar,txt,xls,xlsx,zip',
+                ],
+            ],
+        ];
+        if (!$this->validate($val)) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
+
+        if ($berita_acara['dosuji1_id'] == $this->dosen['id']) $berkas_tipe = "Berkas_saran_dosuji1";
+        else
+            if ($berita_acara['dosuji2_id'] == $this->dosen['id']) $berkas_tipe = "Berkas_saran_dosuji2";
+        $berkas->move("uploads/{$this->mahasiswa['id']}/{$judulProposal['id']}/P/", $file_name);
+        (new BeritaAcaraSeminarProposalModel())
+            ->where('id', $berita_acara['id'])
+            ->set([
+                $berkas_tipe => $file_name,
+            ])
+            ->update();
+        return redirect()->back();
+    }
+
+    public function downloadUji($mahasiswa_id, $judul_id, $type, $dos)
+    {
+        switch ($type) {
+            case 'P':
+                if ($dos == 1) {
+                    $berkas = 'Berkas_saran_dosuji1';
+                }
+                if ($dos == 2) {
+                    $berkas = 'Berkas_saran_dosuji2';
+                }
+                break;
+
+            case 'T':
+                if ($dos == 1) {
+                    $berkas = 'Berkas_saran_dosuji1';
+                }
+                if ($dos == 2) {
+                    $berkas = 'Berkas_saran_dosuji2';
+                }
+                break;
+        }
+        $jadwal = (new JadwalSeminarProposalModel())->asArray()->where('judulProposal_id', $judul_id)->first();
+        $data = (new BeritaAcaraSeminarProposalModel())->asArray()->where('jadwalSeminarProposal_id', $jadwal['id'])->first();
+        return $this->response->download("uploads/{$mahasiswa_id}/{$judul_id}/{$type}/" . $data[$berkas], null);
     }
 }

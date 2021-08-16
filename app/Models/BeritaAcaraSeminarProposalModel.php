@@ -17,6 +17,11 @@ class BeritaAcaraSeminarProposalModel extends Model
     protected $allowedFields =
     [
         'jadwalSeminarProposal_id',
+        'dosuji1_id',
+        'dosuji2_id',
+        'Berkas_saran_dosuji1',
+        'Berkas_saran_dosuji2',
+
         'ketentuan',
     ];
 

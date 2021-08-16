@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col">
-                    <h1>Data Bimbingan Proposal Tugas Akhir Mahasiswa</h1>
+                    <h1>Data Uji Proposal Tugas Akhir Mahasiswa</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -22,8 +22,8 @@
                     <div class="card">
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <?php if ($judul == null) :; ?>
-                                <div>Tidak ada mahasiswa yang mengajukan bimbingan</div>
+                            <?php if ($berita_acara == null) :; ?>
+                                <div>Tidak ada mahasiswa yang melakukan Ujian Seminar Proposal</div>
                             <?php else : ?>
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead class="thead-dark">
@@ -41,70 +41,45 @@
                                                 <center>Judul</center>
                                             </th>
                                             <th>
-                                                <center>Bimbingan Ke-</center>
-                                            </th>
-                                            <th>
-                                                <center>Deskripsi</center>
-                                            </th>
-                                            <th>
-                                                <center>Berkas Bimbingan</center>
-                                            </th>
-                                            <th>
                                                 <center>Saran Dosen</center>
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $i = 1; ?>
-                                        <?php foreach ($judul as $key) :; ?>
-                                            <?php $j = 1; ?>
-                                            <?php $m = $mahasiswa->find($key['mahasiswa_id']); ?>
-                                            <?php foreach ($bimbingan[$key['id']] as $keyB) :; ?>
-
-                                                <tr>
-                                                    <td>
-                                                        <center><?= $i++; ?></center>
-                                                    </td>
-                                                    <td>
-                                                        <center><?= $m['nim']; ?></center>
-                                                    </td>
-                                                    <td>
-                                                        <center><?= $m['nama']; ?></center>
-                                                    </td>
-                                                    <td>
-                                                        <center><?= $key['judul']; ?></center>
-                                                    </td>
-                                                    <td>
-                                                        <center><?= $j++; ?></center>
-                                                    </td>
-                                                    <td>
-                                                        <center><?= $keyB['Deskripsi']; ?></center>
-                                                    </td>
-                                                    <td>
-                                                        <center>
-                                                            <a class="btn btn-info" href="<?= base_url("Dosen/TugasAkhir/downloadBimbingan/{$key['mahasiswa_id']}/{$key['id']}/P/{$keyB['id']}"); ?>">Download</a>
-                                                        </center>
-                                                    </td>
-                                                    <td>
-                                                        <center>
-                                                            <?php if ($key['dospem1_id'] == $person['id']) : ?>
-                                                                <?php if ($keyB['Berkas_saran_dospem1'] == null) : ?>
-                                                                    <a data-toggle="modal" data-nim="<?= $m['nim']; ?>" data-nama="<?= $m['nama']; ?>" data-judul="<?= $key['judul']; ?>" data-bimbingan="<?= $j - 1; ?>" data-bim=<?= $keyB['id']; ?> data-jud=<?= $key['id']; ?> title="Add this item" class="open-AddBimbingan btn btn-info" href="#AddBimbingan">Upload</a>
-                                                                <?php else : ?>
-                                                                    <a class="btn btn-info" href="<?= base_url("Dosen/TugasAkhir/downloadBimbingan/{$key['mahasiswa_id']}/{$key['id']}/P/{$keyB['id']}/1"); ?>">Download</a>
-                                                                <?php endif; ?>
+                                        <?php foreach ($berita_acara as $key) :; ?>
+                                            <tr>
+                                                <td>
+                                                    <center><?= $i++; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $key['nim']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $key['nama']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $key['judul']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?php if ($key['dosuji1_id'] == $person['id']) : ?>
+                                                            <?php if ($key['Berkas_saran_dosuji1'] == null) : ?>
+                                                                <a data-toggle="modal" data-nim="<?= $key['nim']; ?>" data-nama="<?= $key['nama']; ?>" data-judul="<?= $key['judul']; ?>" data-jad=<?= $key['jadwalSeminarProposal_id']; ?> title="Add this item" class="open-AddUji btn btn-info" href="#AddUji">Upload</a>
+                                                            <?php else : ?>
+                                                                <a class="btn btn-info" href="<?= base_url("Dosen/UjiSeminar/Download/{$key['mahasiswa_id']}/{$key['judulProposal_id']}/P/1"); ?>">Download</a>
                                                             <?php endif; ?>
-                                                            <?php if ($key['dospem2_id'] == $person['id']) : ?>
-                                                                <?php if ($keyB['Berkas_saran_dospem2'] == null) : ?>
-                                                                    <a data-toggle="modal" data-nim="<?= $m['nim']; ?>" data-nama="<?= $m['nama']; ?>" data-judul="<?= $key['judul']; ?>" data-bimbingan="<?= $j - 1; ?>" data-bim=<?= $keyB['id']; ?> data-jud=<?= $key['id']; ?> title="Add this item" class="open-AddBimbingan btn btn-info" href="#AddBimbingan">Upload</a>
-                                                                <?php else : ?>
-                                                                    <a class="btn btn-info" href="<?= base_url("Dosen/TugasAkhir/downloadBimbingan/{$key['mahasiswa_id']}/{$key['id']}/P/{$keyB['id']}/2"); ?>">Download</a>
-                                                                <?php endif; ?>
+                                                        <?php endif; ?>
+                                                        <?php if ($key['dosuji2_id'] == $person['id']) : ?>
+                                                            <?php if ($key['Berkas_saran_dosuji2'] == null) : ?>
+                                                                <a data-toggle="modal" data-nim="<?= $key['nim']; ?>" data-nama="<?= $key['nama']; ?>" data-judul="<?= $key['judul']; ?>" data-jad=<?= $key['jadwalSeminarProposal_id']; ?> title="Add this item" class="open-AddUji btn btn-info" href="#AddUji">Upload</a>
+                                                            <?php else : ?>
+                                                                <a class="btn btn-info" href="<?= base_url("Dosen/UjiSeminar/Download/{$key['mahasiswa_id']}/{$key['judulProposal_id']}/P/2"); ?>">Download</a>
                                                             <?php endif; ?>
-                                                        </center>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; ?>
+                                                        <?php endif; ?>
+                                                    </center>
+                                                </td>
+                                            </tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                     <!-- <tfoot>
@@ -129,11 +104,11 @@
         </div>
         <!-- /.container-fluid -->
 
-        <div class="modal fade" id="AddBimbingan">
+        <div class="modal fade" id="AddUji">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3>Upload Bimbingan</h3>
+                        <h3>Upload Saran</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -141,8 +116,7 @@
                     <div class="modal-body">
                         <form action="<?= route_to('Proposal') ?>" method="post" enctype="multipart/form-data">
                             <?= csrf_field() ?>
-                            <input type="text" class="form-control visually-hidden" id="jud" name="jud" />
-                            <input type="text" class="form-control visually-hidden" id="bim" name="bim" />
+                            <input type="text" class="form-control visually-hidden" id="jad" name="jad" />
                             <div class="row align-items-center m-1 form-group">
                                 <div class="col-3">Nim</div>
                                 <div class="col-1">:</div>
@@ -164,16 +138,9 @@
                                     <input type="text" class="form-control" id="judul" name="judul" readonly />
                                 </div>
                             </div>
-                            <div class="row align-items-center m-1 form-group">
-                                <div class="col-3">Bimbingan Ke</div>
-                                <div class="col-1">:</div>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" id="bimbingan" name="bimbingan" readonly />
-                                </div>
-                            </div>
                             <div class="custom-file form-group m-1">
-                                <input type="file" class="form-control custom-file-input" id="Berkas_bimbingan" name="Berkas_bimbingan" />
-                                <label class="custom-file-label" for="Berkas_bimbingan">File</label>
+                                <input type="file" class="form-control custom-file-input" id="Berkas_saran" name="Berkas_saran" />
+                                <label class="custom-file-label" for="Berkas_saran">File</label>
                             </div>
                             <button type="submit" class="btn btn-primary">Save changes</button>
                         </form>
@@ -237,22 +204,20 @@
             })
         });
     });
-    $(document).on("click", ".open-AddBimbingan", function() {
+    $(document).on("click", ".open-AddUji", function() {
         var nim = $(this).data('nim');
         var nama = $(this).data('nama');
         var judul = $(this).data('judul');
         var ke = $(this).data('bimbingan');
-        var bim = $(this).data('bim');
-        var jud = $(this).data('jud');
+        var jad = $(this).data('jad');
         $(".modal-body #nim").attr("value", nim);
         $(".modal-body #nama").attr("value", nama);
         $(".modal-body #judul").attr("value", judul);
         $(".modal-body #bimbingan").attr("value", ke);
-        $(".modal-body #bim").attr("value", bim);
-        $(".modal-body #jud").attr("value", jud);
+        $(".modal-body #jad").attr("value", jad);
         // As pointed out in comments, 
         // it is unnecessary to have to manually call the modal.
-        // $('#AddBimbingan').modal('show');
+        // $('#AddUji').modal('show');
     });
 </script>
 <?= $this->endSection(); ?>
