@@ -20,17 +20,22 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-
-                        <?php if ($judul != null) : ?>
-                            <div class="card-header col-12">
-                                <div class="row">
-                                    <div class="block col"></div>
-                                    <button type="button" class="btn btn-inline btn-primary col-2" data-toggle="modal" data-target="#modal-default">Ajukan Bimbingan</button>
-                                </div>
-                            </div>
-                        <?php endif; ?>
                         <!-- /.card-header -->
+                        <div class="card-header col-12">
+                            <h5 class="card-title">Bimbingan Proposal Tugas Akhir</h5>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
                         <div class="card-body">
+                            <div class="row">
+                                <div class="block col"></div>
+                                <button type="button" class="btn btn-inline btn-primary col-2" data-toggle="modal" data-target="#modal-default">Ajukan Bimbingan</button>
+                            </div>
+                            <br>
                             <?php if ($judul == null) : ?>
                                 <div>
                                     Judul yang anda ajukan belum memenuhi syarat untuk melakukan bimbingan!

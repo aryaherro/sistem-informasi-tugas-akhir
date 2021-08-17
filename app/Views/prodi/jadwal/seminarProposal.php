@@ -20,16 +20,24 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <?php if ($judul != null) : ?>
-                            <div class="card-header col-12">
+                        <!-- /.card-header -->
+                        <div class="card-header">
+                            <h5 class="card-title">Jadwal Seminar Proposal</h5>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <?php if ($judul != null) : ?>
                                 <div class="row">
                                     <div class="block col"></div>
                                     <button type="button" class="btn btn-inline btn-primary col-2" data-toggle="modal" data-target="#modal-default">Set Jadwal</button>
                                 </div>
-                            </div>
-                        <?php endif; ?>
-                        <!-- /.card-header -->
-                        <div class="card-body">
+                                <br>
+                            <?php endif; ?>
                             <?php if ($list_jadwal == null) : ?>
                                 Belum ada judul yang perlu di jadwalkan
                             <?php else : ?>

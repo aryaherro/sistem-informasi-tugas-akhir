@@ -21,6 +21,14 @@
                 <div class="col-12">
                     <div class="card">
                         <!-- /.card-header -->
+                        <div class="card-header">
+                            <h5 class="card-title">Pengajuan Judul Proposal Tugas Akhir</h5>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
                         <div class="card-body">
                             <?php if ($judul == null) : ?>
                                 <div>Tidak ada judul yang perlu divalidasi</div>
@@ -85,12 +93,12 @@
                                                                         break;
                                                                     case null:
                                                                 ?>
-                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/A/{$key['id']}/A"); ?>">
+                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/A/{$key['id']}/A/P"); ?>">
                                                                             <button type="button" class="btn btn-success swalDefaultSuccess">
                                                                                 Setuju
                                                                             </button>
                                                                         </a>
-                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/A/{$key['id']}/R"); ?>">
+                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/A/{$key['id']}/R/P"); ?>">
                                                                             <button type="button" class="btn btn-danger swalDefaultDanger">
                                                                                 Tolak
                                                                             </button>
@@ -107,12 +115,12 @@
                                                                         break;
                                                                     case null:
                                                                 ?>
-                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/A/{$key['id']}/A"); ?>">
+                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/A/{$key['id']}/A/P"); ?>">
                                                                             <button type="button" class="btn btn-success swalDefaultSuccess">
                                                                                 Setuju
                                                                             </button>
                                                                         </a>
-                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/A/{$key['id']}/R"); ?>">
+                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/A/{$key['id']}/R/P"); ?>">
                                                                             <button type="button" class="btn btn-danger swalDefaultDanger">
                                                                                 Tolak
                                                                             </button>
@@ -138,12 +146,12 @@
                                                                 case null:
                                                             ?>
                                                                     <?php if (($key['acc_dospem1'] == true) && ($key['acc_dospem2'] == true) && ($key['acc_prodi'] == true)) : ?>
-                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/L/{$key['id']}/A"); ?>">
+                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/L/{$key['id']}/A/P"); ?>">
                                                                             <button type="button" class="btn btn-success swalDefaultSuccess">
                                                                                 Setuju
                                                                             </button>
                                                                         </a>
-                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/L/{$key['id']}/R"); ?>">
+                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/L/{$key['id']}/R/P"); ?>">
                                                                             <button type="button" class="btn btn-danger swalDefaultDanger">
                                                                                 Tolak
                                                                             </button>
@@ -163,12 +171,144 @@
                                                                 case null:
                                                             ?>
                                                                     <?php if (($key['acc_dospem1'] == true) && ($key['acc_dospem2'] == true) && ($key['acc_prodi'] == true)) : ?>
-                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/L/{$key['id']}/A"); ?>">
+                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/L/{$key['id']}/A/P"); ?>">
                                                                             <button type="button" class="btn btn-success swalDefaultSuccess">
                                                                                 Setuju
                                                                             </button>
                                                                         </a>
-                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/L/{$key['id']}/R"); ?>">
+                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/L/{$key['id']}/R/P"); ?>">
+                                                                            <button type="button" class="btn btn-danger swalDefaultDanger">
+                                                                                Tolak
+                                                                            </button>
+                                                                        </a>
+                                                                    <?php else : ?>
+                                                                        -
+                                                                    <?php endif; ?>
+                                                            <?php break;
+                                                            }
+                                                            ?>
+                                                        <?php endif; ?>
+                                                    </center>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                    <!-- <tfoot>
+                                    <tr>
+                                        <th>Rendering engine</th>
+                                        <th>Browser</th>
+                                        <th>Platform(s)</th>
+                                        <th>Engine version</th>
+                                        <th>CSS grade</th>
+                                    </tr>
+                                </tfoot> -->
+                                </table>
+                            <?php endif; ?>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+                    <div class="card">
+                        <!-- /.card-header -->
+                        <div class="card-header">
+                            <h5 class="card-title">Judul Layak Maju Seminar Tugas Akhir</h5>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <?php if ($judul_akhir == null) : ?>
+                                <div>Tidak ada judul yang perlu divalidasi</div>
+                            <?php else : ?>
+                                <table id="example1" class="table table-bordered table-hover">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>
+                                                <center>No</center>
+                                            </th>
+                                            <th>
+                                                <center>NIM</center>
+                                            </th>
+                                            <th>
+                                                <center>Nama Mahasiswa</center>
+                                            </th>
+                                            <th>
+                                                <center>Judul</center>
+                                            </th>
+                                            <th>
+                                                <center>Deskripsi</center>
+                                            </th>
+                                            <th>
+                                                <center>Maju Seminar</center>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($judul_akhir as $key) : ?>
+                                            <?php $m = $mahasiswa->find($key['mahasiswa_id']); ?>
+                                            <tr>
+                                                <td>
+                                                    <center><?= $i++; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $m['nim']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $m['nama']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $key['judul']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $key['deskripsi']; ?></center>
+                                                </td>
+                                                <!-- maju seminar -->
+                                                <td>
+                                                    <center>
+                                                        <?php if ($key['dospem1_id'] == $person['id']) : ?>
+                                                            <?php
+                                                            switch ($key['layak_dospem1']) {
+                                                                case '1':
+                                                                    echo "Disetujui";
+                                                                    break;
+                                                                case null:
+                                                            ?>
+                                                                    <?php if (($key['acc_dospem1'] == true) && ($key['acc_dospem2'] == true) && ($key['acc_prodi'] == true)) : ?>
+                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/L/{$key['judulProposal_id']}/A/T"); ?>">
+                                                                            <button type="button" class="btn btn-success swalDefaultSuccess">
+                                                                                Setuju
+                                                                            </button>
+                                                                        </a>
+                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/L/{$key['judulProposal_id']}/R/T"); ?>">
+                                                                            <button type="button" class="btn btn-danger swalDefaultDanger">
+                                                                                Tolak
+                                                                            </button>
+                                                                        </a>
+                                                                    <?php else : ?>
+                                                                        -
+                                                                    <?php endif; ?>
+                                                            <?php break;
+                                                            }
+                                                            ?>
+                                                        <?php elseif ($key['dospem2_id'] == $person['id']) : ?>
+                                                            <?php
+                                                            switch ($key['layak_dospem2']) {
+                                                                case '1':
+                                                                    echo "Disetujui";
+                                                                    break;
+                                                                case null:
+                                                            ?>
+                                                                    <?php if (($key['acc_dospem1'] == true) && ($key['acc_dospem2'] == true) && ($key['acc_prodi'] == true)) : ?>
+                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/L/{$key['judulProposal_id']}/A/T"); ?>">
+                                                                            <button type="button" class="btn btn-success swalDefaultSuccess">
+                                                                                Setuju
+                                                                            </button>
+                                                                        </a>
+                                                                        <a href="<?= base_url("/Dosen/Validasi/Judul/L/{$key['judulProposal_id']}/R/T"); ?>">
                                                                             <button type="button" class="btn btn-danger swalDefaultDanger">
                                                                                 Tolak
                                                                             </button>

@@ -18,6 +18,9 @@ class JudulTugasAkhirModel extends Model
     [
         'judulProposal_id',
         'beritaAcaraSeminarProposal_id',
+        'layak_dospem1',
+        'layak_dospem2',
+        'layak_prodi',
     ];
 
     protected $useTimestamps = true;

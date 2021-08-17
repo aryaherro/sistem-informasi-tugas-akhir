@@ -7,7 +7,7 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
+                <div class="col">
                     <h1>Bimbingan Tugas Akhir</h1>
                 </div>
             </div>
@@ -20,51 +20,104 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+
                         <div class="card-header col-12">
+                            <h5 class="card-title">Bimbingan Tugas Akhir</h5>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+
+                        <div class="card-body">
                             <div class="row">
                                 <div class="block col"></div>
                                 <button type="button" class="btn btn-inline btn-primary col-2" data-toggle="modal" data-target="#modal-default">Ajukan Bimbingan</button>
                             </div>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>
-                                            <center>No</center>
-                                        </th>
-                                        <th>
-                                            <center>Judul</center>
-                                        </th>
-                                        <th>
-                                            <center>Bimbingan ke-</center>
-                                        </th>
+                            <br>
+                            <?php if ($judul == null) : ?>
+                                <div>
+                                    Judul yang anda ajukan belum memenuhi syarat untuk melakukan bimbingan!
+                                    <br>
+                                    Silahkan hubungi dosen pembimbing anda.
+                                </div>
+                            <?php else : ?>
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>
+                                                <center>No</center>
+                                            </th>
+                                            <th>
+                                                <center>Judul</center>
+                                            </th>
+                                            <th>
+                                                <center>Bimbingan ke-</center>
+                                            </th>
+                                            <th>
+                                                <center>Deskripsi</center>
+                                            </th>
+                                            <th>
+                                                <center>Lihat File</center>
+                                            </th>
 
-                                        <th>
-                                            <center>bimbingan</center>
-                                        </th>
-                                        <th>
-                                            <center>Deskripsi</center>
-                                        </th>
-                                        <th>
-                                            <center>saran dosen</center>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Sistem pendukung keputusan pemilihan supplier pada CV. surya abadi dengan metode AHP</td>
-                                        <td>-</td>
-                                        <td>
-                                            <a class="btn btn-info" href="">Download</a>
-                                        </td>
-                                        <td>Sistem ini membantu para pengambil keputusan melihat keputusan mana yang paling baik untuk diambil</td>
-                                        <td><a class="btn btn-info" href="">Download</a></td>
-                                    </tr>
-                                </tbody>
-                                <!-- <tfoot>
+                                            <th>
+                                                <center>Saran dosen pembimbing 1</center>
+                                            </th>
+                                            <th>
+                                                <center>Saran dosen pembimbing 2</center>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($judul as $key) : ?>
+                                            <?php $j = 1; ?>
+                                            <?php foreach ($bimbingan[$key['id']] as $keyB) : ?>
+                                                <tr value="<?= $keyB['id']; ?>">
+                                                    <td>
+                                                        <center><?= $i++; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?= $key['judul']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?= $j++; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?= $keyB['Deskripsi']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <a class="btn btn-info" href="<?= base_url("Mahasiswa/TugasAkhir/downloadBimbingan/{$key['mahasiswa_id']}/{$key['id']}/T/{$keyB['id']}"); ?>">Download</a>
+                                                        </center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <?php if ($keyB['Berkas_saran_dospem1'] == null) : ?>
+                                                                Dalam Proses
+                                                            <?php else : ?>
+                                                                <a class="btn btn-info" href="<?= base_url("Mahasiswa/TugasAkhir/downloadBimbingan/{$key['mahasiswa_id']}/{$key['id']}/T/{$keyB['id']}/1"); ?>">Download</a>
+                                                            <?php endif; ?>
+                                                        </center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <?php if ($keyB['Berkas_saran_dospem2'] == null) : ?>
+                                                                Dalam Proses
+                                                            <?php else : ?>
+                                                                <a class="btn btn-info" href="<?= base_url("Mahasiswa/TugasAkhir/downloadBimbingan/{$key['mahasiswa_id']}/{$key['id']}/T/{$keyB['id']}/2"); ?>">Download</a>
+                                                            <?php endif; ?>
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                    <!-- <tfoot>
                                     <tr>
                                         <th>Rendering engine</th>
                                         <th>Browser</th>
@@ -73,7 +126,9 @@
                                         <th>CSS grade</th>
                                     </tr>
                                 </tfoot> -->
-                            </table>
+                                </table>
+
+                            <?php endif; ?>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -92,34 +147,34 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div>
+                            <!-- <label for="customFile">Custom File</label> -->
+                            <form action="<?= route_to('bimbinganTugasAkhir') ?>" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <!-- <label for="customFile">Custom File</label> -->
-
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile">
-                                        <label class="custom-file-label" for="customFile">File</label>
-                                    </div>
+                                    <label>Judul</label>
+                                    <select class="form-select" aria-label="Default select example" name="judulTugasAkhir_id">
+                                        <?php foreach ($judul as $key) :; ?>
+                                            <option value="<?= $key['id']; ?>"><?= $key['judul']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div><?php echo session()->getFlashdata('error'); ?>
+                                <div class="custom-file form-group">
+                                    <input type="file" class="form-control custom-file-input" id="Berkas_bimbingan" name="Berkas_bimbingan" />
+                                    <label class="custom-file-label" for="Berkas_bimbingan">File</label>
                                 </div>
-                            </div>
-                            <div>
                                 <!-- textarea -->
                                 <div class="form-group">
                                     <label>Deskripsi</label>
-                                    <textarea class="form-control" rows="3" placeholder="Deskripsi"></textarea>
+                                    <textarea class="form-control" rows="3" placeholder="Deskripsi" name="Deskripsi"></textarea>
                                 </div>
-                            </div>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </form>
+                            <!-- /.modal-content -->
                         </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                        <!-- /.modal-dialog -->
                     </div>
-                    <!-- /.modal-content -->
+                    <!-- /.modal -->
                 </div>
-                <!-- /.modal-dialog -->
             </div>
-            <!-- /.modal -->
         </div>
         <!-- /.container-fluid -->
     </section>

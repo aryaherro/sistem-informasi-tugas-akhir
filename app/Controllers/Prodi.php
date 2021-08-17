@@ -3,11 +3,14 @@
 namespace App\Controllers;
 
 use App\Models\BeritaAcaraSeminarProposalModel;
+use App\Models\BeritaAcaraSeminarTugasAkhirModel;
 use App\Models\BimbinganProposalModel;
 use App\Models\DosenModel;
 use App\Models\FakultasModel;
 use App\Models\JadwalSeminarProposalModel;
+use App\Models\JadwalSeminarTugasAkhirModel;
 use App\Models\JudulProposalModel;
+use App\Models\JudulTugasAkhirModel;
 use App\Models\MahasiswaModel;
 use App\Models\ProdiModel;
 
@@ -45,27 +48,32 @@ class Prodi extends BaseController
                 $urut++;
             }
         }
+        $isi = (new ProdiModel())
+            ->join('mahasiswa', 'mahasiswa.prodi_id = prodi.id')
+            ->join('judulproposal', 'judulproposal.mahasiswa_id = mahasiswa.id')
+            ->join('judultugasakhir', 'judultugasakhir.judulProposal_id = judulproposal.id')
+            ->where('kaprodi_id', $this->dosen['id'])
+            ->findAll();
         $data = [
             'person' => $this->dosen,
             'prodi'     => $this->prodi,
             'fakultas'  => $this->fakultas,
             'judul' => $this->judulProposal,
+            'isi' => $isi,
             'mahasiswa' => new MahasiswaModel(),
         ];
         return view('prodi/validasi/judul', $data);
     }
 
-    public function tambahvalidasiJudul($type, $id, $acc)
+    public function tambahvalidasiJudul($PT, $type, $id, $acc)
     {
         $this->setDosen();
         if ($acc == 'A') $a = true;
         if ($acc == 'R') $a = false;
         if ($type == 'A') $key = "acc_prodi";
         if ($type == 'L') $key = "layak_prodi";
-        (new JudulProposalModel())
-            ->where('id', $id)
-            ->set([$key => $a])
-            ->update();
+        if ($PT == 'P') (new JudulProposalModel())->where('id', $id)->set([$key => $a])->update();
+        if ($PT == 'T') (new JudulTugasAkhirModel())->where('id', $id)->set([$key => $a])->update();
         return redirect()->back();
     }
 
@@ -155,11 +163,58 @@ class Prodi extends BaseController
 
     public function jadwalSeminarTugasAkhir()
     {
-        return view('prodi/jadwal/seminarTugasAkhir');
+        $this->setDosen();
+        $list_tugas_akhir = (new JudulProposalModel())
+            ->join('judultugasakhir', 'judulproposal.id = judultugasakhir.judulProposal_id')
+            ->join('jadwalseminartugasakhir', 'jadwalseminartugasakhir.judulTugasAkhir_id = judultugasakhir.id', 'LEFT')
+            ->join('bimbingantugasakhir', 'bimbingantugasakhir.judultugasakhir_id = judultugasakhir.id')
+            ->join('mahasiswa', 'mahasiswa.id = judulproposal.mahasiswa_id')
+            ->join('prodi', 'prodi.id = mahasiswa.prodi_id')
+            ->Where('judultugasakhir.layak_dospem1', true)
+            ->Where('judultugasakhir.layak_dospem2', true)
+            ->Where('judultugasakhir.layak_prodi', true)
+            ->where('prodi.kaprodi_id', $this->dosen['id'])
+            ->where('jadwalseminartugasakhir.id', null)
+            ->set('judulTugasAkhir_id', 'judultugasakhir.id')
+            ->findAll();
+        $list_jadwal_tugas_akhir = (new JadwalSeminarTugasAkhirModel())
+            ->join('judultugasakhir', 'jadwalseminartugasakhir.judulTugasAkhir_id = judultugasakhir.id', 'LEFT')
+            ->join('judulproposal', 'judulproposal.id = judultugasakhir.judulProposal_id', 'LEFT')
+            ->join('mahasiswa', 'mahasiswa.id = judulproposal.mahasiswa_id')
+            ->join('prodi', 'prodi.id = mahasiswa.prodi_id')
+            ->where('prodi.kaprodi_id', $this->dosen['id'])
+            ->findAll();
+        // dd($list_tugas_akhir);
+
+        $data = [
+            'person' => $this->dosen,
+            'prodi'     => $this->prodi,
+            'fakultas'  => $this->fakultas,
+            'judul' => $list_tugas_akhir,
+            'list_jadwal' => $list_jadwal_tugas_akhir,
+        ];
+        return view('prodi/jadwal/seminarTugasAkhir', $data);
     }
 
     public function tambahjadwalSeminarTugasAkhir()
     {
+        $this->setDosen();
+        $jadwal = new JadwalSeminarTugasAkhirModel();
+        $data = [
+            'judulTugasAkhir_id'  =>  $this->request->getPost('judulTugasAkhir_id'),
+            'jadwal' => $this->request->getPost('tgl_seminar'),
+        ];
+        $jadwal->save($data);
+        $berita_acara = new BeritaAcaraSeminarTugasAkhirModel();
+        $dosuji1 = (new DosenModel())->asArray()->where('nama', 'Anik Vega Vitianingsih, S. Kom., MT')->first();
+        $dosuji2 = (new DosenModel())->asArray()->where('nama', 'Lambang Probo Sumirat, S.Kom., M.Kom')->first();
+        // dd($dosuji1['id']);
+        $data = [
+            'jadwalSeminarTugasAkhir_id'  => $jadwal->getInsertID(),
+            'dosuji1_id'                => $dosuji1['id'],
+            'dosuji2_id'                => $dosuji2['id'],
+        ];
+        $berita_acara->save($data);
         return redirect()->back();
     }
 
@@ -172,6 +227,7 @@ class Prodi extends BaseController
             ->join('mahasiswa', 'mahasiswa.id = judulproposal.mahasiswa_id')
             ->where('prodi_id', $this->prodi['id'])
             ->findAll();
+        // dd($berita_acara);
         $data = [
             'person' => $this->dosen,
             'berita_acara' => $berita_acara,
@@ -224,5 +280,24 @@ class Prodi extends BaseController
         }
         $data = (new BimbinganProposalModel())->find($bimbingan_id);
         return $this->response->download("uploads/{$mahasiswa_id}/{$judul_id}/{$type}/" . $data[$berkas], null);
+    }
+
+    public function tambahKetentuan($id, $ketentuan)
+    {
+        $this->setDosen();
+        $jadwalSeminarProposal = (new JadwalSeminarProposalModel())->find($id);
+        $berita_acara = (new BeritaAcaraSeminarProposalModel())->where('jadwalSeminarProposal_id', $jadwalSeminarProposal['id'])->first();
+        (new BeritaAcaraSeminarProposalModel())->where('jadwalSeminarProposal_id', $jadwalSeminarProposal['id'])
+            ->set(['ketentuan' => $ketentuan])
+            ->update();
+        // dd($berita_acara);
+        if ($ketentuan) {
+            $data = [
+                'judulProposal_id'  => $jadwalSeminarProposal['judulProposal_id'],
+                'beritaAcaraSeminarProposal_id'    => $berita_acara['id'],
+            ];
+            (new JudulTugasAkhirModel())->save($data);
+        }
+        return redirect()->back();
     }
 }

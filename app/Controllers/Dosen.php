@@ -4,10 +4,12 @@ namespace App\Controllers;
 
 use App\Models\BeritaAcaraSeminarProposalModel;
 use App\Models\BimbinganProposalModel;
+use App\Models\BimbinganTugasAkhirModel;
 use App\Models\DosenModel;
 use App\Models\FakultasModel;
 use App\Models\JadwalSeminarProposalModel;
 use App\Models\JudulProposalModel;
+use App\Models\JudulTugasAkhirModel;
 use App\Models\MahasiswaModel;
 use App\Models\ProdiModel;
 
@@ -58,30 +60,40 @@ class Dosen extends BaseController
             ->orWhere('acc_prodi', null)
             ->groupEnd()
             ->findAll();
+        $judul_tugas_akhir = (new JudulProposalModel())
+            ->join('judultugasakhir', 'judulproposal.id = judultugasakhir.judulProposal_id')
+            ->where('dospem1_id', $this->dosen['id'],)
+            ->orWhere('dospem2_id', $this->dosen['id'],)
+            ->findAll();
+        // dd($judul_tugas_akhir);
         $data = [
             'person' => $this->dosen,
             'prodi'     => $this->prodi,
             'fakultas'  => $this->fakultas,
             'judul' => $this->judulProposal,
+            'judul_akhir' => $judul_tugas_akhir,
             'mahasiswa' => new MahasiswaModel(),
         ];
         return view('dosen/validasi/judul', $data);
     }
 
-    public function tambahvalidasiJudul($type, $id, $acc)
+    public function tambahvalidasiJudul($type, $id, $acc, $PT = null)
     {
         $this->setDosen();
-        $judul = (new JudulProposalModel())->find($id);
-        if ($acc == 'A') $a = true;
-        if ($acc == 'R') $a = false;
+        if ($PT == 'P') $judul = (new JudulProposalModel())->find($id);
+        if ($PT == 'T') $judul = (new JudulProposalModel())
+            ->join('judultugasakhir', 'judulproposal.id = judultugasakhir.judulProposal_id')
+            ->where('judulProposal_id', $id)
+            ->first();
+        // dd($judul);
         if ($type == 'A') $key = ($judul['dospem1_id'] == $this->dosen['id']) ? "acc_dospem1" : "acc_dospem2";
         if ($type == 'L') $key = ($judul['dospem1_id'] == $this->dosen['id']) ? "layak_dospem1" : "layak_dospem2";
-        (new JudulProposalModel())
-            ->where('id', "{$judul['id']}")
-            ->set([
-                $key => $a
-            ])
-            ->update();
+        if ($acc == 'A') $a = true;
+        if ($acc == 'R') $a = false;
+        if ($PT == 'P') (new JudulProposalModel())->where('id', "{$judul['id']}")->set([$key => $a])->update();
+        $akhir = (new JudulTugasAkhirModel())->where('judulProposal_id', $id)->first();
+        // dd([$key => $a]);
+        if ($PT == 'T') (new JudulTugasAkhirModel())->where('id', $akhir['id'])->set([$key => $a])->update();
 
         return redirect()->back();
     }
@@ -170,11 +182,64 @@ class Dosen extends BaseController
 
     public function validasiTugasAkhir()
     {
-        return view('dosen/validasi/tugasAkhir');
+        $this->setDosen();
+        $judul = (new JudulProposalModel())
+            ->join('judultugasakhir', 'judulproposal.id = judultugasakhir.judulProposal_id')
+            ->where('dospem1_id', $this->dosen['id'],)
+            ->orWhere('dospem2_id', $this->dosen['id'],)
+            ->findAll();
+        // dd($judul);
+        $bimbingan_tugas_akhir = new BimbinganTugasAkhirModel();
+        if ($judul != null) {
+            foreach ($judul as $key) {
+                $temp[$key['id']] = (((new BimbinganTugasAkhirModel())->where('judulTugasAkhir_id', $key['id'],))->findAll());
+            }
+            $bimbingan_tugas_akhir = $temp;
+        }
+        $data = [
+            'person' => $this->dosen,
+            'judul' => $judul,
+            'mahasiswa' => new MahasiswaModel(),
+            'bimbingan' => $bimbingan_tugas_akhir,
+        ];
+        return view('dosen/validasi/tugasAkhir', $data);
     }
 
     public function tambahvalidasiTugasAkhir()
     {
+        $this->setDosen();
+        $this->mahasiswa = (new MahasiswaModel())->asArray()->where('nim', $this->request->getPost('nim'))->first();
+        $judul_tugas_akhir = (new JudulProposalModel())
+            ->join('judultugasakhir', 'judulproposal.id = judultugasakhir.judulProposal_id')
+            ->find($this->request->getPost('jud'));
+        // dd($judul_tugas_akhir);
+        $bimbingan = (new BimbinganTugasAkhirModel())->find($this->request->getPost('bim'));
+
+        $berkas = $this->request->getFile('Berkas_bimbingan');
+        $file_name = $berkas->getRandomName();
+        if ($judul_tugas_akhir['dospem1_id'] == $this->dosen['id']) $berkas_tipe = "Berkas_saran_dospem1";
+        else
+            if ($judul_tugas_akhir['dospem2_id'] == $this->dosen['id']) $berkas_tipe = "Berkas_saran_dospem2";
+
+        if (!$this->validate([
+            'Berkas_bimbingan' => [
+                'rules' => 'uploaded[Berkas_bimbingan]|mime_in[Berkas_bimbingan,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.rar,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/zip]',
+                'errors' => [
+                    'uploaded' => 'Harus Ada File yang diupload',
+                    'mime_in' => 'File Extention Harus Berupa doc,docx,pdf,ppt,pptx,rar,txt,xls,xlsx,zip',
+                ],
+            ],
+        ],)) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
+        $berkas->move("uploads/{$this->mahasiswa['id']}/{$judul_tugas_akhir['id']}/T/", $file_name);
+        (new BimbinganTugasAkhirModel())
+            ->where('id', $bimbingan['id'])
+            ->set([
+                $berkas_tipe => $file_name,
+            ])
+            ->update();
         return redirect()->back();
     }
 

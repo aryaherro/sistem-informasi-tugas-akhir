@@ -10,12 +10,6 @@
                 <div class="col-sm-6">
                     <h1>Jadwal Seminar Tugas Akhir</h1>
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">DataTables</li>
-                    </ol>
-                </div>
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -27,65 +21,90 @@
                 <div class="col-12">
                     <div class="card">
                         <!-- /.card-header -->
+                        <div class="card-header">
+                            <h5 class="card-title">Jadwal Seminar Tugas Akhir</h5>
 
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
                         <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>
-                                            <center>No</center>
-                                        </th>
-                                        <th>
-                                            <center>NIM</center>
-                                        </th>
-                                        <th>
-                                            <center>Nama Mahasiswa</center>
-                                        </th>
-                                        <th>
-                                            <center>Judul</center>
-                                        </th>
-                                        <th>
-                                            <center>Deskripsi</center>
-                                        </th>
-                                        <th>
-                                            <center>Nama Dosen Pembimbing</center>
-                                        </th>
-                                        <th>
-                                            <center>Nama Dosen Penguji</center>
-                                        </th>
-                                        <th>
-                                            <center>Tanggal seminar Proposal Tugas Akhir</center>
-                                        </th>
-                                        <th>
-                                            <center>Tanggal Sidang Tugas Akhir</center>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>201811111</td>
-                                        <td>Alexander Pierce</td>
-                                        <td>Sistem pendukung keputusan pemilihan supplier pada CV. surya abadi dengan metode AHP</td>
-                                        <td>Sistem ini membantu para pengambil keputusan melihat keputusan mana yang paling baik untuk diambil</td>
-                                        <td>Thomas S.kom,M.kom</td>
-                                        <td>James S.kom,M.kom</td>
-                                        <td>
-                                            <input type="text" readonly="readonly" class="form-control" value="<?php echo date("j F Y"); ?>" name="tgl">
-                                        </td>
-                                        <td>
-                                            <div class="form-group">
-                                                <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                                    <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate">
-                                                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <?php if ($judul == null) : ?>
+                                Belum ada judul yang perlu di jadwalkan
+                            <?php else : ?>
+                                <div class="row">
+                                    <div class="block col"></div>
+                                    <button type="button" class="btn btn-inline btn-primary col-2" data-toggle="modal" data-target="#modal-default">Set Jadwal</button>
+                                </div>
+                                <br>
+                                <?php if ($list_jadwal == null) : ?>
+                                    Belum ada jadwal yang ditampilkan
+                                <?php else : ?>
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>
+                                                    <center>No</center>
+                                                </th>
+                                                <th>
+                                                    <center>NIM</center>
+                                                </th>
+                                                <th>
+                                                    <center>Nama Mahasiswa</center>
+                                                </th>
+                                                <th>
+                                                    <center>Judul</center>
+                                                </th>
+                                                <th>
+                                                    <center>Deskripsi</center>
+                                                </th>
+                                                <th>
+                                                    <center>Tanggal seminar Proposal</center>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $i = 1; ?>
+                                            <?php foreach ($list_jadwal as $key) : ?>
+                                                <tr>
+                                                    <td>
+                                                        <center>
+                                                            <?= $i++; ?>
+                                                        </center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <?= $key['nim']; ?>
+                                                        </center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <?= $key['nama']; ?>
+                                                        </center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <?= $key['judul']; ?>
+                                                        </center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <?= $key['deskripsi']; ?>
+                                                        </center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <?= $key['jadwal']; ?>
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                <?php endif; ?>
+                            <?php endif; ?>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -94,6 +113,41 @@
                 <!-- /.col -->
             </div>
             <!-- /.row -->
+            <div class="modal fade" id="modal-default">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Tambah Jadwal</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="<?= route_to('SeminarTugasAkhir') ?>" method="post">
+                                <div class="form-group">
+                                    <label>Judul</label>
+                                    <select class="form-select" aria-label="Default select example" name="judulTugasAkhir_id">
+                                        <?php if ($judul != null) : ?>
+                                            <?php foreach ($judul as $key) : ?>
+                                                <option value="<?= $key['judulTugasAkhir_id']; ?>"><?= $key['judul']; ?></option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </select>
+                                </div>
+                                <?php echo session()->getFlashdata('error'); ?>
+                                <div class="form-group">
+                                    <label>Tanggal Seminar</label>
+                                    <input type="date" name="tgl_seminar" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
         </div>
         <!-- /.container-fluid -->
     </section>

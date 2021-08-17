@@ -115,7 +115,33 @@
                                                         <?php endif; ?>
                                                     </center>
                                                 </td>
-                                                <td>11</td>
+                                                <td>
+                                                    <center>
+                                                        <?php
+                                                        switch ($key['ketentuan']) {
+                                                            case null:
+                                                        ?>
+                                                                <a href="<?= base_url("/Prodi/BA/Ketentuan/{$key['jadwalSeminarProposal_id']}/1"); ?>">
+                                                                    <button type="button" class="btn btn-success swalDefaultSuccess">
+                                                                        Lulus
+                                                                    </button>
+                                                                </a>
+                                                                <a href="<?= base_url("/Prodi/BA/Ketentuan/{$key['jadwalSeminarProposal_id']}/0"); ?>">
+                                                                    <button type="button" class="btn btn-danger swalDefaultDanger">
+                                                                        Tidak
+                                                                    </button>
+                                                                </a>
+                                                        <?php break;
+                                                            case 1:
+                                                                echo "Lulus";
+                                                                break;
+                                                            case 0:
+                                                                echo "Tidak Lulus";
+                                                                break;
+                                                        }
+                                                        ?>
+                                                    </center>
+                                                </td>
                                             </tr>
 
                                         <?php endforeach; ?>
@@ -353,8 +379,9 @@
 <link rel="stylesheet" href="<?= base_url(); ?>/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="<?= base_url(); ?>/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
+
 <!-- SweetAlert2 -->
-<link rel="stylesheet" href="<?= base_url(); ?>/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<script src="<?= base_url(); ?>/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
-<link rel="stylesheet" href="<?= base_url(); ?>/plugins/toastr/toastr.min.css">
+<script src="<?= base_url(); ?>/plugins/toastr/toastr.min.js"></script>
 <?= $this->endSection(); ?>

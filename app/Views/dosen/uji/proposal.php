@@ -21,6 +21,15 @@
                 <div class="col-12">
                     <div class="card">
                         <!-- /.card-header -->
+                        <div class="card-header">
+                            <h5 class="card-title">Proposal Tugas Akhir</h5>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
                         <div class="card-body">
                             <?php if ($berita_acara == null) :; ?>
                                 <div>Tidak ada mahasiswa yang melakukan Ujian Seminar Proposal</div>

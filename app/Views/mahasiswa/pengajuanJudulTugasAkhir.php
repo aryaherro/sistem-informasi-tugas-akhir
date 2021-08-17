@@ -20,16 +20,24 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
-                        <div class="card-header col-12">
-                            <div class="row">
+                    <div class="card <?= ($isi != null) ? 'collapsed-card' : ''; ?>">
+                        <div class="card-header">
+                            <h5 class="card-title">Pengajuan Proposal</h5>
 
-                                <div class="block col"></div>
-                                <button type="button" class="btn btn-inline btn-primary col-2" data-toggle="modal" data-target="#modal-default">Tambah Judul</button>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-<?= ($isi == null) ? 'minus' : 'plus'; ?>"></i>
+                                </button>
                             </div>
+
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            <div class="row">
+                                <div class="block col"></div>
+                                <button type="button" class="btn btn-inline btn-primary col-2" data-toggle="modal" data-target="#modal-default">Tambah Judul</button>
+                            </div>
+                            <br>
                             <?php if ($judul == null) : ?>
                                 <div>Anda Belum Mengajukan Judul</div>
                             <?php else : ?>
@@ -216,6 +224,161 @@
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
+                    <?php if ($isi != null) : ?>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Progress Tugas Akhir</h5>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+
+
+                                <table id="example1" class="table table-bordered table-hover">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>
+                                                <center>No</center>
+                                            </th>
+                                            <th>
+                                                <center>Judul</center>
+                                            </th>
+                                            <th>
+                                                <center>Deskripsi</center>
+                                            </th>
+                                            <th>
+                                                <center>Saran Dosen penguji 1</center>
+                                            </th>
+                                            <th>
+                                                <center>Saran Dosen penguji 2</center>
+                                            </th>
+                                            <th>
+                                                <center>Kelayakan Dospem 1</center>
+                                            </th>
+                                            <th>
+                                                <center>Kelayakan Dospem 2</center>
+                                            </th>
+                                            <th>
+                                                <center>Kelayakan Prodi</center>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($isi as $key) : ?>
+                                            <tr value="<?= $key['id']; ?>">
+                                                <td>
+                                                    <center><?= $i++; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $key['judul']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= $key['deskripsi']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?php if ($key['Berkas_saran_dosuji1'] == null) : ?>
+                                                            -
+                                                        <?php else : ?>
+                                                            <a class="btn btn-info" href="<?= base_url("Mahasiswa/BA/Download/{$key['judulProposal_id']}/P/1"); ?>">Download</a>
+                                                        <?php endif; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?php if ($key['Berkas_saran_dosuji2'] == null) : ?>
+                                                            -
+                                                        <?php else : ?>
+                                                            <a class="btn btn-info" href="<?= base_url("Mahasiswa/BA/Download/{$key['judulProposal_id']}/P/2"); ?>">Download</a>
+                                                        <?php endif; ?>
+                                                    </center>
+                                                </td>
+
+                                                <!-- kelayakan -->
+
+                                                <td>
+                                                    <center>
+                                                        <?php
+                                                        switch ($key['layak_dospem1']) {
+                                                            case '1':
+                                                                echo "Disetujui";
+                                                                break;
+                                                            case '0':
+                                                                echo "Ditolak";
+                                                                break;
+                                                            case null:
+                                                                if (($key['layak_dospem2'] == false) && ($key['acc_prodi'] != true))
+                                                                    echo "-";
+                                                                else
+                                                                    echo "Dalam proses";
+                                                                break;
+                                                        }
+                                                        ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?php
+                                                        switch ($key['layak_dospem2']) {
+                                                            case '1':
+                                                                echo "Disetujui";
+                                                                break;
+                                                            case '0':
+                                                                echo "Ditolak";
+                                                                break;
+                                                            case null:
+                                                                if (($key['layak_dospem1'] == false) && ($key['acc_prodi'] != true))
+                                                                    echo "-";
+                                                                else
+                                                                    echo "Dalam proses";
+                                                                break;
+                                                        }
+                                                        ?></center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?php
+                                                        switch ($key['layak_prodi']) {
+                                                            case '1':
+                                                                echo "Disetujui";
+                                                                break;
+                                                            case '0':
+                                                                echo "Ditolak";
+                                                                break;
+                                                            case null:
+                                                                if (((($key['layak_dospem1'] == false) && ($key['layak_dospem1'] != null)) || (($key['layak_dospem2'] == false) && ($key['layak_dospem2'] != null))) || ($key['acc_prodi'] != true))
+                                                                    echo "-";
+                                                                else
+                                                                    echo "Dalam proses";
+                                                                break;
+                                                        }
+                                                        ?></center>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+
+                                    </tbody>
+                                    <!-- <tfoot>
+                                    <tr>
+                                        <th>Rendering engine</th>
+                                        <th>Browser</th>
+                                        <th>Platform(s)</th>
+                                        <th>Engine version</th>
+                                        <th>CSS grade</th>
+                                    </tr>
+                                </tfoot> -->
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    <?php endif; ?>
                 </div>
                 <!-- /.col -->
             </div>
@@ -283,6 +446,15 @@
 <script>
     $(function() {
         $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+        $('#example1').DataTable({
             "paging": true,
             "lengthChange": false,
             "searching": true,
