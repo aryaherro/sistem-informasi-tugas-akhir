@@ -52,6 +52,9 @@
                                             <th>
                                                 <center>Saran Dosen</center>
                                             </th>
+                                            <th>
+                                                <center>Nilai</center>
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -85,6 +88,16 @@
                                                             <?php else : ?>
                                                                 <a class="btn btn-info" href="<?= base_url("Dosen/UjiSeminar/Download/{$key['mahasiswa_id']}/{$key['judulTugasAkhir_id']}/T/2"); ?>">Download</a>
                                                             <?php endif; ?>
+                                                        <?php endif; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?php if ($key['dosuji1_id'] == $person['id']) : ?>
+                                                            <?= $key['dosuji1_nilai']; ?>
+                                                        <?php endif; ?>
+                                                        <?php if ($key['dosuji2_id'] == $person['id']) : ?>
+                                                            <?= $key['dosuji2_nilai']; ?>
                                                         <?php endif; ?>
                                                     </center>
                                                 </td>
@@ -150,6 +163,13 @@
                             <div class="custom-file form-group m-1">
                                 <input type="file" class="form-control custom-file-input" id="Berkas_saran" name="Berkas_saran" />
                                 <label class="custom-file-label" for="Berkas_saran">File</label>
+                            </div>
+                            <div class="row align-items-center m-1 form-group">
+                                <div class="col-3">Nilai</div>
+                                <div class="col-1">:</div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" id="nilai" name="nilai" />
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Save changes</button>
                         </form>

@@ -71,8 +71,6 @@ $routes->group("Dosen", ['filter' => 'role:Dosen'], function ($routes) {
 		$routes->post('Proposal', 'Dosen::tambahUjiProposal');
 		$routes->get('TugasAkhir', 'Dosen::ujiTugasAkhir', ['as' => 'dosen.uji.tugasakhir']);
 		$routes->post('TugasAkhir', 'Dosen::tambahUjiTugasAkhir');
-		$routes->get('Nilai', 'Dosen::validasiNilai', ['as' => 'dosen.validasi.nilai']);
-		$routes->post('Nilai', 'Dosen::tambahvalidasiNilai');
 	});
 	$routes->group("TugasAkhir", function ($routes) {
 		$routes->get('downloadBimbingan/(:num)/(:num)/(:alpha)/(:num)', 'Mahasiswa::downloadBimbingan/$1/$2/$3/$4');

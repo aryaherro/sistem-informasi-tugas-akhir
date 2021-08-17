@@ -245,20 +245,6 @@ class Dosen extends BaseController
         return redirect()->back();
     }
 
-    public function validasiNilai()
-    {
-        $this->setDosen();
-        $data = [
-            'person' => $this->dosen,
-        ];
-        return view('dosen/uji/nilai', $data);
-    }
-
-    public function tambahvalidasiNilai()
-    {
-        return view('dosen/uji/nilai');
-    }
-
     public function jadwalSeminarProposal()
     {
         $this->setDosen();
@@ -393,15 +379,31 @@ class Dosen extends BaseController
             session()->setFlashdata('error', $this->validator->listErrors());
             return redirect()->back()->withInput();
         }
-
-        if ($berita_acara['dosuji1_id'] == $this->dosen['id']) $berkas_tipe = "Berkas_saran_dosuji1";
-        else
-            if ($berita_acara['dosuji2_id'] == $this->dosen['id']) $berkas_tipe = "Berkas_saran_dosuji2";
+        $ketentuan = null;
+        if ($berita_acara['dosuji1_id'] == $this->dosen['id']) {
+            $berkas_tipe = "Berkas_saran_dosuji1";
+            $nilai_tipe = "dosuji1_nilai";
+            if ($berita_acara['dosuji2_nilai'] != null) {
+                $rata = ($this->request->getPost('nilai') + $berita_acara['dosuji2_nilai']) / 2;
+                $ketentuan = ($rata > 60) ? true : false;
+            }
+        } else {
+            if ($berita_acara['dosuji2_id'] == $this->dosen['id']) {
+                $berkas_tipe = "Berkas_saran_dosuji2";
+                $nilai_tipe = "dosuji2_nilai";
+                if ($berita_acara['dosuji2_nilai'] != null) {
+                    $rata = ($this->request->getPost('nilai') + $berita_acara['dosuji1_nilai']) / 2;
+                    $ketentuan = ($rata > 60) ? true : false;
+                }
+            }
+        }
         $berkas->move("uploads/{$this->mahasiswa['id']}/{$judul_tugas_akhir['id']}/T/", $file_name);
         (new BeritaAcaraSeminarTugasAkhirModel())
             ->where('id', $berita_acara['id'])
             ->set([
                 $berkas_tipe => $file_name,
+                $nilai_tipe => $this->request->getPost('nilai'),
+                'ketentuan' => $ketentuan,
             ])
             ->update();
         return redirect()->back();

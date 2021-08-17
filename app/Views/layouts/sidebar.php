@@ -171,12 +171,6 @@
                                             <p>Uji Tugas Akhir</p>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="<?= route_to("dosen.validasi.nilai"); ?>" class="nav-link <?= (current_url() == base_url("/Dosen/UjiSeminar/Nilai")) ? "active" : ""; ?>">
-                                            <i class="fas fa-caret-right"></i>
-                                            <p>Penilaian Tugas Akhir</p>
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
                         </div>
