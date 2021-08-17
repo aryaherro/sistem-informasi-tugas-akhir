@@ -23,40 +23,71 @@
                         <!-- /.card-header -->
 
                         <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>
-                                            <center>No</center>
-                                        </th>
-                                        <th>
-                                            <center>NIM</center>
-                                        </th>
-                                        <th>
-                                            <center>Nama Mahasiswa</center>
-                                        </th>
-                                        <th>
-                                            <center>Judul</center>
-                                        </th>
-                                        <th>
-                                            <center>Deskripsi</center>
-                                        </th>
-                                        <th>
-                                            <center>Tanggal seminar Tugas Akhir</center>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>201811111</td>
-                                        <td>Alexander Pierce</td>
-                                        <td>Sistem pendukung keputusan pemilihan supplier pada CV. surya abadi dengan metode AHP</td>
-                                        <td>Sistem ini membantu para pengambil keputusan melihat keputusan mana yang paling baik untuk diambil</td>
-                                        <td><input type="text" readonly="readonly" class="form-control" value="<?php echo date("j F Y"); ?>" name="tgl"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <?php if ($jadwal == null) : ?>
+                                Belum ada jadwal
+                            <?php else : ?>
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>
+                                                <center>No</center>
+                                            </th>
+                                            <th>
+                                                <center>NIM</center>
+                                            </th>
+                                            <th>
+                                                <center>Nama Mahasiswa</center>
+                                            </th>
+                                            <th>
+                                                <center>Judul</center>
+                                            </th>
+                                            <th>
+                                                <center>Deskripsi</center>
+                                            </th>
+                                            <th>
+                                                <center>Tanggal seminar Proposal</center>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($jadwal as $key) : ?>
+                                            <tr>
+                                                <td>
+                                                    <center>
+                                                        <?= $i++; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?= $key['nim']; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?= $key['nama']; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?= $key['judul']; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?= $key['deskripsi']; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?= $key['jadwal']; ?>
+                                                    </center>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            <?php endif; ?>
                         </div>
                         <!-- /.card-body -->
                     </div>

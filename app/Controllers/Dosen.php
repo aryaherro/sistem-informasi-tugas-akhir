@@ -3,11 +3,13 @@
 namespace App\Controllers;
 
 use App\Models\BeritaAcaraSeminarProposalModel;
+use App\Models\BeritaAcaraSeminarTugasAkhirModel;
 use App\Models\BimbinganProposalModel;
 use App\Models\BimbinganTugasAkhirModel;
 use App\Models\DosenModel;
 use App\Models\FakultasModel;
 use App\Models\JadwalSeminarProposalModel;
+use App\Models\JadwalSeminarTugasAkhirModel;
 use App\Models\JudulProposalModel;
 use App\Models\JudulTugasAkhirModel;
 use App\Models\MahasiswaModel;
@@ -245,12 +247,16 @@ class Dosen extends BaseController
 
     public function validasiNilai()
     {
-        return view('dosen/validasi/nilai');
+        $this->setDosen();
+        $data = [
+            'person' => $this->dosen,
+        ];
+        return view('dosen/uji/nilai', $data);
     }
 
     public function tambahvalidasiNilai()
     {
-        return view('dosen/validasi/nilai');
+        return view('dosen/uji/nilai');
     }
 
     public function jadwalSeminarProposal()
@@ -277,7 +283,20 @@ class Dosen extends BaseController
 
     public function jadwalSeminarTugasAkhir()
     {
-        return view('dosen/jadwal/seminarTugasAkhir');
+        $this->setDosen();
+        $jadwal = (new JadwalSeminarTugasAkhirModel())
+            ->join('judultugasakhir', 'judultugasakhir.id = jadwalseminartugasakhir.judultugasakhir_id')
+            ->join('judulproposal', 'judulproposal.id = judultugasakhir.judulproposal_id')
+            ->join('mahasiswa', 'mahasiswa.id = judulproposal.mahasiswa_id')
+            ->where('judulproposal.dospem1_id', $this->dosen['id'])
+            ->orWhere('judulproposal.dospem2_id', $this->dosen['id'])
+            ->findAll();
+
+        $data = [
+            'person' => $this->dosen,
+            'jadwal' => $jadwal,
+        ];
+        return view('dosen/jadwal/seminarTugasAkhir', $data);
     }
 
     public function ujiProposal()
@@ -332,6 +351,61 @@ class Dosen extends BaseController
             ->update();
         return redirect()->back();
     }
+    public function ujiTugasAkhir()
+    {
+        $this->setDosen();
+        $berita_acara = (new BeritaAcaraSeminarTugasAkhirModel())
+            ->where('dosuji1_id', $this->dosen['id'])
+            ->orWhere('dosuji2_id', $this->dosen['id'])
+            ->join('jadwalseminartugasakhir', 'jadwalseminartugasakhir.id = beritaacaraseminartugasakhir.jadwalSeminartugasakhir_id')
+            ->join('judultugasakhir', 'judultugasakhir.id = jadwalseminartugasakhir.judultugasakhir_id')
+            ->join('judulproposal', 'judulproposal.id = judultugasakhir.judulProposal_id')
+            ->join('mahasiswa', 'mahasiswa.id = judulproposal.mahasiswa_id')
+            ->findAll();
+        // dd($berita_acara);
+        $data = [
+            'person' => $this->dosen,
+            'berita_acara' => $berita_acara,
+        ];
+        return view('dosen/uji/tugasakhir', $data);
+    }
+
+    public function tambahUjiTugasAkhir()
+    {
+        $this->setDosen();
+        $berita_acara = (new BeritaAcaraSeminarTugasAkhirModel())->asArray()->where('jadwalSeminarTugasAkhir_id', $this->request->getPost('jad'))->first();
+        $jadwal = (new JadwalSeminarTugasAkhirModel())->find($this->request->getPost('jad'));
+        $judul_tugas_akhir = (new JudulTugasAkhirModel())->find($jadwal['judulTugasAkhir_id']);
+        $judul_proposal = (new JudulProposalModel())->find($judul_tugas_akhir['judulProposal_id']);
+        $this->mahasiswa = (new MahasiswaModel())->find($judul_proposal['mahasiswa_id']);
+        $berkas = $this->request->getFile('Berkas_saran');
+        $file_name = $berkas->getRandomName();
+        $val = [
+            'Berkas_saran' => [
+                'rules' => 'uploaded[Berkas_saran]|mime_in[Berkas_saran,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.rar,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/zip]',
+                'errors' => [
+                    'uploaded' => 'Harus Ada File yang diupload',
+                    'mime_in' => 'File Extention Harus Berupa doc,docx,pdf,ppt,pptx,rar,txt,xls,xlsx,zip',
+                ],
+            ],
+        ];
+        if (!$this->validate($val)) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
+
+        if ($berita_acara['dosuji1_id'] == $this->dosen['id']) $berkas_tipe = "Berkas_saran_dosuji1";
+        else
+            if ($berita_acara['dosuji2_id'] == $this->dosen['id']) $berkas_tipe = "Berkas_saran_dosuji2";
+        $berkas->move("uploads/{$this->mahasiswa['id']}/{$judul_tugas_akhir['id']}/T/", $file_name);
+        (new BeritaAcaraSeminarTugasAkhirModel())
+            ->where('id', $berita_acara['id'])
+            ->set([
+                $berkas_tipe => $file_name,
+            ])
+            ->update();
+        return redirect()->back();
+    }
 
     public function downloadUji($mahasiswa_id, $judul_id, $type, $dos)
     {
@@ -343,6 +417,8 @@ class Dosen extends BaseController
                 if ($dos == 2) {
                     $berkas = 'Berkas_saran_dosuji2';
                 }
+                $jadwal = (new JadwalSeminarProposalModel())->asArray()->where('judulProposal_id', $judul_id)->first();
+                $data = (new BeritaAcaraSeminarProposalModel())->asArray()->where('jadwalSeminarProposal_id', $jadwal['id'])->first();
                 break;
 
             case 'T':
@@ -352,10 +428,11 @@ class Dosen extends BaseController
                 if ($dos == 2) {
                     $berkas = 'Berkas_saran_dosuji2';
                 }
+                $jadwal = (new JadwalSeminarTugasAkhirModel())->asArray()->where('judulTugasAkhir_id', $judul_id)->first();
+                $data = (new BeritaAcaraSeminarTugasAkhirModel())->asArray()->where('jadwalSeminarTugasAkhir_id', $jadwal['id'])->first();
                 break;
         }
-        $jadwal = (new JadwalSeminarProposalModel())->asArray()->where('judulProposal_id', $judul_id)->first();
-        $data = (new BeritaAcaraSeminarProposalModel())->asArray()->where('jadwalSeminarProposal_id', $jadwal['id'])->first();
+
         return $this->response->download("uploads/{$mahasiswa_id}/{$judul_id}/{$type}/" . $data[$berkas], null);
     }
 }

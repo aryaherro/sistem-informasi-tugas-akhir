@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Jadwal Seminar Tugas Akhir</h1>
+                    <h1>Jadwal Seminar Proposal</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -21,33 +21,181 @@
                 <div class="col-12">
                     <div class="card">
                         <!-- /.card-header -->
+                        <div class="card-header">
+                            <h5 class="card-title">Jadwal Seminar Tugas Akhir</h5>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
                         <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>
-                                            <center>No</center>
-                                        </th>
-                                        <th>
-                                            <center>Judul</center>
-                                        </th>
-                                        <th>
-                                            <center>Deskripsi</center>
-                                        </th>
-                                        <th>
-                                            <center>Tanggal seminar Tugas Akhir</center>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Sistem pendukung keputusan pemilihan supplier pada CV. surya abadi dengan metode AHP</td>
-                                        <td>Sistem ini membantu para pengambil keputusan melihat keputusan mana yang paling baik untuk diambil</td>
-                                        <td><input type="text" readonly="readonly" class="form-control" value="<?php echo date("j F Y"); ?>" name="tgl"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <?php if ($jadwal == null) : ?>
+                                Belum ada jadwal
+                            <?php else : ?>
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>
+                                                <center>No</center>
+                                            </th>
+                                            <th>
+                                                <center>Judul</center>
+                                            </th>
+                                            <th>
+                                                <center>Deskripsi</center>
+                                            </th>
+                                            <th>
+                                                <center>Tanggal seminar Proposal</center>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($jadwal as $key) : ?>
+                                            <tr>
+                                                <td>
+                                                    <center>
+                                                        <?= $i++; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?= $key['judul']; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?= $key['deskripsi']; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?= $key['jadwal']; ?>
+                                                    </center>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            <?php endif; ?>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <div class="card">
+                        <!-- /.card-header -->
+                        <div class="card-header">
+                            <h5 class="card-title">Catatan Seminar Proposal</h5>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <?php if ($berita_acara == null) : ?>
+                                Belum ada hasil seminar
+                            <?php else : ?>
+                                <table id="example1" class="table table-bordered table-hover">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>
+                                                <center>No</center>
+                                            </th>
+                                            <th>
+                                                <center>Judul</center>
+                                            </th>
+                                            <th>
+                                                <center>Deskripsi</center>
+                                            </th>
+                                            <th>
+                                                <center>Saran Dosen Penguji 1</center>
+                                            </th>
+                                            <th>
+                                                <center>Saran Dosen Penguji 2</center>
+                                            </th>
+                                            <th>
+                                                <center>Nilai Dosen Penguji 1</center>
+                                            </th>
+                                            <th>
+                                                <center>Nilai Dosen Penguji 2</center>
+                                            </th>
+                                            <th>
+                                                <center>Hasil</center>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($berita_acara as $key) : ?>
+                                            <tr>
+                                                <td>
+                                                    <center>
+                                                        <?= $i++; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?= $key['judul']; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?= $key['deskripsi']; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?php if ($key['Berkas_saran_dosuji1'] != null) : ?>
+                                                            <a class="btn btn-info" href="<?= base_url("Mahasiswa/BA/Download/{$key['judulProposal_id']}/P/1"); ?>">Download</a>
+                                                        <?php else : ?>
+                                                            -
+                                                        <?php endif; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?php if ($key['Berkas_saran_dosuji2'] != null) : ?>
+                                                            <a class="btn btn-info" href="<?= base_url("Mahasiswa/BA/Download/{$key['judulProposal_id']}/P/2"); ?>">Download</a>
+                                                        <?php else : ?>
+                                                            -
+                                                        <?php endif; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?= $key['dosuji1_nilai']; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?= $key['dosuji2_nilai']; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <?php
+                                                        switch ($key['ketentuan']) {
+                                                            case null:
+                                                                echo 'Dalam Penilaian';
+                                                                break;
+                                                            case 1:
+                                                                echo "Lulus";
+                                                                break;
+                                                            case 0:
+                                                                echo "Tidak Lulus";
+                                                                break;
+                                                        }
+                                                        ?>
+                                                    </center>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            <?php endif; ?>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -87,6 +235,15 @@
 <script>
     $(function() {
         $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+        $('#example1').DataTable({
             "paging": true,
             "lengthChange": false,
             "searching": true,

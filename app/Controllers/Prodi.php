@@ -77,26 +77,6 @@ class Prodi extends BaseController
         return redirect()->back();
     }
 
-    public function validasiProposal()
-    {
-        return view('prodi/validasi/proposal');
-    }
-
-    public function tambahvalidasiProposal()
-    {
-        return redirect()->back();
-    }
-
-    public function validasiTugasAkhir()
-    {
-        return view('prodi/validasi/tugasAkhir');
-    }
-
-    public function tambahvalidasiTugasAkhir()
-    {
-        return redirect()->back();
-    }
-
     public function jadwalSeminarProposal()
     {
         $this->setDosen();

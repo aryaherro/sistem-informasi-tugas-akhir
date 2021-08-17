@@ -69,6 +69,8 @@ $routes->group("Dosen", ['filter' => 'role:Dosen'], function ($routes) {
 		$routes->get('Download/(:num)/(:num)/(:alpha)/(:num)', 'Dosen::downloadUji/$1/$2/$3/$4');
 		$routes->get('Proposal', 'Dosen::ujiProposal', ['as' => 'dosen.uji.proposal']);
 		$routes->post('Proposal', 'Dosen::tambahUjiProposal');
+		$routes->get('TugasAkhir', 'Dosen::ujiTugasAkhir', ['as' => 'dosen.uji.tugasakhir']);
+		$routes->post('TugasAkhir', 'Dosen::tambahUjiTugasAkhir');
 		$routes->get('Nilai', 'Dosen::validasiNilai', ['as' => 'dosen.validasi.nilai']);
 		$routes->post('Nilai', 'Dosen::tambahvalidasiNilai');
 	});
@@ -76,7 +78,7 @@ $routes->group("Dosen", ['filter' => 'role:Dosen'], function ($routes) {
 		$routes->get('downloadBimbingan/(:num)/(:num)/(:alpha)/(:num)', 'Mahasiswa::downloadBimbingan/$1/$2/$3/$4');
 		$routes->get('downloadBimbingan/(:num)/(:num)/(:alpha)/(:num)/(:num)', 'Mahasiswa::downloadBimbingan/$1/$2/$3/$4/$5');
 	});
-	$routes->group("Jadwal", ['filter' => 'permission:Dosen Pembimbing'], function ($routes) {
+	$routes->group("Jadwal", function ($routes) {
 		$routes->get('SeminarProposal', 'Dosen::jadwalSeminarProposal', ['as' => 'dosen.jadwal.seminarProposal']);
 		$routes->get('SeminarTugasAkhir', 'Dosen::jadwalSeminarTugasAkhir', ['as' => 'dosen.jadwal.seminarTugasAkhir']);
 	});
@@ -86,10 +88,6 @@ $routes->group("Prodi", ['filter' => 'permission:Kaprodi'], function ($routes) {
 	$routes->group("Validasi", function ($routes) {
 		$routes->get('Judul', 'Prodi::validasiJudul', ['as' => 'prodi.validasi.judul']);
 		$routes->get('Judul/(:alpha)/(:alpha)/(:num)/(:alpha)', 'Prodi::tambahvalidasiJudul/$1/$2/$3/$4');
-		$routes->get('Proposal', 'Prodi::validasiProposal', ['as' => 'prodi.validasi.proposal']);
-		$routes->post('Proposal', 'Prodi::tambahvalidasiProposal');
-		$routes->get('TugasAkhir', 'Prodi::validasiTugasAkhir', ['as' => 'prodi.validasi.tugasAkhir']);
-		$routes->post('TugasAkhir', 'Prodi::tambahvalidasiTugasAkhir');
 	});
 	$routes->group("Jadwal", function ($routes) {
 		$routes->get('SeminarProposal', 'Prodi::jadwalSeminarProposal', ['as' => 'prodi.jadwal.seminarProposal']);

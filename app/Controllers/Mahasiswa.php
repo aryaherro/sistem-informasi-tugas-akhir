@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\BeritaAcaraSeminarProposalModel;
+use App\Models\BeritaAcaraSeminarTugasAkhirModel;
 use App\Models\BimbinganProposalModel;
 use App\Models\BimbinganTugasAkhirModel;
 use App\Models\DosenModel;
@@ -246,8 +247,10 @@ class Mahasiswa extends BaseController
             ->findAll();
 
 
-        $berita_acara = (new BeritaAcaraSeminarProposalModel())->join('jadwalseminarproposal', 'jadwalseminarproposal.id = beritaacaraseminarproposal.jadwalSeminarProposal_id')
-            ->join('judulproposal', 'judulproposal.id = jadwalseminarproposal.judulProposal_id')
+        $berita_acara = (new BeritaAcaraSeminarTugasAkhirModel())
+            ->join('jadwalseminartugasakhir', 'jadwalseminartugasakhir.id = beritaacaraseminartugasakhir.jadwalseminartugasakhir_id')
+            ->join('judultugasakhir', 'judultugasakhir.id = jadwalseminartugasakhir.judultugasakhir_id')
+            ->join('judulproposal', 'judulproposal.id = judultugasakhir .judulProposal_id')
             ->join('mahasiswa', 'mahasiswa.id = judulproposal.mahasiswa_id')
             ->where('mahasiswa.id', $this->mahasiswa['id'])
             ->findAll();

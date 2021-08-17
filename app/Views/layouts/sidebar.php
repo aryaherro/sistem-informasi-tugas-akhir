@@ -166,6 +166,12 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="<?= route_to("dosen.uji.tugasakhir"); ?>" class="nav-link <?= (current_url() == base_url("/Dosen/UjiSeminar/Nilai")) ? "active" : ""; ?>">
+                                            <i class="fas fa-caret-right"></i>
+                                            <p>Uji Tugas Akhir</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a href="<?= route_to("dosen.validasi.nilai"); ?>" class="nav-link <?= (current_url() == base_url("/Dosen/UjiSeminar/Nilai")) ? "active" : ""; ?>">
                                             <i class="fas fa-caret-right"></i>
                                             <p>Penilaian Tugas Akhir</p>
@@ -197,18 +203,7 @@
                                         <p>Judul Tugas Akhir</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="<?= route_to("prodi.validasi.proposal"); ?>" class="nav-link <?= (current_url() == base_url("/Prodi/Validasi/Proposal")) ? "active" : ""; ?>">
-                                        <i class="fas fa-caret-right"></i>
-                                        <p>Data Proposal Tugas Akhir Mahasiswa</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?= route_to("prodi.validasi.tugasAkhir"); ?>" class="nav-link <?= (current_url() == base_url("/Prodi/Validasi/TugasAkhir")) ? "active" : ""; ?>">
-                                        <i class="fas fa-caret-right"></i>
-                                        <p>Data Tugas Akhir Mahasiswa</p>
-                                    </a>
-                                </li>
+
                             </ul>
                         </li>
                     </div>

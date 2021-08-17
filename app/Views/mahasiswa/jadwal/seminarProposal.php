@@ -161,7 +161,19 @@
                                                 </td>
                                                 <td>
                                                     <center>
-
+                                                        <?php
+                                                        switch ($key['ketentuan']) {
+                                                            case null:
+                                                                echo 'Dalam Penilaian';
+                                                                break;
+                                                            case 1:
+                                                                echo "Lulus";
+                                                                break;
+                                                            case 0:
+                                                                echo "Tidak Lulus";
+                                                                break;
+                                                        }
+                                                        ?>
                                                     </center>
                                                 </td>
                                             </tr>
